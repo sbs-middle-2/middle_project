@@ -1,4 +1,4 @@
-package com.jhg.proto.controller;
+package com.jhg.proto.article;
 
 public class ArticleController {
 }
