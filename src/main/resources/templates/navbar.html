@@ -38,7 +38,7 @@
                         <div class="toggle-menu">
                             <ul>
                                 <li><a href="/">로그인</a></li>
-                                <li><a href="/">회원가입</a></li>
+                                <li><a href="/member/join">회원가입</a></li>
                             </ul>
                         </div>
                     </a></li>
@@ -49,12 +49,12 @@
 
     <script>
         $(document).ready(function () {
-  $(
-    ".wrap-box > .menu-banner-box > .top-bar-box > .login-box > .lo-box > a"
-  ).click(function () {
-    $(this).siblings(".toggle-menu").toggleClass("active");
-  });
-});
+        $(
+        ".wrap-box > .menu-banner-box > .top-bar-box > .login-box > .lo-box > a"
+        ).click(function () {
+        $(this).siblings(".toggle-menu").toggleClass("active");
+        });
+        });
 
     </script>
 </nav>

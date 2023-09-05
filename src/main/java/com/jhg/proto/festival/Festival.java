@@ -20,7 +20,7 @@ public class Festival {
     @Column(name = "updateDate")
     private LocalDateTime updateDate;
 
-    @Column(name = "picture", length = 255)
+    @Column(name = "picture")
     private String picture;
 
     @Column(name = "title", length = 100)

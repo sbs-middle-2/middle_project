@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="container my-3">
     <div>
         <section class="mt-5">
@@ -29,25 +29,21 @@
                         </thead>
 
                         <tbody>
-                        <tr th:each="festival : ${festivals}">
-                            <tr class="hover">
-                                <td>
-                                    <img src="${festival.picture}" alt="축제 이미지" width="100" height="100">
-                                </td>
-                                <td>${festival.id}</td>
-                                <td>${festival.startDate}</td>
-                                <td>${festival.endDate}</td>
-                                <td>${festival.address}</td>
-                                <td>
-                                    <a class="btn-text-link block w-full truncate" href="../festival/f_detail?id=${festival.id}">${festival.title}</a>
-                                </td>
-                                <td>
-                                    <a class="btn-text-link block w-full truncate" href="../festival/f_detail?id=${festival.id}">${festival.body}</a>
-                                </td>
-                                <!-- 이미지 표시 -->
-                                <!-- 필요한 열의 데이터를 출력하세요 -->
-                            </tr>
-                        </tr:each>
+                        <tr th:each="festival : ${festival}">
+                            <td>
+                                <img th:src="${festival.picture}" alt="축제 이미지" width="100" height="100">
+                            </td>
+                            <td th:text="${festival.id}">Festival Number</td>
+                            <td th:text="${festival.startDate}">Start Date</td>
+                            <td th:text="${festival.endDate}">End Date</td>
+                            <td th:text="${festival.address}">Location</td>
+                            <td>
+                                <a class="btn-text-link block w-full truncate" th:href="'../festival/f_detail?id=' + ${festival.id}" th:text="${festival.title}">Festival Title</a>
+                            </td>
+                            <td>
+                                <a class="btn-text-link block w-full truncate" th:href="'../festival/f_detail?id=' + ${festival.id}" th:text="${festival.body}">Festival Description</a>
+                            </td>
+                        </tr>
                         </tbody>
 
                     </table>
