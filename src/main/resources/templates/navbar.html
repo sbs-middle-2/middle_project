@@ -13,7 +13,7 @@
                         <!--         2차메뉴   -->
                         <div class="nav-2-menu">
                             <ul class="menu-1">
-                                <li><a href="/"><span>맛집정보</span></a></li>
+                                <li><a href="/kakao/map"><span>맛집정보</span></a></li>
                                 <li><a href="/"><span>숙소정보</span></a></li>
                             </ul>
                             <ul class="menu-2">
@@ -49,12 +49,11 @@
 
     <script>
         $(document).ready(function () {
-        $(
-        ".wrap-box > .menu-banner-box > .top-bar-box > .login-box > .lo-box > a"
-        ).click(function () {
-        $(this).siblings(".toggle-menu").toggleClass("active");
+            $(
+                ".wrap-box > .menu-banner-box > .top-bar-box > .login-box > .lo-box > a"
+                ).click(function () {
+                    $(this).siblings(".toggle-menu").toggleClass("active");
+                });
         });
-        });
-
     </script>
 </nav>
