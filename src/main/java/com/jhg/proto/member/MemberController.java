@@ -16,4 +16,11 @@ public class MemberController {
 
         return "memberJoin";
     }
+
+    @GetMapping("/login")
+    public String showLogin(Model model) {
+
+
+        return "memberLogin";
+    }
 }
