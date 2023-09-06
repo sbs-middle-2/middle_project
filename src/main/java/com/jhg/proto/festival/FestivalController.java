@@ -20,6 +20,6 @@ public class FestivalController {
     public String showFestivalList(Model model) {
         List<Festival> festival = this.festivalService.getList();
         model.addAttribute("festival", festival);
-        return "festivalList"; // 템플릿 파일 이름은 "festivalList.html"로 일치
+        return "festival_list"; // 템플릿 파일 이름은 "festival_list.html"로 일치
     }
 }

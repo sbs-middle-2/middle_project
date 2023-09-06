@@ -1,59 +1,69 @@
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="wrap-box">
         <!-- 상단바 -->
-        <div class="menu-banner-box">
-            <div class="top-bar-box ">
-                <ul class="logo-box ">
-                    <li><a href="/"> <img src="https://cdn.jsdelivr.net/gh/gsw05018/test-img/a.svg" alt=""></a></li>
-                </ul>
-                <ul class="menu-box ">
-                    <li class=""><a class="a-1" href="/"><i class="fa-solid fa-house">
-                    </i></a></li>
-                    <li class=""><a href="/festival/list"><span>축제정보센터</span></a>
-                        <!--         2차메뉴   -->
-                        <div class="nav-2-menu">
-                            <ul class="menu-1">
-                                <li><a href="/kakao/map"><span>맛집정보</span></a></li>
-                                <li><a href="/"><span>숙소정보</span></a></li>
-                            </ul>
-                            <ul class="menu-2">
-                                <li><a href="/">축제리뷰</a></li>
-                                <li><a href="/">자유게시판</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class=""><a href="/"><span>축제커뮤니티</span></a>
-                    </li>
-                    <li><a href="/"><span>공지사항</span></a></li>
-                    <li><a href="/"><span>고객센터</span></a></li>
-                </ul>
-                <ul class="login-box ">
-                    <li><a href="/">
-                        <div class="se-box">
-                            <input type="text" placeholder="어디로, 어떤 축제를 가실 예정인가요?">
-                            <i class="fa-solid fa-magnifying-glass se-icon "></i>
-                        </div>
-                    </a></li>
-                    <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn"></i>
-                        <div class="toggle-menu">
-                            <ul>
-                                <li><a href="/member/login">로그인</a></li>
-                                <li><a href="/member/join">회원가입</a></li>
-                            </ul>
-                        </div>
-                    </a></li>
-                </ul>
-            </div>
+        <div class="top-bar-box ">
+            <ul class="logo-box ">
+                <li><a href="/"> <img src="https://cdn.jsdelivr.net/gh/gsw05018/test-img/a.svg" alt=""></a></li>
+            </ul>
+            <ul class="menu-box ">
+                <li class=""><a class="a-1" href="/"><i class="fa-solid fa-house">
+                </i></a></li>
+                <li class=""><a href="/festival/list"><span>축제정보센터</span></a>
+                    <!-- 2차메뉴 -->
+                    <div class="nav-2-menu">
+                        <ul class="menu-1">
+                            <li><a href="/map/restaurant"><span>맛집정보</span></a></li>
+                            <li><a href="/map/lodging"><span>숙소정보</span></a></li>
+                        </ul>
+
+                        <ul class="menu-2">
+                            <li><a href="/">축제리뷰</a></li>
+                            <li><a href="/question/list">자유게시판</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="">
+                    <a href="#"><span>축제커뮤니티</span></a>
+                </li>
+                <li><a href="/"><span>공지사항</span></a></li>
+                <li><a href="/"><span>고객센터</span></a></li>
+            </ul>
+
+            <ul class="login-box ">
+                <li><a href="#">
+                    <div class="se-box">
+                        <input type="text" placeholder="어디로, 어떤 축제를 가실 예정인가요?">
+                        <i class="fa-solid fa-magnifying-glass se-icon "></i>
+                    </div>
+                </a></li>
+
+                <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn"></i>
+                    <div class="toggle-menu">
+                        <ul>
+                            <li>
+                                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/mypage}">마이페이지</a>
+                                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+                            </li>
+                        </ul>
+                    </div>
+                </a></li>
+
+            </ul>
+
         </div>
+
     </div>
 
     <script>
         $(document).ready(function () {
-            $(
-                ".wrap-box > .menu-banner-box > .top-bar-box > .login-box > .lo-box > a"
-                ).click(function () {
-                    $(this).siblings(".toggle-menu").toggleClass("active");
-                });
+            $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
+                $(this).siblings(".toggle-menu").toggleClass("active");
+            });
         });
     </script>
 </nav>

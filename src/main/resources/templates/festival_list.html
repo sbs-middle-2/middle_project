@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/festival_list.css">
+</head>
+
+<body>
+<div layout:fragment="content" class="container my-3" style="margin-top: 300px !important;">
+    <div class='festival-list'>
+        <div class="search-options">
+            <div class="search-option">
+                <label for="calendar">달력</label>
+                <input type="date" id="calendar">
+                <button id="clearCalendar">달력 초기화</button>
+            </div>
+            <div class="search-option">
+                <label for="region">지역별 선택</label>
+                <select id="region">
+                    <option value="전체">전국</option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기</option>
+                    <!-- 나머지 8도를 추가하세요 -->
+                    <option value="강원">강원</option>
+                    <option value="충청북도">충청북도</option>
+                    <option value="충청남도">충청남도</option>
+                    <option value="전라북도">전라북도</option>
+                    <option value="전라남도">전라남도</option>
+                    <option value="경상북도">경상북도</option>
+                    <option value="경상남도">경상남도</option>
+                    <option value="제주">제주</option>
+                </select>
+            </div>
+        </div>
+        <div id="filtered-festivals">
+            <!-- 여기에 필터링된 축제 목록이 표시됩니다. -->
+        </div>
+    </div>
+
+    <script>
+        // 축제 데이터 예시 (실제 데이터에 맞게 수정해야 함)
+const festivals = [
+    {
+        title: "축제 1",
+        description: "축제 1 내용",
+        startDate: "2023-09-10",
+        endDate: "2023-09-15",
+        location: "서울",
+        category: "문화/예술",
+    },
+    {
+        title: "축제 2",
+        description: "축제 2 내용",
+        startDate: "2023-09-20",
+        endDate: "2023-09-25",
+        location: "경기",
+        category: "스포츠/레져",
+    },
+    // 다른 축제 데이터도 추가
+];
+
+// 달력 초기화 버튼 처리
+document.getElementById("clearCalendar").addEventListener("click", function () {
+    document.getElementById("calendar").value = ""; // 달력 값을 비웁니다.
+    displayFilteredFestivals(); // 축제 리스트를 다시 표시합니다.
+});
+
+// 필터링된 축제를 표시하는 함수
+function displayFilteredFestivals() {
+    const calendar = document.getElementById("calendar").value;
+    const region = document.getElementById("region").value;
+
+    const filteredFestivals = festivals.filter((festival) => {
+        // 필터링 조건을 여기에 추가
+        const startDate = new Date(festival.startDate);
+        const endDate = new Date(festival.endDate);
+
+        const isDateMatch = (calendar === "" || (startDate <= new Date(calendar) && endDate >= new Date(calendar)));
+        const isRegionMatch = (region === "전체" || festival.location === region);
+
+        return isDateMatch && isRegionMatch;
+    });
+
+    const filteredFestivalsContainer = document.getElementById("filtered-festivals");
+    filteredFestivalsContainer.innerHTML = "";
+
+    if (filteredFestivals.length === 0) {
+        filteredFestivalsContainer.innerHTML = "일치하는 축제가 없습니다.";
+    } else {
+        filteredFestivals.forEach((festival) => {
+            const festivalItem = document.createElement("div");
+            festivalItem.classList.add("festival-item");
+            festivalItem.innerHTML = `
+                <img src="이미지 경로" alt="축제 이미지">
+                <div class="festival-details">
+                    <h3>제목: ${festival.title}</h3>
+                    <p>내용: ${festival.description}</p>
+                    <p>기간: ${festival.startDate} ~ ${festival.endDate}</p>
+                    <p>장소 : ${festival.location}</p>
+                    <p>분류: ${festival.category}</p>
+                </div>
+            `;
+            filteredFestivalsContainer.appendChild(festivalItem);
+        });
+    }
+}
+
+// 사용자 입력 변화 감지
+document.getElementById("calendar").addEventListener("change", displayFilteredFestivals);
+document.getElementById("region").addEventListener("change", displayFilteredFestivals);
+
+// 페이지 로드시 초기 필터링
+displayFilteredFestivals();
+    </script>
+
+</div>
+</body>
+
+</html>
