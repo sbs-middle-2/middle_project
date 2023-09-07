@@ -7,34 +7,71 @@
 </head>
 
 <body>
-<div layout:fragment="content" class="container my-3">
+
+<!--   회원가입  -->
+<div layout:fragment="content" class="join-box">
+    <p class="logo-text">뭐하지 또? 또 가지 뭐!</p>
     <h1>회원가입</h1>
     <!-- 회원가입 -->
     <form action="">
         <div class="form-box">
-            <input class="id-box" type="text" placeholder="아이디를 입력하세요">
-            <input class="pass-box" type="password" placeholder="비밀번호를 입력하세요">
-            <input class="pass-box" type="password" placeholder="비밀번호를 다시 입력하세요">
-            <input class="name-box" type="text" placeholder="이름를 입력하세요">
-            <input class="niname-box" type="password" placeholder="닉네임를 입력하세요">
-            <input class="bir-box" type="password" placeholder="생년월일를 입력하세요">
+            <div class="join-icon-box">
+                <i class="id fa-regular fa-user"></i>
+                <input class="id-box" type="text" placeholder="아이디를 입력하세요">
+            </div>
+            <div class="join-icon-box">
+                <i class="ps fa-solid fa-key"></i>
+                <input class="pass-box" type="password" placeholder="비밀번호를 입력하세요">
+                <p class="p-text">영어, 특수문자, 숫자를 모두 포함시켜주세요</p>
+            </div>
+            <div class="join-icon-box">
+                <i class="ps fa-solid fa-key"></i>
+                <input class="pass-box" type="password" placeholder="비밀번호를 다시 입력하세요">
+                <p class="p-text">영어, 특수문자, 숫자를 모두 포함시켜주세요</p>
+            </div>
+            <div class="join-icon-box">
+                <i class="name fa-regular fa-user"></i>
+                <input class="name-box" type="text" placeholder="이름를 입력하세요">
+            </div>
+            <div class="join-icon-box">
+                <i class="name fa-regular fa-circle-user"></i>
+                <input class="niname-box" type="text" placeholder="닉네임를 입력하세요">
+            </div>
+            <div class="join-icon-box">
+                <i class="name fa-solid fa-envelope"></i>
+                <input class="niname-box" type="text" placeholder="이메일를 입력하세요">
+            </div>
+            <div class="join-icon-box">
+                <i class="name fa-solid fa-heart"></i>
+                <input class="bir-box" type="text" placeholder="생년월일를 입력하세요">
+            </div>
+            <div class="join-icon-box">
+                <i class="name fa-solid fa-phone-volume"></i>
+                <select name="" id="통신사">
 
-            <select name="" id="통신사">
-                <option value="" selected>통신사 선택</option>
-                <option value="">KT</option>
-                <option value="">LGU+</option>
-                <option value="">SKT</option>
-            </select>
-
-            <input class="phone-box" type="text" placeholder="전화번호">
-            <button id="requestCodeBtn" class="submit">인증요청</button>
-            <div id="verificationCode"></div> <!-- 인증번호를 표시할 요소 추가 -->
-            <input class="insig-box" type="text" placeholder="인증번호를 입력하세요">
+                    <option value="" selected>통신사 선택</option>
+                    <option value="">KT</option>
+                    <option value="">LGU+</option>
+                    <option value="">SKT</option>
+                </select>
+            </div>
+            <div class="join-icon-box">
+                <i class="name fa-solid fa-tablet-screen-button"></i>
+                <input class="phone-box" type="text" placeholder="전화번호">
+            </div>
+            <button class="submit">인증요청</button>
+            <div class="join-icon-box">
+                <i class="injig fa-solid fa-envelope"></i>
+                <input class="insig-box" type="text" placeholder="인증번호를 입력하세요">
+            </div>
             <button class="submit">인증확인</button>
             <p class="text"><input class="agree-box" type="checkbox"> 개인정보 수집 및 이용 내용을 확인하였으며, 동의합니다. </p>
             <button class="submit">회원가입하기</button>
         </div>
     </form>
+</div>
+
+<!-- 회원가입 끝 -->
 
     <!--백업용 로그인 폼(DB 연결, 수정 필요)-->
     <!--<div class="join-box">
