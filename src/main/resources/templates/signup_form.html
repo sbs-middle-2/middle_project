@@ -10,11 +10,12 @@
 
 <!--   회원가입  -->
 <div layout:fragment="content" class="join-box">
-    <p class="logo-text">뭐하지 또? 또 가지 뭐!</p>
+    <a href="/"><p class="logo-text">뭐하지 또? 또 가지 뭐!</p></a>
     <h1>회원가입</h1>
     <!-- 회원가입 -->
-    <form action="">
-        <div class="form-box">
+    <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div  class="form-box">
             <div class="join-icon-box">
                 <i class="id fa-regular fa-user"></i>
                 <input class="id-box" type="text" placeholder="아이디를 입력하세요">
@@ -57,7 +58,7 @@
             </div>
             <div class="join-icon-box">
                 <i class="name fa-solid fa-tablet-screen-button"></i>
-                <input class="phone-box" type="text" placeholder="전화번호">
+                <input class="phone-box"  type="text" placeholder="전화번호">
             </div>
             <button class="submit">인증요청</button>
             <div class="join-icon-box">
