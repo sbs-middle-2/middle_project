@@ -12,20 +12,6 @@ li {
   list-style: none;
 }
 
-/* 라이브러리 */
-.cell {
-  float: left;
-}
-
-.cell-r {
-  float: right;
-}
-
-.row::after {
-  content: "";
-  clear: both;
-  display: block;
-}
 
 /* 스타일 */
 input {

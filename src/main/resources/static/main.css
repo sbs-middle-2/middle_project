@@ -145,33 +145,24 @@ li {
   position: relative;
 }
 
-.wrap-box > .menu-banner-box {
-  width: 100%;
-  height: 1000px;
-  transition: background-color 0.5s;
-}
-
 /* 상단 슬라이드 */
 
 /* 슬라이드 컨테이너 스타일 */
-.slick-wrap {
+.wrap-box .slick-wrap {
   width: 100%;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 150px ;
 }
 
 /* 각 슬라이드 아이템 스타일 */
-.slick-content {
+.wrap-box .slick-content {
   width: 100%;
-  overflow: hidden;
+  overflow: hidden ;
   text-align: center;
   padding: 20px;
   position: relative;
 }
 
-.slick-wrap .slick-content .img {
+.wrap-box .slick-wrap .slick-content .img {
   width: 100%;
   height: 700px;
   background-size: cover;
@@ -181,103 +172,100 @@ li {
   transition: 0.8s;
 }
 
-.slick-wrap .slick-content:hover span {
+.wrap-box .slick-wrap .slick-content:hover span{
   opacity: 1;
 }
 
-.slick-wrap .slick-content .img:hover {
+.wrap-box .slick-wrap .slick-content .img:hover{
   transform: scale(1.2);
 }
 
 /* 글자 */
-.slick-wrap .slick-content span {
+.wrap-box .slick-wrap .slick-content span{
   position: absolute;
   left: 50%;
   top: 13%;
   transform: translate(-50%, -50%);
   padding: 40px 40px;
-  opacity: 0;
+  opacity: 0 ;
   transition: opacity 0.7s;
   color: white;
-  font-size: 35px;
-  border: 3px groove white;
-  font-weight: bold;
+  font-size: 35px ;
+  border: 3px groove white ;
+  font-weight: bold ;
   border-radius: 20px;
-  font-family: "omyu_pretty";
+  font-family: 'omyu_pretty';
 }
 
 /* 센터 모드 활성화 */
-.slick-slider {
+.wrap-box .slick-slider {
   text-align: center;
 }
 
 /* 슬라이드 간의 간격 설정 (원하는 값으로 조절) */
-.slick-slide {
+.wrap-box .slick-slide {
   margin: 0 10px; /* 좌우 여백 조절 */
 }
 
-.slick-slide {
+.wrap-box .slick-slide {
   transition: opacity 0.5s ease-in-out; /* 부드러운 투명도 전환을 위한 CSS3 트랜지션 설정 */
 }
 
 /* 현재 활성화된 슬라이드는 투명도 1 (원래 크게 나타남) */
-.slick-slide.slick-center {
+.wrap-box .slick-slide.slick-center {
   opacity: 1;
-  border-radius: 15px;
+  border-radius:15px ;
 }
 
+
 /* 양 끝쪽 슬라이드는 투명도를 낮춤 (작게 나타남) */
-.slick-content {
+.wrap-box .slick-content {
   opacity: 0.3; /* 원하는 투명도 값으로 조정 */
 }
 
 /* 각 슬라이더 이미지 svg로 할 것 */
-.slick-wrap .slick-content .img-1 {
+.wrap-box .slick-wrap .slick-content .img-1 {
   background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MjlfODAg%2FMDAxNjYxNzUyODcxODgx.A0IEYUaQtDH0eTZXUWfqV0m0YhlmYdJqh4OWoIfF5xQg.Zz-cgarBDhN5OlzmuLsNMBuTXt4IgizsHw13a1jSgbAg.JPEG.discoverincheon%2F2021_%25EC%25A4%2591%25EA%25B5%25AC_%25EA%25B0%259C%25ED%2595%25AD%253F%259E%25A5_mbc%253F%2595%2584%253F%258A%25B8_%253F%259A%25A9%253F%2597%25AD_%253F%2582%25B4%25EB%25B6%253F%25EB%25B3%25B4%25EA%253F%253F%259A%25A9_%25283%2529.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-2 {
+.wrap-box .slick-wrap .slick-content .img-2 {
   background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F032%2F2019%2F10%2F23%2F0002970238_001_20191023160322987.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-3 {
+.wrap-box .slick-wrap .slick-content .img-3 {
   background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMDlfMjM3%2FMDAxNjY1MjU3MDQyNjMx.LQzG_imcYz3JUkocaRV3vJ5lltHQ0vVDGQRvVCyfeW4g.xcJVjR4-8w29TxFvKHTGSOuTh85-NUOlKshdEVBR_dUg.JPEG.namuansoop%2FCW3A8974.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-4 {
+.wrap-box .slick-wrap .slick-content .img-4 {
   background-image: url(" https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMDVfMjM5%2FMDAxNjY0OTcxMzUxNzY3.xMCG7EQKynJgM9Jw8TditXsWcayC4kSPkzN6tqG8ttcg.Q1iXbk7lPON0BI5Jvmyk0_bn2cmVLFJ61oPaCAch1Fwg.JPEG.valerion0826%2FKakaoTalk_20221005_194038172_11.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-5 {
+.wrap-box .slick-wrap .slick-content .img-5 {
   background-image: url(" https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F421%2F2019%2F08%2F03%2F0004128522_003_20190803204624646.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-6 {
+.wrap-box .slick-wrap .slick-content .img-6 {
   background-image: url(" https://search.pstatic.net/common/?src=http%3A%2F%2Fimage.nmv.naver.net%2Fblog_2021_10_04_1330%2F9d56afca-246a-11ec-8678-48df379cca40_01.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-7 {
+.wrap-box .slick-wrap .slick-content .img-7 {
   background-image: url("https://search.pstatic.net/sunny/?src=http%3A%2F%2Ftong.visitkorea.or.kr%2Fcms%2Fresource%2F86%2F2993586_image2_1.JPG&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-8 {
+.wrap-box .slick-wrap .slick-content .img-8 {
   background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5151%2F2016%2F05%2F30%2F2016053015094090410_00_947_99_20160530154506.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-9 {
+.wrap-box .slick-wrap .slick-content .img-9 {
   background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MjBfMjgw%2FMDAxNjU1Njg3MzU5Mjky.x24_mcAkf2QPo_xRKU4kH44m1GEAmQpxnnv1fvc4G7og.EQDYP4x-5NflBUHqLT7M2AKfJvsiZM47ZeeCFFsdV08g.JPEG.pinegn%2F%25B1%25D7%25B8%25B2__15.jpg&type=sc960_832");
 }
 
-.slick-wrap .slick-content .img-10 {
+.wrap-box .slick-wrap .slick-content .img-10 {
   background-image: url("https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230503_26%2F1683073402947aEB0E_JPEG%2F%25C3%25BB%25B5%25B5%25C7%25C1%25B7%25CE%25B9%25E6%25BD%25BA_%25283%2529.JPG");
 }
 
-/* 글자 페이든인 효과 주기  */
-.wrap-box slick-wrap content span {
-}
-
 /* next, prve 버튼  */
-.btn-icon {
+.wrap-box .btn-icon {
   width: 100px;
   height: 150px;
   color: #000000;
@@ -285,15 +273,15 @@ li {
   position: absolute;
   height: 50px;
   width: 50px;
-  bottom: 71.5%;
+  top: 12.7%;
   cursor: pointer;
 }
 
-.right-icon {
+.wrap-box .right-icon {
   right: 37%;
 }
 
-.left-icon {
+.wrap-box .left-icon {
   position: absolute;
   left: 38%;
 }
@@ -301,18 +289,18 @@ li {
 /* next, prve 버튼  끝 */
 
 /*  도트 변경 */
-.slick-wrap .slick-dots li {
+.wrap-box .slick-wrap .slick-dots li {
   width: auto;
   height: auto;
   transition: 1s;
 }
 
-.slick-wrap .slick-dots li.slick-active button {
-  width: 30px;
-  background-color: black;
+.wrap-box .slick-wrap .slick-dots li.slick-active button {
+  width: 40px;
+  background-color: #567ff2;
 }
 
-.slick-wrap .slick-dots li button {
+.wrap-box .slick-wrap .slick-dots li button {
   background-color: #b1b1b1;
   border-radius: 50px;
   width: 15px;
@@ -322,11 +310,12 @@ li {
   cursor: pointer;
   transition: background-color 0.5s ease-in-out;
 }
-.slick-wrap .slick-dots li button:before {
+.wrap-box .slick-wrap .slick-dots li button:before {
   content: "";
 }
 
 /* 도트변경 끝 */
+
 
 /* 상단 슬라이드 끝 */
 
@@ -334,8 +323,7 @@ li {
 
 .wrap-box > .main-container-box {
   max-width: 1920px;
-  height: 2300px;
-  margin: 0 auto;
+margin-top: 100px ;
 }
 
 .wrap-box > .main-container-box > .reply-main-box {
@@ -725,7 +713,6 @@ li {
 .slider-wrap-2 {
   width: 1920px;
   margin: 0 auto;
-  border: 1px solid;
 }
 
 .slider-wrap-2 .slier-content-2 a img {
