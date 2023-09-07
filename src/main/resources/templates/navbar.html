@@ -49,10 +49,11 @@
                 <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn"></i>
                     <div class="toggle-menu">
                         <ul  sec:authorize="isAnonymous()">
-                            <li>
-                                <a class="nav-link" th:href="@{/user/signup}">회원가입</a>   </li>
-                             <li>   <a class="nav-link" th:href="@{/user/login}">로그인</a></li>
+                            <li>   <a class="nav-link" th:href="@{/user/login}">로그인</a></li>
+
+                            <li><a class="nav-link" th:href="@{/user/signup}">회원가입</a>   </li>
                             </ul>
+
                         <ul sec:authorize="isAuthenticated()" >
 
                             <li>
