@@ -20,4 +20,14 @@ public class SiteUser {
 
     @Column(unique = true)
     private String email;
+
+    private String name;
+
+    private String nickname;
+
+    private String birthdate;
+
+    private String telecom;
+
+    private String phone;
 }
