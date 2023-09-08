@@ -3,13 +3,12 @@ package com.jhg.proto.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -39,12 +38,15 @@ public class UserController {
 
         try {
             userService.create(userCreateForm.getUsername(),
-                    userCreateForm.getEmail(), userCreateForm.getPassword1());
-        }catch(DataIntegrityViolationException e) {
+                    userCreateForm.getPassword1(), userCreateForm.getEmail(),
+                    userCreateForm.getName(), userCreateForm.getNickname(),
+                    userCreateForm.getBirthdate(), userCreateForm.getTelecom(),
+                    userCreateForm.getPhone());
+        } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
             return "signup_form";
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
             return "signup_form";
@@ -64,5 +66,16 @@ public class UserController {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         model.addAttribute("siteUser", siteUser);
         return "mypage_form";
+    }
+
+    @PostMapping("/check-username")
+    @ResponseBody
+    public ResponseEntity<String> checkUsername(@RequestParam String username) {
+        boolean isUsernameAvailable = userService.isUsernameAvailable(username);
+        if (isUsernameAvailable) {
+            return ResponseEntity.ok("사용 가능한 아이디입니다.");
+        } else {
+            return ResponseEntity.badRequest().body("이미 사용 중인 아이디입니다.");
+        }
     }
 }

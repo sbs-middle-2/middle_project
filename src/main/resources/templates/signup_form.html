@@ -19,15 +19,23 @@
             <div class="form-box">
                 <div class="join-icon-box">
                     <i class="id fa-regular fa-user"></i>
-                    <input type="text" th:field="*{username}" placeholder="아이디를 입력하세요" class="id-box">
+                    <input type="text" th:field="*{username}" placeholder="아이디를 입력하세요" class="id-box" id="username">
+                    <button id="checkUsernameBtn" class="submit">아이디 확인</button>
+                    <p id="usernameAvailability" class="availability-text"></p>
                 </div>
                 <div class="join-icon-box">
                     <i class="ps fa-solid fa-key"></i>
                     <input type="password" th:field="*{password1}" placeholder="비밀번호를 입력하세요" class="pass-box">
+                    <p class="p-text">영어, 특수문자, 숫자를 모두 포함시켜주세요</p>
                 </div>
                 <div class="join-icon-box">
                     <i class="ps fa-solid fa-key"></i>
-                    <input type="password" th:field="*{password2}" placeholder="비밀번호를 입력하세요" class="pass-box">
+                    <input type="password" th:field="*{password2}" placeholder="비밀번호를 다시 입력하세요" class="pass-box">
+                    <p class="p-text">영어, 특수문자, 숫자를 모두 포함시켜주세요</p>
+                </div>
+                <div class="join-icon-box">
+                    <i class="name fa-solid fa-envelope"></i>
+                    <input type="text" th:field="*{email}" placeholder="이메일을 입력하세요" class="niname-box">
                 </div>
                 <div class="join-icon-box">
                     <i class="name fa-regular fa-user"></i>
@@ -39,21 +47,40 @@
                 </div>
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-heart"></i>
-                    <input type="text" th:field="*{birthdate}" placeholder="생년월일을 입력하세요" class="bir-box">
+                    <input type="text" th:field="*{birthdate}" placeholder="생년월일을 입력하세요" class="bir-box" id="birthdateInput">
                 </div>
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-phone-volume"></i>
-                    <select name="통신사" id="통신사">
+                    <select name="통신사" th:field="*{telecom}" id="통신사">
                         <option value="" selected>통신사 선택</option>
                         <option value="KT">KT</option>
                         <option value="LGU+">LGU+</option>
                         <option value="SKT">SKT</option>
                     </select>
                 </div>
+
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-tablet-screen-button"></i>
                     <input type="text" th:field="*{phone}" placeholder="전화번호" class="phone-box">
+
+                    <button id="requestCodeBtn" class="submit">인증요청</button>
+                    <div id="verificationCode"></div>
+                    <input class="insig-box" type="text" placeholder="인증번호를 입력하세요" id="verificationInput">
+                    <button type="button" id="verifyButton" class="submit">인증확인</button>
                 </div>
+
+                <!--
+                <div class="join-icon-box">
+                    <i class="name fa-solid fa-tablet-screen-button"></i>
+                    <input type="text" th:field="*{phone}" placeholder="전화번호" class="phone-box">
+
+                    <button id="requestCodeBtn" class="submit">인증요청</button>
+                    <div id="verificationCode"></div> &lt;!&ndash; 인증번호를 표시할 요소 추가 &ndash;&gt;
+                    &lt;!&ndash; 인증번호를 입력할 인풋 박스에 id를 부여합니다. &ndash;&gt;
+                    <input class="insig-box" type="text" placeholder="인증번호를 입력하세요" id="verificationInput">
+                    <button type="button" id="verifyButton" class="submit">인증확인</button>
+                </div>
+                -->
                 <button type="submit" class="submit">회원가입하기</button>
             </div>
         </form>
@@ -61,6 +88,78 @@
             <input type="checkbox" class="agree-box"> 개인정보 수집 및 이용 내용을 확인하였으며, 동의합니다.
         </p>
     </div>
+
+    <!-- 아이디 중복 체크 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const usernameInput = document.getElementById("username");
+            const checkUsernameBtn = document.getElementById("checkUsernameBtn");
+            const usernameAvailability = document.getElementById("usernameAvailability");
+
+            checkUsernameBtn.addEventListener("click", function () {
+                event.preventDefault(); // 기본 동작인 페이지 새로고침을 막습니다.
+                const username = usernameInput.value;
+
+                // 아이디 중복 체크 함수 호출
+                checkUsernameAvailability(username);
+            });
+
+            function checkUsernameAvailability(username) {
+                // 이 부분에서 아이디 중복 체크를 수행합니다.
+                // 사용 가능한 아이디일 경우 usernameAvailability.textContent를 변경하고 클래스를 추가/제거하세요.
+                // 아래는 예시 코드이며 실제 아이디 중복 체크 로직에 맞게 수정하셔야 합니다.
+                const isUsernameAvailable = true; // 예시: 사용 가능한 경우
+                if (isUsernameAvailable) {
+                    usernameAvailability.textContent = "사용 가능한 아이디입니다.";
+                    usernameAvailability.classList.remove("unavailable");
+                    usernameAvailability.classList.add("available");
+                } else {
+                    usernameAvailability.textContent = "이미 사용 중인 아이디입니다.";
+                    usernameAvailability.classList.remove("available");
+                    usernameAvailability.classList.add("unavailable");
+                }
+            }
+        });
+    </script>
+
+    <!-- 생년월일 캘린더 스크립트 -->
+    <script>
+        $(document).ready(function() {
+            $('#birthdateInput').on('input', function() {
+                // 입력값에서 숫자만 추출
+                const input = $(this).val().replace(/\D/g, '');
+
+                // 숫자를 형식에 맞게 변경
+                if (input.length >= 8) {
+                    const year = input.slice(0, 4);
+                    const month = input.slice(4, 6);
+                    const day = input.slice(6, 8);
+
+                    // 입력된 연도가 1900 이상인지 확인
+                    if (parseInt(year) >= 1900) {
+                        // 입력된 월이 1에서 12 사이에 있는지 확인
+                        if (parseInt(month) >= 1 && parseInt(month) <= 12) {
+                            // 입력된 일이 1에서 31 사이에 있는지 확인
+                            if (parseInt(day) >= 1 && parseInt(day) <= 31) {
+                                const formattedDate = `${year}-${month}-${day}`;
+                                $(this).val(formattedDate);
+                            } else {
+                                alert('올바른 일(01-31)을 입력하세요.');
+                                $(this).val('');
+                            }
+                        } else {
+                            alert('올바른 월(01-12)을 입력하세요.');
+                            $(this).val('');
+                        }
+                    } else {
+                        alert('올바른 연도(1900 이상)를 입력하세요.');
+                        $(this).val('');
+                    }
+                }
+            });
+        });
+    </script>
 
     <!-- 인증번호 요청 스크립트 -->
     <script>
@@ -74,22 +173,32 @@
         }
 
         $(document).ready(function() {
-            $('#requestCodeBtn').click(function() {
+            $('#requestCodeBtn').click(function(event) {
+                event.preventDefault(); // 기본 동작 막기
                 const verificationCode = generateVerificationCode();
                 $('#verificationCode').text('인증번호: ' + verificationCode);
             });
-        });
 
-        /* 인증번호 요청 버튼 클릭시 새로고침 현상 막기 */
-        $(document).ready(function() {
-            $('#requestCodeBtn').click(function(event) {
-                event.preventDefault(); // 기본 동작 막기
+            $('#verifyButton').click(function() {
+                const enteredCode = $('#verificationInput').val();
+                const generatedCode = $('#verificationCode').text().split(': ')[1];
 
-                const verificationCode = generateVerificationCode();
-                $('#verificationCode').text('인증번호: ' + verificationCode);
+                if (enteredCode === generatedCode) {
+                    alert('인증번호가 일치합니다.');
+                } else {
+                    alert('인증번호가 일치하지 않습니다.');
+                }
+            });
+
+            $('#verificationInput').keypress(function(event) {
+                if (event.which === 13) {
+                    $('#verifyButton').click();
+                    event.preventDefault();
+                }
             });
         });
     </script>
+
 </div>
 </body>
 </html>
