@@ -67,6 +67,19 @@ public class UserController {
     }
 
 
+    @PostMapping("/login")
+    public String loginSuccess() {
+        // 로그인 성공 시 처리
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        // 로그아웃 처리
+        return "redirect:/";
+    }
+
+
     // 마이페이지
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage")
@@ -75,6 +88,8 @@ public class UserController {
         model.addAttribute("siteUser", siteUser);
         return "mypage_form";
     }
+
+
 
     // 아이디 중복 체크
     @GetMapping("/checkUsername/{username}")

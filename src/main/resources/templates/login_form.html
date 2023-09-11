@@ -10,7 +10,7 @@
 
 <!--   로그인  -->
 <div layout:fragment="content" class="input-login-box">
-    <h1>뭐하지 또? 또가지 뭐!</h1>
+    <a href="/"><h1>뭐하지 또? 또가지 뭐!</h1></a>
     <div class="login-top-box">
         <form  th:action="@{/user/login}" method="post">
         <div class="form-box" >
@@ -39,7 +39,7 @@
     <div class="text-box">
         <a class="id" href="#" title="아이디 찾기"><span>아이디 찾기</span></a>
         <a class="password" href="#" title="비밀번호 찾기"><span>비밀번호 찾기</span></a>
-        <a class="join" href="#" title="회원가입"><span>회원가입</span></a>
+        <a class="join" th:href="@{/user/signup}" title="회원가입"><span>회원가입</span></a>
     </div>
 </div>
 <!-- 로그인 끝 -->

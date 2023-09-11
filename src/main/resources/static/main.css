@@ -160,7 +160,7 @@ li {
   width: 100%;
   overflow: hidden ;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
   position: relative;
 }
 
@@ -170,7 +170,7 @@ li {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 15px;
+  border-radius: 30px;
   transition: 0.8s;
 }
 
@@ -179,7 +179,7 @@ li {
 }
 
 .wrap-box .slick-wrap .slick-content .img:hover{
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 /* 글자 */
@@ -188,14 +188,14 @@ li {
   left: 50%;
   top: 15%;
   transform: translate(-50%, -50%);
-  padding: 40px 40px;
+  padding: 40px 20px;
   opacity: 0 ;
   transition: opacity 0.7s;
   color: white;
   font-size: 35px ;
   border: 3px groove white ;
   font-weight: bold ;
-  border-radius: 20px;
+  border-radius: 10px;
   font-family: 'omyu_pretty';
 }
 
@@ -216,7 +216,7 @@ li {
 /* 현재 활성화된 슬라이드는 투명도 1 (원래 크게 나타남) */
 .wrap-box .slick-slide.slick-center {
   opacity: 1;
-  border-radius:15px ;
+  border-radius:30px ;
 }
 
 
@@ -268,22 +268,20 @@ li {
 
 /* next, prve 버튼  */
 .wrap-box .btn-icon {
-  width: 100px;
-  height: 150px;
-  color: #000000;
-  font-size: 35px;
+  color: #fff;
+  font-size: 80px;
   position: absolute;
-  top: 22.8%;
+  top: 10%;
   cursor: pointer;
 }
 
 .wrap-box .right-icon {
-  right: 35%;
+  right: 16.5%;
 }
 
 .wrap-box .left-icon {
   position: absolute;
-  left: 38%;
+  left: 16.5%;
 }
 
 /* next, prve 버튼  끝 */
@@ -303,8 +301,8 @@ li {
 .wrap-box .slick-wrap .slick-dots li button {
   background-color: #b1b1b1;
   border-radius: 50px;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 10px;
   margin-right: 10px;
   border: none;
   cursor: pointer;

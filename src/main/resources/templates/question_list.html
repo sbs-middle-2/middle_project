@@ -3,90 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/bootstrap.min.css">
     <!-- navbar.css를 모든 페이지에 포함 -->
-    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/question_list.css}">
+    <script  th:src="@{/question_list.js}"></script>
+
 </head>
 
 <body>
-<div layout:fragment="content" class="container my-3" style="margin-top: 100px !important;">
-    <div class="row my-3">
-        <div class="col-6">
-            <a th:href="@{/question/create}" class="btn btn-primary">게시글 등록하기</a>
-        </div>
-        <div class="col-6">
-            <div class="input-group">
-                <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+
+<!-- 리스트 박스 -->
+<div class="list-box" layout:fragment="content">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요(작성자. 제목, 내용)">
+    </div>
+    <div class="article-list-box">
+        <span>번호</span>
+        <span>작성자</span>
+        <span>작성날짜</span>
+        <span>수정날짜</span>
+        <span style="text-align : center;">제목</span>
+        <span>댓글 수</span>
+
+    </div>
+    <div class="accordion">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>01번</span>
+                <span>인철</span>
+                <span>23.08.02</span>
+                <span>23.08.03</span>
+                <span>ㅋㅋㅋ</span>
+                <span>08</span>
+                <i class="fas fa-plus"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="detail-box">
+                    <ul>
+                        <li><span>번호</span></li>
+                        <li><span>작성자</span></li>
+                        <li><span>작성날짜</span></li>
+                        <li><span>수정날짜</span></li>
+                        <li><span>조회수</span></li>
+                    </ul>
+                    <ul>
+                        <li><span>01</span></li>
+                        <li><span>한인철</span></li>
+                        <li><span>23.09.08</span></li>
+                        <li><span>23.09.09</span></li>
+                        <li><span>01</span></li>
+                    </ul>
+                    <div class="body-box" style="display : flex ; margin-top : 20px ;box-shadow: 0 6px 6px -6px rgba(68, 68, 68, 0.3);   border-bottom: 2px solid #d1d1d1; padding-bottom: 10px; margin-bottom: 20px;">
+                        <ul style="border : none ; box-shadow : none ; width : 20% ; display : flex ; justify-content :center; align-items : center ; ">
+                            <li style=" width : 100%; "><span>내용</span>
+                            </li>
+                        </ul>
+                        <ul style="width : 100%; text-align : left ;">
+                            <li style=" width : 100% ; text-align : left ; padding : 10px ;"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore, doloremque odit cumque temporibus quibusdam nisi laborum, aperiam distinctio fuga voluptas neque doloribus magnam at quis iure? Unde sapiente sunt in.</span></li>
+                        </ul>
+                    </div>
+                    <form action="" method="post">
+                        <div style=" padding: 10px; display: flex; align-items: center; justify-content: center;">
+                            <span style=" height: 100%; width: 100px; font-size: 30px;">댓글</span>
+                            <textarea style="resize: none; width: 1000px; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.3); border: 1px solid #f1f1f1; padding: 20px;" required placeholder="댓글을 입력하세요"></textarea>
+                        </div>
+                </div>
+                <button type="submit" style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 20px 10px ; margin-right : 20px ; display: flex ;  margin-left: auto;">댓글 추가</button>
+
+                </form>
+
+                <!-- 댓글 목록 표시 영역 -->
+                <div class="comment-list">
+                    <!--  댓글 목록 -->
+                </div>
             </div>
         </div>
     </div>
-    <table class="table">
-        <thead class="table-dark">
-        <tr class="text-center">
-            <th>번호</th>
-            <th style="width:50%">제목</th>
-            <th>글쓴이</th>
-            <th>작성일시</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-center" th:each="question, loop : ${paging}">
-            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-            <td class="text-start">
-                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
-                <span class="text-danger small ms-2"
-                      th:if="${#lists.size(question.answerList) > 0}"
-                      th:text="${#lists.size(question.answerList)}">
-                    </span>
-            </td>
-            <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
-            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <!-- 페이징처리 시작 -->
-    <div th:if="${!paging.isEmpty()}">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" href="javascript:void(0)" th:data-page="${paging.number-1}">
-                <a class="page-link"
-                   th:href="@{|?page=${paging.number-1}|}">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'" class="page-item">
-                <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
-            </li>
-            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>01번</span>
+            <span>인철</span>
+            <span>23.08.02</span>
+            <span>23.08.03</span>
+            <span>ㅋㅋㅋ</span>
+            <span>08</span>
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="accordion-content">
+            짱구
+        </div>
     </div>
-    <!-- 페이징처리 끝 -->
-    <form th:action="@{/question/list}" method="get" id="searchForm">
-        <input type="hidden" id="kw" name="kw" th:value="${kw}">
-        <input type="hidden" id="page" name="page" th:value="${paging.number}">
-    </form>
 </div>
-<script layout:fragment="script" type='text/javascript'>
-    const page_elements = document.getElementsByClassName("page-link");
-    Array.from(page_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            document.getElementById('page').value = this.dataset.page;
-            document.getElementById('searchForm').submit();
-        });
-    });
-    const btn_search = document.getElementById("btn_search");
-    btn_search.addEventListener('click', function() {
-        document.getElementById('kw').value = document.getElementById('search_kw').value;
-        document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
-        document.getElementById('searchForm').submit();
-    });
-</script>
+</div>
+
 </body>
 
 </html>

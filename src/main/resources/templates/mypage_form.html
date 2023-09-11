@@ -3,21 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/mypage.css">
+    <link rel="stylesheet" th:href="@{/mypage.css}">
+    <script th:src="@{/mypage.js}"></script>
 </head>
 
 <body>
-<div layout:fragment="content" class="container my-3" style="margin-top: 300px !important;">
-    <h1>마이페이지</h1>
-    <p>안녕하세요, <span th:text="${siteUser.username}"></span>님! 마이페이지에 오신 것을 환영합니다.</p>
-    <!-- 필요한 유저 정보를 여기에 추가 하세요 -->
-    <p>이름: <span th:text="${siteUser.name}"></span></p>
-    <p>생년월일: <span th:text="${siteUser.birthdate}"></span></p>
-    <p>이메일: <span th:text="${siteUser.email}"></span></p>
-    <p>번호: <span th:text="${siteUser.phone}"></span></p>
+<!-- 제이쿼리 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <button type="submit">정보 수정</button>
-    <button type="submit">회원 탈퇴</button>
+<!-- toastr 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마이 페이지</title>
+</head>
+
+<body>
+
+<!-- 마이페이지 -->
+<div class="my-wrap" layout:fragment="content">
+    <div class="id-section">
+        <a href="">
+            <p class="logo-text">뭐하지 또? 또 가지 뭐!</p>
+        </a>
+        <h1>MY PAGE</h1>
+
+        <!--     이미지    -->
+        <div class="avatar">
+            <div class="img-box">
+                <img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ffe%2F94%2F01%2Ffe9401b82ec1a52d876b76774da990ac.jpg&type=sc960_832" alt="프로필 이미지">
+            </div>
+        </div>
+
+        <!--   사용자이름  -->
+        <h2>한인철</h2>
+        <h4>gsw05018@naver.com</h4>
+
+        <!--    메뉴   -->
+        <ul class="">
+            <li><a href="">정보 수정</a></li>
+            <li><a href="">할인권 조회</a></li>
+        </ul>
+
+    </div>
+
+    <div class="ch-section">
+        <!--   정보수정 폼   -->
+        <div class="join-box">
+            <form action="">
+                <div class="form-box">
+                    <table>
+                        <!-- 사용자 정보  -->
+                        <tr class="table-box ">
+                            <th><span class=" user">이름</span><span class="body">한인철</span></th>
+                        </tr>
+                        <tr class="table-box ">
+                            <th><span class=" user">이메일</span><span class="body ">gsw05018@naver.com</span></th>
+                        </tr>
+                        <tr class="table-box ">
+                            <th><span class=" user">전화번호</span><span class="body">010-****-***4</span></th>
+                        </tr>
+
+                        <tr class="table-box ">
+                            <th><span class=" user">집 주소</span><span class="body ">대전시 서구 가수원동 </span></th>
+                        </tr>
+                        <tr class="table-box ">
+                            <th><span class="user">비밀번호</span><span class="body ">***********</span></th>
+                            <td><button id="openModalButton">수정</button></td>
+                        </tr>
+                        <tr class="table-box ">
+                            <th><span class="pro-text"> 핸드폰 프로모션 정보 통신 동의</span></th>
+                            <td>
+                                <div class="btn" id="toggleBtn">off</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <button class="submit" id="otherButton">수정하기</button>
+                </div>
+            </form>
+        </div>
+        <!--   정보수정    -->
+
+    </div>
 </div>
+
+<!-- On/Off 변경 시 상단에 나타날 안내창 -->
+<div id="notificationBar"></div>
+
+<!-- 모달 창 -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" style="float: right; cursor: pointer;">닫기</span>
+        <h2 style="text-align : center ;  margin-bottom : 30px ; font-size : 35px ;">비밀번호 변경</h2>
+        <!-- 비밀번호 변경 양식 -->
+        <form id="passwordChangeForm">
+            <!-- 비밀번호 입력 필드 등을 여기에 추가 -->
+            <label for="newPassword" style=" padding : 10px 20px ; font-size : 20px ; font-weight : 500 ; ">새 비밀번호 입력:</label>
+            <input type="password" id="newPassword" name="newPassword" style="width : 50% ; height : 30px ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada;   border-radius: 10px; padding-left: 15px ;"><br><br>
+            <label for="confirmPassword" style="padding : 10px 20px ; font-size : 20px ; font-weight : 500 ; ">새 비밀번호 확인:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" style="width : 50% ; height : 30px ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada;   border-radius: 10px; padding-left: 15px ; "><br><br>
+            <button type="button" id="changePasswordButton" style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top : 30px ; ">비밀번호 변경</button>
+        </form>
+    </div>
+</div>
+
 </body>
+
 </html>
