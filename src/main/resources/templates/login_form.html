@@ -8,22 +8,34 @@
 
 <body>
 <div layout:fragment="content" class="container my-3" style="margin-top: 100px !important;">
-    <form th:action="@{/user/login}" method="post">
-        <div th:if="${param.error}">
-            <div class="alert alert-danger">
-                사용자ID 또는 비밀번호를 확인해 주세요.
-            </div>
+    <div class="input-login-box">
+        <h1>뭐하지 또? 또가지 뭐!</h1>
+        <div class="login-top-box">
+            <!-- Step 1: 폼 액션을 서버의 로그인 엔드포인트로 설정합니다. -->
+            <form th:action="@{/user/login}" method="post">
+                <div class="form-box" method="POST">
+                    <div class="id-icon-box">
+                        <i class="fa-regular fa-user"></i>
+                        <!-- Step 2: 아이디 입력 필드에 name 속성을 추가합니다. -->
+                        <input class="id-box" type="text" name="username" placeholder="아이디">
+                    </div>
+                    <div class="pass-icon-box">
+                        <i class="fa-solid fa-key"></i>
+                        <!-- Step 3: 비밀번호 입력 필드에 name 속성을 추가합니다. -->
+                        <input class="pass-box" type="password" name="password" placeholder="비밀번호">
+                    </div>
+                    <div><input class="check-box" type="checkbox"> <span>로그인 기억하기</span></div>
+                    <!-- Step 4: 로그인 버튼을 제출 버튼으로 설정합니다. -->
+                    <button type="submit" class="submit">로그인</button>
+                </div>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="username" class="form-label">사용자ID</label>
-            <input type="text" name="username" id="username" class="form-control">
+        <div class="text-box">
+            <a class="id" href="#" title="아이디 찾기"><span>아이디 찾기</span></a>
+            <a class="password" href="#" title="비밀번호 찾기"><span>비밀번호 찾기</span></a>
+            <a class="join" href="#" title="회원가입"><span>회원가입</span></a>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">비밀번호</label>
-            <input type="password" name="password" id="password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-    </form>
+    </div>
 </div>
 </body>
 </html>
