@@ -63,11 +63,6 @@
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-tablet-screen-button"></i>
                     <input type="text" th:field="*{phone}" placeholder="전화번호" class="phone-box">
-
-                    <button id="requestCodeBtn" class="submit">인증요청</button>
-                    <div id="verificationCode"></div>
-                    <input class="insig-box" type="text" placeholder="인증번호를 입력하세요" id="verificationInput">
-                    <button type="button" id="verifyButton" class="submit" style="margin-bottom: 10px">인증확인</button>
                 </div>
                 <p class="text">
                     <input type="checkbox" class="agree-box"> 개인정보 수집 및 이용 내용을 확인하였으며, 동의합니다.
@@ -150,62 +145,6 @@
         });
     </script>
 
-    <!-- 인증번호 요청 스크립트 -->
-    <script>
-        function generateVerificationCode() {
-            const codeLength = 6;
-            const min = Math.pow(10, codeLength - 1);
-            const max = Math.pow(10, codeLength) - 1;
-            const randomCode = Math.floor(Math.random() * (max - min + 1)) + min;
-
-            return randomCode.toString().padStart(codeLength, '0');
-        }
-
-        $(document).ready(function() {
-            $('#requestCodeBtn').click(function(event) {
-                event.preventDefault(); // 기본 동작 막기
-                const verificationCode = generateVerificationCode();
-                $('#verificationCode').text('인증번호: ' + verificationCode);
-            });
-
-            $('#verifyButton').click(function() {
-                const enteredCode = $('#verificationInput').val();
-                const generatedCode = $('#verificationCode').text().split(': ')[1];
-
-                if (enteredCode === generatedCode) {
-                    alert('인증번호가 일치합니다.');
-                } else {
-                    alert('인증번호가 일치하지 않습니다.');
-                }
-            });
-
-            $('#verificationInput').keypress(function(event) {
-                if (event.which === 13) {
-                    $('#verifyButton').click();
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
-
-<!--  스크룰시 올림버튼   -->
-    <script>
-        $(window).scroll(function () {
-            var $scrollTop = $(this).scrollTop();
-            if ($scrollTop > 0) {
-                $(".goto-tp-btn").css({ opacity: 1 });
-            } else {
-                $(".goto-tp-btn").css({ opacity: 0 });
-            }
-        });
-
-        $(document).ready(function () {
-            $(".goto-tp-btn").click(function () {
-                $("html, body").animate({ scrollTop: 0 });
-            });
-        });
-
-    </script>
 
 </div>
 </body>
