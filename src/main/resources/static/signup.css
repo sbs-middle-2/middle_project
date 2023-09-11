@@ -39,11 +39,8 @@ li {
 /* 스타일 */
 
 /* 회원가입  */
-<<<<<<< HEAD
 
 /* 글자 */
-=======
->>>>>>> 82580c7f066a89ca0bf78cd192b1705e8fb61c79
 .join-box {
   position: relative;
   width: 500px;
@@ -78,8 +75,9 @@ select {
 }
 
 .join-box > form select:focus,
-.join-box > form input:focus {
-  border: 2px solid #3b91ff;
+.join-box > form input:focus,
+.join-box > form button:focus{
+  border: 1px solid #3b91ff;
 }
 
 select:hover,
@@ -221,20 +219,8 @@ form > .form-box .phone-box {
   border-radius: 10px;
 }
 
-form > .form-box .insig-box {
-  width: 100%;
-  height: 50px;
-  padding: 0 40px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08);
-  border: 1px solid #dadada;
-  border-radius: 10px;
-}
-
 form > .form-box .text {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-top: 10px;
   cursor: pointer;
 }
@@ -250,7 +236,7 @@ form > .form-box .submit {
 }
 
 form > .form-box > .submit:hover {
-  border: 2px solid #3b91ff;
+  border: 1px solid #3b91ff;
   background-color: #f0f8ff;
   color: black;
   font-weight: bold;

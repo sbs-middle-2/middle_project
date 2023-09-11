@@ -2,6 +2,7 @@ package com.jhg.proto.user;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -18,6 +21,9 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
@@ -60,6 +66,8 @@ public class UserController {
         return "login_form";
     }
 
+
+    // 마이페이지
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage")
     public String mypage(Principal principal, Model model) {
@@ -68,14 +76,13 @@ public class UserController {
         return "mypage_form";
     }
 
-    @PostMapping("/check-username")
-    @ResponseBody
-    public ResponseEntity<String> checkUsername(@RequestParam String username) {
-        boolean isUsernameAvailable = userService.isUsernameAvailable(username);
-        if (isUsernameAvailable) {
-            return ResponseEntity.ok("사용 가능한 아이디입니다.");
-        } else {
-            return ResponseEntity.badRequest().body("이미 사용 중인 아이디입니다.");
-        }
+    // 아이디 중복 체크
+    @GetMapping("/checkUsername/{username}")
+    public ResponseEntity<Map<String, Boolean>> checkUsernameAvailability(@PathVariable String username) {
+        // 아이디 중복 체크를 위한 서비스 메서드 호출
+        boolean isUsernameTaken = userRepository.existsByUsername(username);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("available", !isUsernameTaken);
+        return ResponseEntity.ok(response);
     }
 }
