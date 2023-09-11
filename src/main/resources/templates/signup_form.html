@@ -61,31 +61,14 @@
 
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-tablet-screen-button"></i>
-                    <input type="text" th:field="*{phone}" placeholder="전화번호" class="phone-box">
-
-                    <button id="requestCodeBtn" class="submit">인증요청</button>
-                    <div id="verificationCode"></div>
-                    <input class="insig-box" type="text" placeholder="인증번호를 입력하세요" id="verificationInput">
-                    <button type="button" id="verifyButton" class="submit">인증확인</button>
+                    <input type="tel" th:field="*{phone}" placeholder="전화번호" class="phone-box">
                 </div>
 
-                <!--
-                <div class="join-icon-box">
-                    <i class="name fa-solid fa-tablet-screen-button"></i>
-                    <input type="text" th:field="*{phone}" placeholder="전화번호" class="phone-box">
-
-                    <button id="requestCodeBtn" class="submit">인증요청</button>
-                    <div id="verificationCode"></div> &lt;!&ndash; 인증번호를 표시할 요소 추가 &ndash;&gt;
-                    &lt;!&ndash; 인증번호를 입력할 인풋 박스에 id를 부여합니다. &ndash;&gt;
-                    <input class="insig-box" type="text" placeholder="인증번호를 입력하세요" id="verificationInput">
-                    <button type="button" id="verifyButton" class="submit">인증확인</button>
-                </div>
-                -->
                 <button type="submit" class="submit">회원가입하기</button>
             </div>
         </form>
         <p class="text">
-            <input type="checkbox" class="agree-box"> 개인정보 수집 및 이용 내용을 확인하였으며, 동의합니다.
+            <input type="checkbox" class="agree-box" id="privacyCheckbox"> 개인정보 수집 및 이용 내용을 확인하였으며, 동의합니다.
         </p>
     </div>
 
@@ -106,19 +89,25 @@
             });
 
             function checkUsernameAvailability(username) {
-                // 이 부분에서 아이디 중복 체크를 수행합니다.
-                // 사용 가능한 아이디일 경우 usernameAvailability.textContent를 변경하고 클래스를 추가/제거하세요.
-                // 아래는 예시 코드이며 실제 아이디 중복 체크 로직에 맞게 수정하셔야 합니다.
-                const isUsernameAvailable = true; // 예시: 사용 가능한 경우
-                if (isUsernameAvailable) {
-                    usernameAvailability.textContent = "사용 가능한 아이디입니다.";
-                    usernameAvailability.classList.remove("unavailable");
-                    usernameAvailability.classList.add("available");
-                } else {
-                    usernameAvailability.textContent = "이미 사용 중인 아이디입니다.";
-                    usernameAvailability.classList.remove("available");
-                    usernameAvailability.classList.add("unavailable");
-                }
+                // 서버로 아이디 중복 체크 요청을 보냅니다.
+                fetch(`/user/checkUsername/${username}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const isUsernameAvailable = data.available;
+                        if (isUsernameAvailable) {
+                            usernameAvailability.textContent = "사용 가능한 아이디입니다.";
+                            usernameAvailability.classList.remove("unavailable");
+                            usernameAvailability.classList.add("available");
+                        } else {
+                            usernameAvailability.textContent = "이미 사용 중인 아이디입니다.";
+                            usernameAvailability.classList.remove("available");
+                            usernameAvailability.classList.add("unavailable");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("아이디 중복 체크 에러:", error);
+                        // 에러 처리 로직 추가
+                    });
             }
         });
     </script>
@@ -136,24 +125,18 @@
                     const month = input.slice(4, 6);
                     const day = input.slice(6, 8);
 
-                    // 입력된 연도가 1900 이상인지 확인
-                    if (parseInt(year) >= 1900) {
-                        // 입력된 월이 1에서 12 사이에 있는지 확인
-                        if (parseInt(month) >= 1 && parseInt(month) <= 12) {
-                            // 입력된 일이 1에서 31 사이에 있는지 확인
-                            if (parseInt(day) >= 1 && parseInt(day) <= 31) {
-                                const formattedDate = `${year}-${month}-${day}`;
-                                $(this).val(formattedDate);
-                            } else {
-                                alert('올바른 일(01-31)을 입력하세요.');
-                                $(this).val('');
-                            }
+                    // 입력된 월이 1에서 12 사이에 있는지 확인
+                    if (parseInt(month) >= 1 && parseInt(month) <= 12) {
+                        // 입력된 일이 1에서 31 사이에 있는지 확인
+                        if (parseInt(day) >= 1 && parseInt(day) <= 31) {
+                            const formattedDate = `${year}-${month}-${day}`;
+                            $(this).val(formattedDate);
                         } else {
-                            alert('올바른 월(01-12)을 입력하세요.');
+                            alert('올바른 일(01-31)을 입력하세요.');
                             $(this).val('');
                         }
                     } else {
-                        alert('올바른 연도(1900 이상)를 입력하세요.');
+                        alert('올바른 월(01-12)을 입력하세요.');
                         $(this).val('');
                     }
                 }
@@ -161,39 +144,100 @@
         });
     </script>
 
-    <!-- 인증번호 요청 스크립트 -->
+    <!-- 전화번호 입력 포맷팅 스크립트 -->
     <script>
-        function generateVerificationCode() {
-            const codeLength = 6;
-            const min = Math.pow(10, codeLength - 1);
-            const max = Math.pow(10, codeLength) - 1;
-            const randomCode = Math.floor(Math.random() * (max - min + 1)) + min;
+        // 전화번호 입력을 자동으로 포맷팅하는 함수
+        function formatPhoneNumber(input) {
+            // 숫자만 추출하고, 11자리까지만 허용
+            const phoneNumber = input.value.replace(/\D/g, '').slice(0, 11);
 
-            return randomCode.toString().padStart(codeLength, '0');
+            // 전화번호 형식에 따라 포맷팅
+            if (phoneNumber.length <= 3) {
+                input.value = phoneNumber;
+            } else if (phoneNumber.length <= 7) {
+                input.value = `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+            } else {
+                input.value = `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 7)}-${phoneNumber.slice(7)}`;
+            }
         }
 
+        // 전화번호 입력 필드에 이벤트 리스너 추가
+        const phoneInput = document.querySelector(".phone-box"); // 전화번호 입력 필드의 클래스에 맞게 수정
+        phoneInput.addEventListener("input", function () {
+            formatPhoneNumber(this);
+        });
+    </script>
+
+    <!-- 인증번호 요청 스크립트 -->
+    <script>
         $(document).ready(function() {
+            // 인증번호 생성 함수
+            function generateVerificationCode() {
+                const codeLength = 6;
+                const min = Math.pow(10, codeLength - 1);
+                const max = Math.pow(10, codeLength) - 1;
+                const randomCode = Math.floor(Math.random() * (max - min + 1)) + min;
+
+                return randomCode.toString().padStart(codeLength, '0');
+            }
+
+            // 인증번호 요청 버튼 클릭 이벤트
             $('#requestCodeBtn').click(function(event) {
                 event.preventDefault(); // 기본 동작 막기
                 const verificationCode = generateVerificationCode();
                 $('#verificationCode').text('인증번호: ' + verificationCode);
             });
-
-            $('#verifyButton').click(function() {
-                const enteredCode = $('#verificationInput').val();
-                const generatedCode = $('#verificationCode').text().split(': ')[1];
+        });
+    </script>
+    <!-- 인증번호 확인 스크립트 -->
+    <script>
+        $(document).ready(function() {
+            // 인증번호 확인 버튼 클릭 이벤트
+            $('#verifyButton').click(function(event) {
+                event.preventDefault(); // 기본 동작 막기
+                const enteredCode = $('#verificationInput').val().trim(); // 입력된 인증번호
+                const generatedCode = $('#verificationCode').text().split(': ')[1]; // 생성된 인증번호
 
                 if (enteredCode === generatedCode) {
-                    alert('인증번호가 일치합니다.');
+                    // 인증번호가 일치할 때만 회원가입 버튼 활성화
+                    $('#submitBtn').prop('disabled', false); // 회원가입 버튼 활성화
                 } else {
                     alert('인증번호가 일치하지 않습니다.');
+                    // 인증번호가 일치하지 않으면 회원가입 버튼 비활성화
+                    $('#submitBtn').prop('disabled', true); // 회원가입 버튼 비활성화
                 }
             });
 
+            // Enter 키를 눌렀을 때 인증번호 확인 버튼 클릭 이벤트 호출
             $('#verificationInput').keypress(function(event) {
                 if (event.which === 13) {
-                    $('#verifyButton').click();
                     event.preventDefault();
+                    const enteredCode = $('#verificationInput').val().trim(); // 입력된 인증번호
+                    const generatedCode = $('#verificationCode').text().split(': ')[1]; // 생성된 인증번호
+
+                    if (enteredCode === generatedCode) {
+                        // 인증번호가 일치할 때만 회원가입 버튼 활성화
+                        $('#submitBtn').prop('disabled', false); // 회원가입 버튼 활성화
+                    } else {
+                        alert('인증번호가 일치하지 않습니다.');
+                        // 인증번호가 일치하지 않으면 회원가입 버튼 비활성화
+                        $('#submitBtn').prop('disabled', true); // 회원가입 버튼 비활성화
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- 개인정보 수집 동의 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const privacyCheckbox = document.getElementById("privacyCheckbox");
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function (event) {
+                if (!privacyCheckbox.checked) {
+                    event.preventDefault(); // 폼 제출을 막습니다.
+                    alert("개인정보 수집 및 이용 내용에 동의해야 회원가입이 가능합니다.");
                 }
             });
         });
