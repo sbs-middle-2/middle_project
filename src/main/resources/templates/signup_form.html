@@ -7,7 +7,8 @@
 </head>
 
 <body>
-<div layout:fragment="content" style="margin-top: 200px  ;">
+
+<div layout:fragment="content" style="margin-top: 200px  ; margin-bottom:  50px  ;">
 
     <!--백업용 로그인 폼(DB 연결, 수정 필요)-->
     <div class="join-box">
@@ -185,6 +186,25 @@
                 }
             });
         });
+    </script>
+
+<!--  스크룰시 올림버튼   -->
+    <script>
+        $(window).scroll(function () {
+            var $scrollTop = $(this).scrollTop();
+            if ($scrollTop > 0) {
+                $(".goto-tp-btn").css({ opacity: 1 });
+            } else {
+                $(".goto-tp-btn").css({ opacity: 0 });
+            }
+        });
+
+        $(document).ready(function () {
+            $(".goto-tp-btn").click(function () {
+                $("html, body").animate({ scrollTop: 0 });
+            });
+        });
+
     </script>
 
 </div>

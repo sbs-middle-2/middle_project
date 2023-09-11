@@ -1,3 +1,6 @@
+
+
+
 // 로딩 팝업 창
 window.onload = function () {
     var modal = document.getElementById("imageModal");
@@ -119,5 +122,3 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: 0 });
     });
 });
-
-// 올림버튼 끝

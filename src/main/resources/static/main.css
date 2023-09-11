@@ -46,6 +46,8 @@ li {
 
 /* 스타일 */
 
+
+
 /* 로딩 팝업창 시작 */
 .modal {
   display: none;
@@ -713,11 +715,13 @@ li {
 .slider-wrap-2 {
   width: 1920px;
   margin: 0 auto;
+
 }
 
 .slider-wrap-2 .slier-content-2 a img {
   width: 1920px;
   height: 130px;
+  z-index: 1;
 }
 
 /* 하단 배너 슬릭 슬라이드 */
