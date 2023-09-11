@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 82580c7f066a89ca0bf78cd192b1705e8fb61c79
 // 로딩 팝업 창
 window.onload = function () {
     var modal = document.getElementById("imageModal");
@@ -122,3 +125,8 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: 0 });
     });
 });
+<<<<<<< HEAD
+=======
+
+// 올림버튼 끝
+>>>>>>> 82580c7f066a89ca0bf78cd192b1705e8fb61c79

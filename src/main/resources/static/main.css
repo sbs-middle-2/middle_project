@@ -275,7 +275,11 @@ li {
   position: absolute;
   height: 50px;
   width: 50px;
+<<<<<<< HEAD
   top: 22.8%;
+=======
+  top: 24.9%;
+>>>>>>> 82580c7f066a89ca0bf78cd192b1705e8fb61c79
   cursor: pointer;
 }
 
@@ -325,7 +329,11 @@ li {
 
 .wrap-box > .main-container-box {
   max-width: 1920px;
+<<<<<<< HEAD
   margin-top: 100px ;
+=======
+margin-top: 100px ;
+>>>>>>> 82580c7f066a89ca0bf78cd192b1705e8fb61c79
 }
 
 .wrap-box > .main-container-box > .reply-main-box {
@@ -715,7 +723,10 @@ li {
 .slider-wrap-2 {
   width: 1920px;
   margin: 0 auto;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 82580c7f066a89ca0bf78cd192b1705e8fb61c79
 }
 
 .slider-wrap-2 .slier-content-2 a img {
