@@ -1,3 +1,11 @@
+<script>
+    $(document).ready(function () {
+        $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
+            $(this).siblings(".toggle-menu").toggleClass("active");
+        });
+    });
+</script>
+
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="wrap-box">
         <!-- 상단바 -->
@@ -40,14 +48,17 @@
 
                 <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn"></i>
                     <div class="toggle-menu">
-                        <ul>
+                        <ul  sec:authorize="isAnonymous()">
+                            <li>   <a class="nav-link" th:href="@{/user/login}">로그인</a></li>
+
+                            <li><a class="nav-link" th:href="@{/user/signup}">회원가입</a>   </li>
+                        </ul>
+
+                        <ul sec:authorize="isAuthenticated()" >
+
                             <li>
-                                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
-                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/mypage}">마이페이지</a>
-                                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+                                <a class="nav-link"  th:href="@{/user/mypage}">마이페이지</a>
+                                <a class="nav-link"  th:href="@{/user/logout}">로그아웃</a>
                             </li>
                         </ul>
                     </div>
@@ -59,11 +70,5 @@
 
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
-                $(this).siblings(".toggle-menu").toggleClass("active");
-            });
-        });
-    </script>
+
 </nav>
