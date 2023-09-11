@@ -4,94 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/festival_list.css">
+
+    <!--  제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-<div layout:fragment="content" class="container my-3" style="margin-top: 300px !important;">
-    <div class='festival-list'>
-        <div class="search-options">
-            <div class="search-option">
-                <label for="calendar">달력</label>
-                <input type="date" id="calendar">
-                <button id="clearCalendar">달력 초기화</button>
+<div layout:fragment="content" class="container my-3">
+    <div>
+        <h1>진행 중인 축제 리스트</h1>
+        <div class="festival-list">
+            <div class="festival-item">
+                <img src="http://tong.visitkorea.or.kr/cms/resource/16/3000216_image2_1.png" alt="축제 1">
+                <h2>은평청년축제</h2>
+                <p>(서울) 2023.09.09 ~ 2023.09.12</p>
             </div>
-            <div class="search-option">
-                <label for="region">지역별 선택</label>
-                <select id="region">
-                    <option value="전체">전국</option>
-                    <option value="서울">서울</option>
-                    <option value="경기">경기</option>
-                    <!-- 나머지 8도를 추가하세요 -->
-                    <option value="강원">강원</option>
-                    <option value="충청북도">충청북도</option>
-                    <option value="충청남도">충청남도</option>
-                    <option value="전라북도">전라북도</option>
-                    <option value="전라남도">전라남도</option>
-                    <option value="경상북도">경상북도</option>
-                    <option value="경상남도">경상남도</option>
-                    <option value="제주">제주</option>
-                </select>
+
+            <div class="festival-item">
+                <img src="http://tong.visitkorea.or.kr/cms/resource/30/3008030_image2_1.jpg" alt="축제 2">
+                <h2>종로청계야 놀자</h2>
+                <p>(서울) 2023.09.16 ~ 2023.09.16</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://korean.visitkorea.or.kr/kfes/upload/contents/db/400_725edecb-4975-4293-89ff-248a707be405_2.jpg" alt= "축제3">
+                <h2>클럽 하이볼</h2>
+                <p>(서울) 2023.09.15 ~ 2023.09.16</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://korean.visitkorea.or.kr/kfes/upload/contents/db/400_527be805-75fb-4361-8e7f-6883c1a00f1e_3.jpg" alt= "축제4">
+                <h2>휴애리 유럽 수국 축제</h2>
+                <p>(제주) 2023.07.17 ~ 2023.09.15</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="http://tong.visitkorea.or.kr/cms/resource/13/2999913_image2_1.jpg" alt= "축제5">
+                <h2>아트밸리 아산 YOUNG FESTA (영페스타)</h2>
+                <p>(충남) 2023.09.16 ~ 2023.09.16</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="http://tong.visitkorea.or.kr/cms/resource/80/3000480_image2_1.jpg" alt= "축제6">
+                <h2>대전ART마임페스티벌</h2>
+                <p>(대전) 2023.09.15 ~ 2023.09.16</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="http://tong.visitkorea.or.kr/cms/resource/23/2997423_image2_1.jpg" alt= "축제7">
+                <h2>따따블페스티벌</h2>
+                <p>(대구) 2023.09.15 ~ 2023.09.16</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://siwf.or.kr/wp/wp-content/uploads/2023/07/poster-2023.jpg" alt= "축제8">
+                <h2>서울 국제작가축제</h2>
+                <p>(서울) 2023.09.02 ~ 2023.09.13</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://korean.visitkorea.or.kr/kfes/upload/contents/db/400_2387725a-dc4a-4b19-8d5d-2a4d954d00d7_2.jpg" alt= "축제9">
+                <h2>장수한우랑사과랑축제</h2>
+                <p>(전북) 2023.09.14 ~ 2023.09.17</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyMzA4MzFfMjc5/MDAxNjkzNDEzMjU1NDQ1._p-goV3bATX69s2f-CA-slg7jVwkDDIzGpbbT7XxytYg.3ctuK31ADwN52M2qv_t3nIRvbdmTdIIb9k6YLEHFMpgg.PNG.eao0926/%EC%A0%9C23%ED%9A%8C%EF%BC%BF%EC%86%8C%EB%9E%98%ED%8F%AC%EA%B5%AC%EC%B6%95%EC%A0%9C%EF%BC%BF%EA%B3%B5%EC%8B%9D%ED%8F%AC%EC%8A%A4%ED%84%B0.png?type=w800" alt= "축제10">
+                <h2>제23회 소래포구축제</h2>
+                <p>(인천) 2023.09.15 ~ 2023.09.17</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://i.namu.wiki/i/moP3DZ8O7daBq04Dz7YgsQ8uq1CclD37IubDFh__7OktwxuVY_Hvlvg0Tviz06LtUDpFEJuM4NREN170bNqo4A.webp" alt= "축제11">
+                <h2>전주 세계소리축제</h2>
+                <p>(전북) 2023.09.15 ~ 2023.09.24</p>
+            </div>
+
+            <div class="festival-item">
+                <img src="https://cdn.dominilbo.com/news/photo/202306/57519_57603_5210.jpg" alt= "축제12">
+                <h2>제 2회 선셋재즈페스티벌</h2>
+                <p>(충남) 2023.09.09 ~ 2023.09.10</p>
             </div>
         </div>
-        <div id="filtered-festivals">
-            <!-- 여기에 필터링된 축제 목록이 표시됩니다. -->
+
+        <div class="festival-pagination">
+            <ul>
+                <li class="page-number"><a href="arrow"><</a></li>
+                <li class="page-number current-page"><a href="#">1</a></li>
+                <li class="page-number"><a href="#">2</a></li>
+                <li class="page-number"><a href="#">3</a></li>
+                <li class="page-number"><a href="#">4</a></li>
+                <li class="page-number"><a href="#">5</a></li>
+                <li class="page-number"><a href="arrow">></a></li>
+                <!-- 페이지 번호를 필요한 만큼 추가 -->
+            </ul>
         </div>
+
     </div>
 
     <script>
         // 축제 데이터 예시 (실제 데이터에 맞게 수정해야 함)
-const festivals = [
-    {
-        title: "축제 1",
-        description: "축제 1 내용",
-        startDate: "2023-09-10",
-        endDate: "2023-09-15",
-        location: "서울",
-        category: "문화/예술",
-    },
-    {
-        title: "축제 2",
-        description: "축제 2 내용",
-        startDate: "2023-09-20",
-        endDate: "2023-09-25",
-        location: "경기",
-        category: "스포츠/레져",
-    },
-    // 다른 축제 데이터도 추가
-];
+        const festivals = [
+            {
+                title: "축제 1",
+                description: "축제 1 내용",
+                startDate: "2023-09-10",
+                endDate: "2023-09-15",
+                location: "서울",
+                category: "문화/예술",
+            },
+            {
+                title: "축제 2",
+                description: "축제 2 내용",
+                startDate: "2023-09-20",
+                endDate: "2023-09-25",
+                location: "경기",
+                category: "스포츠/레져",
+            },
+            // 다른 축제 데이터도 추가
+        ];
 
-// 달력 초기화 버튼 처리
-document.getElementById("clearCalendar").addEventListener("click", function () {
-    document.getElementById("calendar").value = ""; // 달력 값을 비웁니다.
-    displayFilteredFestivals(); // 축제 리스트를 다시 표시합니다.
-});
+        // 달력 초기화 버튼 처리
+        document.getElementById("clearCalendar").addEventListener("click", function () {
+            document.getElementById("calendar").value = ""; // 달력 값을 비웁니다.
+            displayFilteredFestivals(); // 축제 리스트를 다시 표시합니다.
+        });
 
-// 필터링된 축제를 표시하는 함수
-function displayFilteredFestivals() {
-    const calendar = document.getElementById("calendar").value;
-    const region = document.getElementById("region").value;
+        // 필터링된 축제를 표시하는 함수
+        function displayFilteredFestivals() {
+            const calendar = document.getElementById("calendar").value;
+            const region = document.getElementById("region").value;
 
-    const filteredFestivals = festivals.filter((festival) => {
-        // 필터링 조건을 여기에 추가
-        const startDate = new Date(festival.startDate);
-        const endDate = new Date(festival.endDate);
+            const filteredFestivals = festivals.filter((festival) => {
+                // 필터링 조건을 여기에 추가
+                const startDate = new Date(festival.startDate);
+                const endDate = new Date(festival.endDate);
 
-        const isDateMatch = (calendar === "" || (startDate <= new Date(calendar) && endDate >= new Date(calendar)));
-        const isRegionMatch = (region === "전체" || festival.location === region);
+                const isDateMatch = (calendar === "" || (startDate <= new Date(calendar) && endDate >= new Date(calendar)));
+                const isRegionMatch = (region === "전체" || festival.location === region);
 
-        return isDateMatch && isRegionMatch;
-    });
+                return isDateMatch && isRegionMatch;
+            });
 
-    const filteredFestivalsContainer = document.getElementById("filtered-festivals");
-    filteredFestivalsContainer.innerHTML = "";
+            const filteredFestivalsContainer = document.getElementById("filtered-festivals");
+            filteredFestivalsContainer.innerHTML = "";
 
-    if (filteredFestivals.length === 0) {
-        filteredFestivalsContainer.innerHTML = "일치하는 축제가 없습니다.";
-    } else {
-        filteredFestivals.forEach((festival) => {
-            const festivalItem = document.createElement("div");
-            festivalItem.classList.add("festival-item");
-            festivalItem.innerHTML = `
+            if (filteredFestivals.length === 0) {
+                filteredFestivalsContainer.innerHTML = "일치하는 축제가 없습니다.";
+            } else {
+                filteredFestivals.forEach((festival) => {
+                    const festivalItem = document.createElement("div");
+                    festivalItem.classList.add("festival-item");
+                    festivalItem.innerHTML = `
                 <img src="이미지 경로" alt="축제 이미지">
                 <div class="festival-details">
                     <h3>제목: ${festival.title}</h3>
@@ -101,17 +165,17 @@ function displayFilteredFestivals() {
                     <p>분류: ${festival.category}</p>
                 </div>
             `;
-            filteredFestivalsContainer.appendChild(festivalItem);
-        });
-    }
-}
+                    filteredFestivalsContainer.appendChild(festivalItem);
+                });
+            }
+        }
 
-// 사용자 입력 변화 감지
-document.getElementById("calendar").addEventListener("change", displayFilteredFestivals);
-document.getElementById("region").addEventListener("change", displayFilteredFestivals);
+        // 사용자 입력 변화 감지
+        document.getElementById("calendar").addEventListener("change", displayFilteredFestivals);
+        document.getElementById("region").addEventListener("change", displayFilteredFestivals);
 
-// 페이지 로드시 초기 필터링
-displayFilteredFestivals();
+        // 페이지 로드시 초기 필터링
+        displayFilteredFestivals();
     </script>
 
 </div>
