@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--  외부 파일 css, js   -->
     <link rel="stylesheet" href="/main.css">
-    <script src="/main.js"></script>
-
-    <!--폰트 어썸-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/main.js}"></script>
 
     <!--slick slider 필요 태그 st-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -27,64 +24,6 @@
 <body>
 
 <!-- 로딩 팝업창 -->
-<script>
-    // 쿠키를 설정하는 함수
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    // 쿠키를 가져오는 함수
-    function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
-    window.onload = function() {
-        var modal = document.getElementById("imageModal");
-        var closeModal = document.getElementById("closeModal");
-        var closeButton = document.getElementById("closeButton"); // 다시 보지 않기 버튼
-
-        // 다시 보지 않기 버튼 클릭 시 쿠키 설정
-        closeButton.addEventListener("click", function() {
-            setCookie("popupClosed", "true", 365); // 쿠키 유효기간을 365일로 설정
-            modal.style.display = "none";
-        });
-
-        // 쿠키를 확인하여 팝업을 표시할지 여부 결정
-        var popupClosed = getCookie("popupClosed");
-        if (popupClosed != "true") {
-            modal.style.display = "block";
-        }
-
-        // "닫기" 아이콘 클릭 시 모달 닫기
-        closeModal.addEventListener("click", function() {
-            modal.style.display = "none";
-        });
-
-        // 모달 외부 클릭 시 모달 닫기
-        window.addEventListener("click", function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
-    }
-</script>
-<-- 팝업 창 쿠키 설정 자바 스크립트 끝 -->
-
 
 <div id="imageModal" class="modal">
     <div class="modal-content">
@@ -226,11 +165,7 @@
                                 <a href="https://www.koreanfolk.co.kr/" target="_blank">view</a>
                             </div>
                         </div>
-                        <div class="btn-box">
-                            <button type="button">
-                                <a href="">오늘의 축제 추천</a>
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -335,7 +270,8 @@
 
 </div>
 
-<link rel="stylesheet" href="./footer.html">
+
+
 
 </body>
 </html>

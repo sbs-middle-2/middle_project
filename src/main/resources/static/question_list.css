@@ -27,6 +27,7 @@ li {
 /* 리스트  */
 .list-box {
   width: 1200px;
+  height: 600px;   /*높이를 조절해 푸터를 밑에 고정*/
   margin: 0 auto;
   margin-top : 100px ;
   margin-bottom : 100px ;

@@ -1,3 +1,4 @@
+
 // 로딩 팝업 창
 window.onload = function () {
     var modal = document.getElementById("imageModal");
@@ -21,6 +22,7 @@ window.onload = function () {
     // 페이지 로드 시 모달 열기
     modal.style.display = "block";
 };
+
 
 // 로딩 팝업 창 끝
 
