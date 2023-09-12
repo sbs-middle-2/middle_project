@@ -41,7 +41,7 @@
                     </div>
                 </a></li>
 
-                <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn"></i>
+                <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn-i"></i>
                     <div class="toggle-menu">
                         <ul  sec:authorize="isAnonymous()">
                             <li>   <a class="nav-link" th:href="@{/user/login}">로그인</a></li>
@@ -51,7 +51,7 @@
                         <ul sec:authorize="isAuthenticated()" >
                             <li>  <a class="nav-link"  th:href="@{/user/mypage}">마이페이지</a></li>
                             <li> <a class="nav-link"  th:href="@{/user/logout}">로그아웃</a> </li>
-                        </ul>
+                        </ul>g
                     </div>
                 </a>
 
