@@ -18,8 +18,8 @@ public class FestivalController {
 
     @GetMapping("/list")
     public String showFestivalList(Model model) {
-        List<Festival> festival = this.festivalService.getList();
-        model.addAttribute("festival", festival);
-        return "festival_list"; // 템플릿 파일 이름은 "festival_list.html"로 일치
+        List<Festival> festivals = festivalService.getList();
+        model.addAttribute("festivals", festivals);
+        return "festival_list"; // 템플릿 파일 이름은 "festival_list.html"로 일치해야 합니다.
     }
 }
