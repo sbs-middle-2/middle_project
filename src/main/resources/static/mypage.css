@@ -2,7 +2,7 @@
 @font-face {
   font-family: "Humanbumsuk";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2")
-    format("woff2");
+  format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -48,6 +48,7 @@ button {
   font-weight: bold;
   margin-left: 20px;
   margin-top: 30px;
+  width: 200px;
 }
 
 .my-wrap > .id-section h1 {
@@ -63,6 +64,7 @@ button {
   margin-bottom: 1.25rem;
 }
 
+/* 이미지 박스 */
 .my-wrap > .id-section .img-box {
   width: 5.75rem;
   height: 6rem;
@@ -71,13 +73,35 @@ button {
   box-shadow: 0 0 0 1.5px rgba(59, 130, 246, 1);
   outline: 2px solid rgba(0, 0, 0, 0.05);
   outline-offset: 2px;
+  position: relative; /* 부모 요소에 대해 상대적으로 배치 */
 }
 
+/* 이미지 */
 .my-wrap > .id-section img {
   width: 5.75rem;
   height: 6rem;
   border-radius: 50%;
 }
+
+/* 프로필 사진 변경 버튼 */
+.my-wrap > .id-section .change-profile-button {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  background-color: #3b91ff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+
 
 .my-wrap > .id-section h2 {
   text-align: center;
@@ -119,7 +143,7 @@ button {
   width: 800px;
   height: auto;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 35px;
 }
 
 .form-box {

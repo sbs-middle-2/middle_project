@@ -1,45 +1,48 @@
-<!DOCTYPE html>
 <html layout:decorate="~{layout}">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/mypage.css}">
-    <script th:src="@{/mypage.js}"></script>
+
+    <!-- CSS 불러오기 -->
+    <link rel="stylesheet"  type="text/css " href="/mypage.css">
+
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script layout:fragment="script" type="text/javascript" th:src="@{/mypage.js}"></script>
+
 </head>
 
+<title>My Page </title>
 <body>
-<!-- 제이쿼리 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-<!-- toastr 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-<link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마이 페이지</title>
-</head>
-
-<body>
-
 <!-- 마이페이지 -->
 <div class="my-wrap" layout:fragment="content">
     <div class="id-section">
-        <a href="">
-            <p class="logo-text">뭐하지 또? 또 가지 뭐!</p>
-        </a>
+
+        <p class="logo-text">
+            <a href="/" style="width: 200px;" >뭐하지 또? 또 가지 뭐! </a>
+        </p>
+
         <h1>MY PAGE</h1>
 
         <!--     이미지    -->
         <div class="avatar">
             <div class="img-box">
                 <img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ffe%2F94%2F01%2Ffe9401b82ec1a52d876b76774da990ac.jpg&type=sc960_832" alt="프로필 이미지">
+                <label for="profileImageInput" class="change-profile-button"><span>변경</span></label>
+                <input type="file" id="profileImageInput" style="display: none;">
             </div>
         </div>
 
         <!--   사용자이름  -->
         <h2>한인철</h2>
-        <h4>gsw05018@naver.com</h4>
+        <h4 style="margin-top: 10px ">gsw05018@naver.com</h4>
 
         <!--    메뉴   -->
         <ul class="">
@@ -58,6 +61,9 @@
                         <!-- 사용자 정보  -->
                         <tr class="table-box ">
                             <th><span class=" user">이름</span><span class="body">한인철</span></th>
+                        </tr>
+                        <tr class="table-box ">
+                            <th><span class=" user">닉네임</span><span class="body">인처리리</span></th>
                         </tr>
                         <tr class="table-box ">
                             <th><span class=" user">이메일</span><span class="body ">gsw05018@naver.com</span></th>
@@ -110,6 +116,9 @@
     </div>
 </div>
 
+
+
 </body>
+
 
 </html>

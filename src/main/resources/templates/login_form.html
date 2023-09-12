@@ -9,28 +9,30 @@
 <body>
 
 <!--   로그인  -->
-<div layout:fragment="content" class="input-login-box">
+<div layout:fragment="content"  class="input-login-box">
     <a href="/"><h1>뭐하지 또? 또가지 뭐!</h1></a>
     <div class="login-top-box">
-        <form  th:action="@{/user/login}" method="post">
+        <form th:action="@{/user/login}" method="post">
         <div class="form-box" >
             <div th:if="${param.error}">
                 <div class="alert alert-danger">
                     사용자ID 또는 비밀번호를 확인해 주세요.
                 </div>
             </div>
-            <div class="id-icon-box">
+            <div class="id-icon-box icon-box">
+                <label for="username" class="form-label" ></label>
                 <i class="fa-regular fa-user"></i>
-                <input class="id-box" type="text" placeholder="아이디" autocomplete="on">
+                <input class="id-box" type="text" placeholder="아이디를 입력해주세요"name="username" id="username" autocomplete="on" >
             </div>
-            <div class="pass-icon-box">
+            <div class="pass-icon-box icon-box">
+                <label for="password" class="form-label"></label>
                 <i class="fa-solid fa-key"></i>
-                <input class="pass-box" type="password" placeholder="비밀번호">
+                <input class="pass-box" type="password" name="password" id="password"  placeholder="비밀번호를 입력해주세요">
             </div>
 
             <div><input class="check-box" type="checkbox"> <span>로그인 기억하기</span></div>
 
-            <button class="submit">로그인</button>
+            <button class="submit" type="submit">로그인</button>
 
         </div>
         </form>
