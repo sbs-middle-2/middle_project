@@ -200,7 +200,8 @@ input {
 }
 
 .wrap-box > .top-bar-box > .menu-box:hover > li > .nav-2-menu {
-  height: 180px;
+  height: 190px;
+/*  2차 메뉴 높이 수정할 때 사용*/
 }
 
 .wrap-box > .top-bar-box > .menu-box .menu-1 {

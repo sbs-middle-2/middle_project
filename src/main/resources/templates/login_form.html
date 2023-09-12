@@ -8,33 +8,46 @@
 
 <body>
 
-<!--   로그인  -->
-<div layout:fragment="content"  class="input-login-box">
+<!-- 로그인 -->
+<div layout:fragment="content" class="input-login-box">
     <a href="/"><h1>뭐하지 또? 또가지 뭐!</h1></a>
     <div class="login-top-box">
-        <form th:action="@{/user/login}" method="post">
-        <div class="form-box" >
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">
-                    사용자ID 또는 비밀번호를 확인해 주세요.
+        <form th:action="@{/user/login}" method="post" onsubmit="return validateForm()">
+            <div class="form-box">
+                <div th:if="${param.error}">
+                    <script th:inline="javascript">
+                        var errorParam = '[[${param.error}]] ';
+                        var errorMessage = "아이디 또는 비밀번호를 확인해 주세요.";
+
+                        if (errorParam === "Bad credentials") {
+                            errorMessage = "아이디 또는 비밀번호가 일치하지 않습니다.";
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: '로그인 오류',
+                            text: errorMessage
+                        });
+                    </script>
                 </div>
-            </div>
-            <div class="id-icon-box icon-box">
-                <label for="username" class="form-label" ></label>
-                <i class="fa-regular fa-user"></i>
-                <input class="id-box" type="text" placeholder="아이디를 입력해주세요"name="username" id="username" autocomplete="on" >
-            </div>
-            <div class="pass-icon-box icon-box">
-                <label for="password" class="form-label"></label>
-                <i class="fa-solid fa-key"></i>
-                <input class="pass-box" type="password" name="password" id="password"  placeholder="비밀번호를 입력해주세요">
-            </div>
+                <div class="id-icon-box icon-box">
+                    <label for="username" class="form-label"></label>
+                    <i class="fa-regular fa-user"></i>
+                    <input class="id-box" type="text" placeholder="아이디를 입력해주세요" name="username" id="username"
+                           autocomplete="on" required>
+                </div>
+                <div class="pass-icon-box icon-box">
+                    <label for="password" class="form-label"></label>
+                    <i class="fa-solid fa-key"></i>
+                    <input class="pass-box" type="password" name="password" id="password"
+                           placeholder="비밀번호를 입력해주세요" required>
+                </div>
 
-            <div><input class="check-box" type="checkbox"> <span>로그인 기억하기</span></div>
+                <div><input class="check-box" type="checkbox"> <span>로그인 기억하기</span></div>
 
-            <button class="submit" type="submit">로그인</button>
+                <button class="submit" type="submit">로그인</button>
 
-        </div>
+            </div>
         </form>
 
     </div>
@@ -46,6 +59,32 @@
 </div>
 <!-- 로그인 끝 -->
 
+<script>
+    function validateForm() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if (!username || username.trim() === "") {
+            Swal.fire({
+                icon: 'error',
+                title: '아이디 미입력',
+                text: '아이디를 입력하세요.'
+            });
+            return false;
+        }
+
+        if (!password || password.trim() === "") {
+            Swal.fire({
+                icon: 'error',
+                title: '비밀번호 미입력',
+                text: '비밀번호를 입력하세요.'
+            });
+            return false;
+        }
+
+        return true;
+    }
+</script>
 
 </body>
 </html>
