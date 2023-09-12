@@ -54,17 +54,12 @@
 
                             <li><a class="nav-link" th:href="@{/user/signup}">회원가입</a>   </li>
                         </ul>
-                            </ul>
-
                         <ul sec:authorize="isAuthenticated()" >
-
-                            <li>
-                                <a class="nav-link"  th:href="@{/user/mypage}">마이페이지</a>
-                                <a class="nav-link"  th:href="@{/user/logout}">로그아웃</a>
-                            </li>
+                            <li>  <a class="nav-link"  th:href="@{/user/mypage}">마이페이지</a></li>
+                            <li> <a class="nav-link"  th:href="@{/user/logout}">로그아웃</a> </li>
                         </ul>
                     </div>
-                </a></li>
+                </a>
 
             </ul>
 
