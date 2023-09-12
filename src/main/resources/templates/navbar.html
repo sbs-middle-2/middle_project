@@ -1,10 +1,4 @@
-<script>
-    $(document).ready(function () {
-        $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
-            $(this).siblings(".toggle-menu").toggleClass("active");
-        });
-    });
-</script>
+
 
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="wrap-box">
@@ -69,3 +63,11 @@
 
 
 </nav>
+
+<script>
+    $(document).ready(function () {
+        $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
+            $(this).siblings(".toggle-menu").toggleClass("active");
+        });
+    });
+</script>
