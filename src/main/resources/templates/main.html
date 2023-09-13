@@ -6,7 +6,6 @@
 <!--  외부 파일 css, js   -->
     <link rel="stylesheet" href="/main.css">
     <script th:src="@{/main.js}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!--slick slider 필요 태그 st-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css">
@@ -23,21 +22,24 @@
 <title>뭐하지 또 또 가지 뭐</title>
 <body>
 
-<!-- 로딩 팝업창 -->
-
-<div id="imageModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <h1>어서오세요</h1>
-        <span class="hight"> 뭐하지 또? 또 가지 뭐!</span> <span class="text">입니다</span>
-        <img src="https://raw.githubusercontent.com/gsw05018/test-img/2d03d016e8ec7462b1bcbae1215789f4a5b1893a/a.svg" alt="이미지 설명">
-        <button id="closeButton">다시 보지 않기</button>
-    </div>
-</div>
-<!-- 로딩 팝업창 끝 -->
 
 
 <div layout:fragment="content" class="container my-3">
+
+
+    <!-- 로딩 팝업창 -->
+
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h1>어서오세요</h1>
+            <span class="hight"> 뭐하지 또? 또 가지 뭐!</span> <span class="text">입니다</span>
+            <img src="https://raw.githubusercontent.com/gsw05018/test-img/2d03d016e8ec7462b1bcbae1215789f4a5b1893a/a.svg" alt="이미지 설명">
+            <button id="closeButton">다시 보지 않기</button>
+        </div>
+    </div>
+    <!-- 로딩 팝업창 끝 -->
+
     <div class="wrap-box">
         <!-- 상단바 -->
         <div class="slick-wrap">
