@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/login.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -16,6 +15,32 @@
         <form th:action="@{/user/login}" method="post" onsubmit="return validateForm()">
             <div class="form-box">
                 <div th:if="${param.error}">
+                    <script>
+                        function validateForm() {
+                            var username = document.getElementById("username").value;
+                            var password = document.getElementById("password").value;
+
+                            if (!username || username.trim() === "") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: '아이디 미입력',
+                                    text: '아이디를 입력하세요.'
+                                });
+                                return false;
+                            }
+
+                            if (!password || password.trim() === "") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: '비밀번호 미입력',
+                                    text: '비밀번호를 입력하세요.'
+                                });
+                                return false;
+                            }
+
+                            return true;
+                        }
+                    </script>
                     <script th:inline="javascript">
                         var errorParam = '[[${param.error}]] ';
                         var errorMessage = "아이디 또는 비밀번호를 확인해 주세요.";
@@ -57,35 +82,11 @@
         <a class="password" href="#" title="비밀번호 찾기"><span>비밀번호 찾기</span></a>
         <a class="join" th:href="@{/user/signup}" title="회원가입"><span>회원가입</span></a>
     </div>
+
 </div>
 <!-- 로그인 끝 -->
 
-<script>
-    function validateForm() {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
 
-        if (!username || username.trim() === "") {
-            Swal.fire({
-                icon: 'error',
-                title: '아이디 미입력',
-                text: '아이디를 입력하세요.'
-            });
-            return false;
-        }
-
-        if (!password || password.trim() === "") {
-            Swal.fire({
-                icon: 'error',
-                title: '비밀번호 미입력',
-                text: '비밀번호를 입력하세요.'
-            });
-            return false;
-        }
-
-        return true;
-    }
-</script>
 
 </body>
 </html>
