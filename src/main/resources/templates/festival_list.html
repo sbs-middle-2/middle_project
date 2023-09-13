@@ -14,9 +14,11 @@
     <h1>진행 중인 축제 리스트</h1>
     <div class="festival-list">
         <div class="festival-item" th:each="festival : ${festivals}">
-            <img th:src="${festival.picture}" alt="축제 이미지">
-            <h2 th:text="${festival.title}">축제 제목</h2>
-            <p th:text="${festival.event_Period}">축제 기간</p>
+            <a href="#" onclick="showFestivalDetail(event, '${festival.title}', '${festival.event_Period}', '${festival.picture}')">
+                <img th:src="${festival.picture}" alt="축제 이미지">
+                <h2 th:text="${festival.title}">축제 제목</h2>
+                <p th:text="${festival.event_Period}">축제 기간</p>
+            </a>
         </div>
     </div>
 
@@ -27,6 +29,22 @@
             <li class="page-number"><a href="arrow">></a></li>
         </ul>
     </div>
+
+    <script>
+        function showFestivalDetail(event, title, period, picture) {
+            // 기본 이벤트 동작 막기 (링크 이동 방지)
+            event.preventDefault();
+
+            // 예시: 상세 정보를 모달 또는 다른 방법으로 표시
+            console.log("축제 제목: " + title);
+            console.log("축제 기간: " + period);
+            console.log("축제 이미지 URL: " + picture);
+
+            // 상세 페이지로 이동하려면 window.location.href를 사용
+            // window.location.href = "/festival/detail?title=" + title;
+            // 위 코드는 클릭한 축제의 제목을 URL 매개변수로 전달하는 예시입니다.
+        }
+    </script>
 </div>
 </body>
 </html>

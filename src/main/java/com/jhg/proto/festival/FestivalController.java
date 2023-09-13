@@ -22,4 +22,9 @@ public class FestivalController {
         model.addAttribute("festivals", festivals);
         return "festival_list"; // 템플릿 파일 이름은 "festival_list.html"로 일치해야 합니다.
     }
+
+    @GetMapping("/detail")
+    public String showFestivalDetail(Model model) {
+        return "festival_detail";
+    }
 }
