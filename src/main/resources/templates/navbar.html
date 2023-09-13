@@ -43,8 +43,8 @@
                 </a>
                 </li>
 
-                <li class="lo-box">
-                    <a href="#"><i class="fa-solid fa-circle-user btn-i"></i>
+                 <li class="lo-box" style=" cursor : pointer;">
+                   <i class="fa-solid fa-circle-user btn-i" ></i>
                         <div class="toggle-menu">
                             <ul sec:authorize="isAnonymous()">
                                 <li><a class="nav-link" th:href="@{/user/login}">로그인</a></li>
@@ -55,7 +55,6 @@
                                 <li><a class="nav-link" th:href="@{/user/logout}">로그아웃</a></li>
                             </ul>
                         </div>
-                    </a>
                 </li>
 
 

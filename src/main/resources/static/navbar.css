@@ -20,7 +20,7 @@ input {
 
 /* 배너 메뉴 툴 */
 .wrap-box {
-  width: 100%;
+  width: 1920px ;
   margin: 0 auto;
   position: relative;
 }
@@ -81,10 +81,11 @@ input {
   bottom: 20px;
 }
 
-.wrap-box > .top-bar-box > .login-box > li > a > i {
+.wrap-box > .top-bar-box > .login-box > li  i {
   position: absolute;
   right: 60px;
   bottom: 30px;
+
 }
 
 .wrap-box > .top-bar-box > .login-box div > .se-icon {
