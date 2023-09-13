@@ -64,13 +64,13 @@
 
     </div>
 
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".wrap-box > .top-bar-box > .login-box > .lo-box i", function () {
+                $(this).siblings(".toggle-menu").toggleClass("active");
+            });
+        });
+    </script>
 
 </nav>
 
-<script>
-    $(document).ready(function () {
-        $(document).on("click", ".wrap-box > .top-bar-box > .login-box > .lo-box i", function () {
-            $(this).siblings(".toggle-menu").toggleClass("active");
-        });
-    });
-</script>

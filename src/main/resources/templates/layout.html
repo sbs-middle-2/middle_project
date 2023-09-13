@@ -41,13 +41,7 @@
 <div class="goto-tp-btn"><i class="fa-solid fa-arrow-up"></i></div>
 <!-- 네비게이션바 -->
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
-<script>
-    $(document).ready(function () {
-        $(document).on("click", ".wrap-box > .top-bar-box > .login-box > .lo-box i", function () {
-            $(this).siblings(".toggle-menu").toggleClass("active");
-        });
-    });
-</script>
+
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 <th:block layout:fragment="content"></th:block>
 
