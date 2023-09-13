@@ -222,6 +222,15 @@ input {
   padding: 10px 0;
 }
 
+.wrap-box > .top-bar-box > .menu-box .menu-3 {
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  left: 69% ;
+  text-align: center;
+  padding: 10px 0;
+}
+
 .wrap-box > .top-bar-box > .menu-box ul > li {
   padding: 20px 0;
   font-size: 15px;
