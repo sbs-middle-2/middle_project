@@ -33,6 +33,34 @@ public class QuestionController {
         return "question_list";
     }
 
+    @GetMapping("/reply_list")
+    public String reply_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_reply_list";
+    }
+
+    @GetMapping("/notification_list")
+    public String notification_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_notification_list";
+    }
+
+    @GetMapping("/qna_list")
+    public String qna_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                                    @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_qna_list";
+    }
+
+
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
         Question question = this.questionService.getQuestion(id);
@@ -55,6 +83,22 @@ public class QuestionController {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
         return "redirect:/question/list";
+    }
+// 공지사항 게시판
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/admin_create")
+    public String question_admin_Create(QuestionForm questionForm) {
+        return "question_admin_form";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/admin_create")
+    public String question_admin_Create(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "question_admin_form";
+        }
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
+        return "redirect:/question/notification_list";
     }
 
     @PreAuthorize("isAuthenticated()")

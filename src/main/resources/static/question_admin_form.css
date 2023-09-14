@@ -67,23 +67,12 @@ table tr td textarea:focus {
   padding: 20px 20px;
 }
 
-.table-stbox tr td > select {
-  width: 200px;
-  height: 50px;
-  padding: 0 20px;
-  border-radius: 15px;
-  border: 1px solid #c;
-}
 .table-stbox tr td > input,
 .table-stbox tr td > textarea {
   width: 900px;
   padding: 20px;
   border-radius: 15px;
   border: 1px solid #dadada;
-}
-
-.table-stbox tr td > select option:checked {
-  border-radius: 15px;
 }
 
 .table-stbox tr td > textarea {

@@ -1,0 +1,37 @@
+.faq-box {
+  width: 1100px;
+  height: auto ;
+  margin: auto ;
+  margin-top: 100px ;
+  margin-bottom: 100px;
+  box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08);
+  border: 1px solid #dadada;
+  padding:10px;
+  border-radius: 10px ;
+}
+
+.faq-box__question {
+  cursor:pointer;
+}
+
+.faq-box__question::after {
+  content:"[+]";
+  float:right;
+}
+
+.faq-box > ul > li {
+  padding:10px;
+}
+
+.faq-box > ul > li.hover > .faq-box__question::after {
+  content:"[-]";
+}
+
+.faq-box__answer {
+  display:none;
+  background-color:#f1f1f1;
+  margin-top: 20px ;
+  margin-bottom: 20px ;
+  border-radius:10px;
+  padding:10px;
+}
