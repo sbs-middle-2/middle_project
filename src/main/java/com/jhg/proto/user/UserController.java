@@ -90,6 +90,15 @@ public class UserController {
         return "mypage_form";
     }
 
+    // 마이페이지
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/mypage_exit")
+    public String mypage_exit(Principal principal, Model model) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        model.addAttribute("siteUser", siteUser);
+        return "mypage_secession";
+    }
+
 
 
     // 아이디 중복 체크

@@ -1,0 +1,112 @@
+<html layout:decorate="~{layout}">
+
+<head>
+
+    <!-- CSS 불러오기 -->
+    <link rel="stylesheet" type="text/css " href="/mypage.css">
+    <!-- SweetAlert 2 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+
+<!-- 마이페이지 -->
+<div class="my-wrap" layout:fragment="content">
+    <div class="id-section">
+
+        <p class="logo-text">
+            <a href="/" style="width: 200px;">뭐하지 또? 또 가지 뭐! </a>
+        </p>
+
+        <h1>MY PAGE</h1>
+
+        <!--     이미지    -->
+        <div class="avatar">
+            <div class="img-box">
+                <img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ffe%2F94%2F01%2Ffe9401b82ec1a52d876b76774da990ac.jpg&type=sc960_832"
+                     alt="프로필 이미지">
+                <label for="profileImageInput" class="change-profile-button"><span>변경</span></label>
+                <input type="file" id="profileImageInput" style="display: none;">
+            </div>
+        </div>
+
+        <!--   사용자이름  -->
+        <h2>한인철</h2>
+        <h4 style="margin-top: 10px ">gsw05018@naver.com</h4>
+
+        <!--    메뉴   -->
+        <ul class="">
+            <li><a href="">탈퇴</a></li>
+        </ul>
+
+    </div>
+
+    <div class="ch-section">
+        <!--   정보수정 폼   -->
+        <div class="join-box">
+            <h2 style="text-align : center ;  margin-bottom : 30px ; font-size : 35px ;">회원 탈퇴</h2>
+            <!-- 비밀번호 변경 양식 -->
+            <form id="passwordChangeForm">
+                <!-- 현재 비밀번호 입력 필드 -->
+                <label for="currentPassword" style="  padding: 10px 20px; font-size: 20px; font-weight: 500;">아이디 </label>
+                <input type="text" id="currentPassword" name="currentPassword" disabled value="gsw05018(아이디)"
+                       style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px; margin-left: 65px ; background-color: #fff;"> <br><br>
+                <!-- 새 비밀번호 입력 필드 -->
+                <label for="newPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">비밀번호 입력 </label>
+                <input type="password" id="newPassword" name="newPassword"
+                       style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br><br>
+                <!-- 새 비밀번호 확인 입력 필드 -->
+                <label for="confirmPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">비밀번호 확인 </label>
+                <input type="password" id="confirmPassword" name="confirmPassword"
+                       style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br><br>
+              <div style="display: flex ">
+                  <button type="button" id="changePasswordButton"
+                          style="margin-right : 20px ; width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
+                      탈퇴하기
+                  </button>
+                  <button type="button"  onclick="window.location.href='/user/mypage'"
+                          style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
+                      취소
+                  </button>
+              </div>
+            </form>
+        </div>
+
+        </div>
+
+    <script>
+        // 탈퇴 버튼 클릭 시
+        document.getElementById("changePasswordButton").addEventListener("click", function () {
+            const enteredPassword = document.getElementById("newPassword").value;
+
+            // 서버에 비밀번호 확인 요청을 보내는 대신, 여기에서는 임의로 비밀번호 "password"를 기준으로 확인
+            const correctPassword = "password";
+
+            if (enteredPassword === correctPassword) {
+                Swal.fire({
+                    title: "탈퇴 확인",
+                    text: "정말로 탈퇴하시겠습니까?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "예",
+                    cancelButtonText: "아니오"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // 여기에서 실제 탈퇴 처리 로직을 추가해주세요
+                        window.location.href = "/";
+                        Swal.fire("탈퇴되었습니다.", "", "success");
+                    }
+                });
+            } else {
+                Swal.fire("비밀번호가 일치하지 않습니다.", "", "error");
+            }
+        });
+    </script>
+
+    </div>
+
+</body>
+
+
+</html>
