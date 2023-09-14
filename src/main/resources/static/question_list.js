@@ -17,7 +17,7 @@ $(document).ready(function () {
 
       $items.hide(); // 모든 항목을 일단 숨김
 
-      if (value.length >= 1) { // 최소 1글자 이상의 입력이 있을 때만 검색 수행
+      if (value.length >= 1) {
         var $matchingItems = $items.filter(function () {
           var itemText = $(this).text().toLowerCase();
           return (
@@ -35,9 +35,9 @@ $(document).ready(function () {
           });
         }
 
-        $matchingItems.show(); // 일치하는 항목만 표시
+        $matchingItems.show();
       } else {
-        $items.show(); // 검색어가 1글자도 입력되지 않으면 모든 항목 표시
+        $items.show();
       }
     }
   });
