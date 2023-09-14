@@ -229,7 +229,7 @@ button {
   left: 15px;
 }
 
-
+form > .form-box .submit:nth-child(2),
 form > .form-box .submit:nth-child(1){
   margin-right: 20px ;
 }
@@ -251,36 +251,14 @@ form > .form-box > .submit:hover {
   font-weight: bold;
 }
 
-/* 비밀번호 팝업 변경창 */
-.modal {
-  /*   display: none; */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 350px;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
+form .infor-box {
+display :flex ;
 }
 
-.modal-content {
-  background-color: #fff;
-  height: 100%;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+form .infor-box input{
+flex-grow : 1;
+width : 400px ;
 }
-
-.modal .modal-content button:hover {
-  border: 1px solid #3b91ff;
-  background-color: #f0f8ff;
-  color: black;
-  font-weight: bold;
-  z-index: 999;
-}
-/* 비밀번호 팝업 변경창 끝 */
 
 /* 프로모션 on off */
 .btn {
@@ -305,15 +283,4 @@ form > .form-box > .submit:hover {
   background-color: #00ff00; /* 초록색 배경 (ON 상태) */
   color: #000; /* 검정색 텍스트 (ON 상태) */
 }
-/* 팝업 스타일 */
-#notificationBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ffcc00; /* 노란색 배경 */
-  padding: 10px;
-  text-align: center;
-  display: none; /* 초기에는 숨겨진 상태 */
-  z-index: 2;
-}
+
