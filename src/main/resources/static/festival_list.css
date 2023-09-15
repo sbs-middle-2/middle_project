@@ -246,83 +246,236 @@ input {
   color: #333;
 }
 
+/*축제 정보 페이지 구현 시작*/
+
+.outtrack {
+  background-color: #f0ffff;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+  gap: 400px;
+}
+
+/*달력 구현*/
+
+.wrapper {
+}
+
+.wrapper > h1 {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.wrapper > h2 {
+  text-align: center;
+}
+.wrapper > h2 > span {
+  background-color: skyblue;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: black;
+  opacity: 0.7;
+  display: inline-block;
+  padding: 5px;
+}
+
+.container-calendar {
+  background: #ffffff;
+  padding: 15px;
+  max-width: 475px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.button-container-calendar button {
+  cursor: pointer;
+  display: inline-block;
+  zoom: 1;
+  background: #00a2b7;
+  color: #fff;
+  border: 1px solid #0aa2b5;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.table-calendar {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-calendar td,
+.table-calendar th {
+  padding: 5px;
+  border: 1px solid #e2e2e2;
+  text-align: center;
+  vertical-align: top;
+}
+
+.date-picker.selected {
+  font-weight: bold;
+  outline: 1px dashed #00bcd4;
+}
+
+.date-picker.selected span {
+  border-bottom: 2px solid currentColor;
+}
+
+/* Sunday */
+.date-picker:nth-child(1) {
+  color: red;
+}
+
+/* Saturday */
+.date-picker:nth-child(7) {
+  color: navy;
+}
+
+#monthAndYear {
+  text-align: center;
+  margin-top: 0;
+}
+
+.button-container-calendar {
+  position: relative;
+  margin-bottom: 1em;
+  overflow: hidden;
+  clear: both;
+}
+
+#previous {
+  float: left;
+}
+
+#next {
+  float: right;
+}
+
+.footer-container-calendar {
+  margin-top: 1em;
+  border-top: 1px solid #dadada;
+  padding: 10px 0;
+}
+
+.footer-container-calendar select {
+  cursor: pointer;
+  display: inline-block;
+  zoom: 1;
+  background: #ffffff;
+  color: #585858;
+  border: 1px solid #bfc5c5;
+  border-radius: 3px;
+  padding: 5px 1em;
+}
+
+/*체크박스*/
+.selectlist {
+  font-family: segoe ui;
+  width: flex;
+  letter-spacing: 7px;
+
+}
+.selectlist > container {
+  user-select: none;
+}
+
+.selectlist > h2 {
+  margin-top : 100px;
+  font-size: 20;
+
+}
+
+.selectlist > h2 > span {
+  text-align: center;
+  background-color: skyblue;
+  border-radius: 5px;
+  color: black;
+  opacity: 0.7;
+  margin-bottom: 20px;
+  display: inline-block;
+  padding: 5px;
+}
+
+/*축제 정보 페이지 구현 끝*/
 
 /* 하단 부터는 축제 리스트 페이지 구현 시작*/
-h1{
-    margin-top : 300px;
-    margin-left : 180px;
+
+.ListTitle > h1 {
+  margin-left: 200px;
+  margin-top: 80px;
 }
 
 .festival-list {
-    display: flex;
-    flex-wrap: wrap; /* 화면 크기에 맞게 줄바꿈 */
-    justify-content: space-between; /* 아이템들을 좌우로 분산 정렬 */
-    margin-top : 80px;
-    margin-left : 180px;
-    margin-right : 180px;
+  display: flex;
+  flex-wrap: wrap; /* 화면 크기에 맞게 줄바꿈 */
+  justify-content: space-between; /* 아이템들을 좌우로 분산 정렬 */
+  margin-top: 80px;
+  margin-left: 180px;
+  margin-right: 180px;
+  cursor: pointer;
 }
 
 .festival-item {
-    width: calc(25% - 20px); /* 한 줄에 4개씩 아이템 표시, 여백을 포함한 폭 설정 */
-    height: auto;
-    margin-bottom: 100px; /* 아이템 아래 여백 */
+  width: calc(
+    25% - 20px
+  ); /* 한 줄에 4개씩 아이템 표시, 여백을 포함한 폭 설정 */
+  height: auto;
+  margin-bottom: 100px; /* 아이템 아래 여백 */
 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
 }
 
 .festival-item img {
-    width: 350px; /* 이미지 너비 */
-    height: auto; /* 이미지 비율 유지 */
+  width: 350px; /* 이미지 너비 */
+  height: 700px; /* 이미지 비율 유지 */
 }
 
 .festival-item h2 {
-    font-size: 20px;
-    margin: 10px;
-    margin-top : 20px;
+  font-size: 20px;
+  margin: 10px;
+  margin-top: 20px;
 }
 
 .festival-item p {
-    font-size: 16px;
-    margin: 10px;
-    margin-top : 20px;
+  font-size: 16px;
+  margin: 10px;
+  margin-top: 20px;
 }
 
 .festival-pagination {
-    margin-top: 20px; /* 페이지 번호와 축제 리스트 간격 조절 */
-    margin-bottom : 40px;
-    text-align: center; /* 페이지 번호 가운데 정렬 */
-
+  margin-top: 20px; /* 페이지 번호와 축제 리스트 간격 조절 */
+  margin-bottom: 40px;
+  text-align: center; /* 페이지 번호 가운데 정렬 */
 }
 
 .festival-pagination ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center; /* 페이지 번호 수평 중앙 정렬 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* 페이지 번호 수평 중앙 정렬 */
 }
 
 .page-number {
-    margin: 0 5px; /* 페이지 번호 간격 조절 */
-    font-size: 25px; /* 페이지 번호 글꼴 크기 */
+  margin: 0 5px; /* 페이지 번호 간격 조절 */
+  font-size: 25px; /* 페이지 번호 글꼴 크기 */
 }
 
 .page-number a {
-    text-decoration: none; /* 링크 밑줄 제거 */
-    color: #333; /* 페이지 번호 색상 */
-    padding: 10px 20px; /* 페이지 번호 내 여백 */
-    border: 1px solid #ccc; /* 페이지 번호 테두리 설정 */
-    border-radius: 5px; /* 페이지 번호 모서리 둥글게 */
-    transition: background-color 0.3s; /* 호버 효과 애니메이션 설정 */
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: #333; /* 페이지 번호 색상 */
+  padding: 10px 20px; /* 페이지 번호 내 여백 */
+  border: 1px solid #ccc; /* 페이지 번호 테두리 설정 */
+  border-radius: 5px; /* 페이지 번호 모서리 둥글게 */
+  transition: background-color 0.3s; /* 호버 효과 애니메이션 설정 */
 }
 
 .page-number a:hover {
-    background-color: skyblue; /* 호버 시 배경색 변경 */
-    color: white; /* 호버 시 텍스트 색상 변경 */
+  background-color: skyblue; /* 호버 시 배경색 변경 */
+  color: white; /* 호버 시 텍스트 색상 변경 */
 }
 
 .current-page a {
-    background-color: skyblue;
-    color: white;
-    border-color: #ccc;
+  background-color: skyblue;
+  color: white;
+  border-color: #ccc;
 }

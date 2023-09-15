@@ -23,11 +23,17 @@
     </div>
 
     <div class="festival-pagination">
-        <ul>
-            <li class="page-number"><a href="arrow"><</a></li>
-            <li class="page-number current-page"><a href="#"></a></li>
-            <li class="page-number"><a href="arrow">></a></li>
-        </ul>
+        <!-- 이전 페이지로 이동하는 링크 -->
+        <a th:if="${currentPage > 1}" th:href="@{|/festival/list/page/${currentPage - 1}|}">&lt;</a>
+
+        <!-- 페이지 버튼 표시 -->
+        <span th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+        <a th:if="${pageNum == currentPage}" th:text="${pageNum}" class="page-number current-page"></a>
+        <a th:if="${pageNum != currentPage}" th:href="@{|/festival/list/page/${pageNum}|}" th:text="${pageNum}" class="page-number"></a>
+    </span>
+
+        <!-- 다음 페이지로 이동하는 링크 -->
+        <a th:if="${currentPage < totalPages}" th:href="@{|/festival/list/page/${currentPage + 1}|}">&gt;</a>
     </div>
 
     <script>
