@@ -84,16 +84,26 @@
                                     style="resize: none; width: 1000px; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.3); border: 1px solid #f1f1f1; padding: 20px;"
                                     required placeholder="여러분의 소중한 의견을 남겨주세요!!" id="content" name="contene"></textarea>
                         </div>
+<!--  댓글 수정, 삭제, 등록 좋아요 버튼 -->
                         <div class="btn-box"
-                             style="display: flex ; justify-content: flex-end; width: 150px; margin-left : auto; margin-right: 20px ;">
+                             style="display: flex ; justify-content: flex-end; width: 350px;   margin-left : auto; margin-right: 20px ;">
                             <button type="submit"
                                     style="color:#FF4500; font-size: 20px ; width : 50px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-right : 10px ; ">
                                 ♥
                             </button>
                             <button type="submit"
-                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ;">
-                                등록
+                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-right: 10px;">
+                               댓글 수정
                             </button>
+                            <button type="submit"
+                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-right: 10px; ">
+                                댓글 삭제
+                            </button>
+                            <button type="submit"
+                                              style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ;">
+                            댓글 등록
+                        </button>
+                            <!--  댓글 수정, 삭제, 등록 좋아요 버튼 끝 -->
                         </div>
                     </form>
                     <!--                    댓글 등록 품 끝-->
@@ -108,29 +118,32 @@
                                 작성날짜 <span
                                     style=" color:#FF4500; margin-left : auto; text-align: right; margin-right:20px  ;">♥ <span
                                     style="color: #000000 ; margin-left: 10px "> 0 </span></span></li>
-                            <!-- 좋아요 수정 삭제버튼 -->
-                            <form action="" method="post">
-                                <div class="btn-box"
-                                     style="display: flex ; justify-content: flex-end; width: 250px; margin-left : auto; margin-right: 20px ;">
-                                    <button type="submit"
-                                            style="color:#FF4500; font-size: 20px ; width : 50px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ;  ">
-                                        ♥
-                                    </button>
-                                    <button type="submit"
-                                            style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ;  ">
-                                        수정
-                                    </button>
-                                    <button type="submit"
-                                            style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ; ">
-                                        삭제
-                                    </button>
-                                </div>
-                            </form>
                         </ul>
                         <!-- 댓글 목록  1끝 -->
 
                     </div>
                     <!-- 댓글 목록 표시 영역 -->
+                    <!-- 게시글 좋아요 수정 삭제버튼 -->
+                    <form action="" method="post">
+                        <div class="btn-box"
+                             style="display: flex ; justify-content: flex-end; width: 250px; margin-left : auto; margin-right: 20px ;">
+                            <button type="submit"
+                                    style="color:#FF4500; font-size: 20px ; width : 50px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ;  ">
+                                ♥
+                            </button>
+                            <button type="submit"
+                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ;  ">
+                                <a href="">
+                                    수정
+                                </a>
+                            </button>
+                            <button type="submit"
+                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ; ">
+                                삭제
+                            </button>
+                        </div>
+                    </form>
+                    <!-- 게시글 좋아요 수정 삭제버튼 끝 -->
                 </div>
             </div>
 

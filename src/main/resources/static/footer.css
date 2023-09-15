@@ -16,16 +16,17 @@ li {
 
 /* 푸터 스타일 */
 
+
+
 footer {
     width: 1920px ;
     background-color: #ffffff;
-    height: auto;
     margin: 0 auto;
     /* 기존의 position: fixed;와 bottom: 0; 삭제 */
     text-align: center; /* 푸터 내용을 중앙 정렬 */
 }
 
-footer > .top-text-box {
+footer .top-text-box {
     width: 100%;
     height: 70px;
     background-color: #ffffff;
@@ -36,28 +37,29 @@ footer > .top-text-box {
     line-height: 70px;
 }
 
-footer > .top-text-box > a {
+footer .top-text-box > a {
     margin-right: 20px;
 }
 
-footer > .top-text-box > a::after {
+footer .top-text-box a::after {
     content: "";
     border-right: 1px solid #dadada;
     padding-right: 20px;
 }
 
-footer > .top-text-box > .last-a::after {
+footer .top-text-box .last-a::after {
     content: "";
     border-right: none;
 }
 
-footer > .text-img-box {
+footer .text-img-box {
     width: 1920px;
     height: 100%;
     display: flex;
     position: relative;
 }
-footer > .text-img-box > .logo-img {
+
+footer .text-img-box .logo-img {
     width: 200px;
     height: 200px;
     position: absolute;
@@ -65,36 +67,36 @@ footer > .text-img-box > .logo-img {
     top: 20px;
 }
 
-footer > .text-img-box > .logo-img > img {
+footer .text-img-box .logo-img img {
     width: 100%;
-    height: 100%x;
+    height: 100%;
 }
 
-footer > .text-img-box > .text-box {
+footer .text-img-box .text-box {
     width: 960px;
     height: 100%;
     text-align: right;
     padding: 15px;
 }
 
-footer > .text-img-box > .text-box > span {
+footer .text-img-box .text-box span {
     display: block;
     padding: 10px 0;
 }
 
-footer > .text-img-box > .img-box {
+footer .text-img-box .img-box {
     width: 960px;
     height: 100%;
 }
 
-footer > .text-img-box > .img-box > img {
+footer .text-img-box .img-box img {
     width: 30px;
     height: 30px;
     margin-left: 20px;
     margin-top: 30px;
 }
 
-footer > .text-img-box > .img-box > p {
+footer .text-img-box .img-box p {
     margin-left: 20px;
     margin-top: 10px;
 }
