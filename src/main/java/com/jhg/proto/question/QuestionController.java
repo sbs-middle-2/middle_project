@@ -84,6 +84,41 @@ public class QuestionController {
         this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
         return "redirect:/question/list";
     }
+
+    // 게시판 수정하기
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify_create")
+    public String question_modify_Create(QuestionForm questionForm) {
+        return "question_modify_form";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify_create")
+    public String question_modify_Create(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "question_modify_form";
+        }
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
+        return "redirect:/question/list";
+    }
+
+    // 공지사항 게시판 수정하기
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/admin_modify_create")
+    public String question_admin_modify_Create(QuestionForm questionForm) {
+        return "question_admin_modify_form";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/admin_modify_create")
+    public String question_admin_modify_Create(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "question_admin_modify_form";
+        }
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
+        return "redirect:/question/notification_list";
+    }
+
 // 공지사항 게시판
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/admin_create")

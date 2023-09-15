@@ -26,7 +26,6 @@
         <span>작성날짜</span>
         <span>수정날짜</span>
         <span style="text-align : center;">제목</span>
-        <span>조회 수</span>
         <!-- 리스트 상단 바 끝 -->
     </div>
 
@@ -40,7 +39,6 @@
                 <span>23.08.02</span>
                 <span>23.08.03</span>
                 <span>ㅋㅋㅋ</span>
-                <span>08</span>
                 <i class="fas fa-plus"></i>
             </div>
             <!-- 리스트 1 끝 -->
@@ -50,9 +48,6 @@
                         <li><span>번호</span></li>
                         <li><span>작성자</span></li>
                         <li><span>작성날짜</span></li>
-                        <li><span>수정날짜</span></li>
-                        <li><span>댓글 수</span></li>
-                        <li><span style="color:#FF4500;">♥</span></li>
                     </ul>
                     <!-- 상세게시판 -->
 
@@ -60,9 +55,6 @@
                         <li><span>01</span></li>
                         <li><span>한인철</span></li>
                         <li><span>23.09.08</span></li>
-                        <li><span>23.09.09</span></li>
-                        <li><span>01</span></li>
-                        <li><span>01</span></li>
                     </ul>
                     <div class="body-box"
                          style="display : flex ; margin-top : 20px ;box-shadow: 0 6px 6px -6px rgba(68, 68, 68, 0.3);   border-bottom: 2px solid #d1d1d1; padding-bottom: 10px; margin-bottom: 20px;">
@@ -77,64 +69,13 @@
                     </div>
                     <!-- 상세게시판 끝 -->
 
-                    <!--                    댓글 등록 품-->
-                    <form action="" method="post">
-                        <div style=" padding: 10px; display: flex; align-items: center; justify-content: center;">
-                            <span style=" height: 100%; width: 100px; font-size: 30px; ">댓글</span>
-                            <textarea
-                                    style="resize: none; width: 1000px; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.3); border: 1px solid #f1f1f1; padding: 20px;"
-                                    required placeholder="여러분의 소중한 의견을 남겨주세요!!" id="content" name="contene"></textarea>
-                        </div>
-                        <!--  댓글 수정, 삭제, 등록 좋아요 버튼 -->
-                        <div class="btn-box"
-                             style="display: flex ; justify-content: flex-end; width: 350px;   margin-left : auto; margin-right: 20px ;">
-                            <button type="submit"
-                                    style="color:#FF4500; font-size: 20px ; width : 50px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-right : 10px ; ">
-                                ♥
-                            </button>
-                            <button type="submit"
-                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-right: 10px;">
-                                댓글 수정
-                            </button>
-                            <button type="submit"
-                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-right: 10px; ">
-                                댓글 삭제
-                            </button>
-                            <button type="submit"
-                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ;">
-                                댓글 등록
-                            </button>
-                            <!--  댓글 수정, 삭제, 등록 좋아요 버튼 끝 -->
-                        </div>
-                    </form>
-                    <!--                    댓글 등록 품 끝-->
-
-                    <!-- 댓글 목록 표시 영역 -->
-                    <div class="reply-list">
-                        <!-- 댓글 목록 1 -->
-                        <ul style="font-weight: lighter ; height: auto; margin-top: 50px ; display: block ;  border-bottom: 2px solid #c1c1c1;">
-                            <li style=" width: 100px ; padding: 10px 5px ; text-align: left ;">닉네임</li>
-                            <li style=" width: 100% ;  padding: 10px 5px  ; text-align: left ; ">내용</li>
-                            <li style=" width: 100% ; padding: 10px 5px ;  text-align: left ; display: flex ; margin-bottom: 20px ;">
-                                작성날짜 <span
-                                    style=" color:#FF4500; margin-left : auto; text-align: right; margin-right:20px  ;">♥ <span
-                                    style="color: #000000 ; margin-left: 10px "> 0 </span></span></li>
-                        </ul>
-                        <!-- 댓글 목록  1끝 -->
-
-                    </div>
-                    <!-- 댓글 목록 표시 영역 -->
                     <!-- 게시글 좋아요 수정 삭제버튼 -->
                     <form action="" method="post">
                         <div class="btn-box"
                              style="display: flex ; justify-content: flex-end; width: 250px; margin-left : auto; margin-right: 20px ;">
                             <button type="submit"
-                                    style="color:#FF4500; font-size: 20px ; width : 50px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ;  ">
-                                ♥
-                            </button>
-                            <button type="submit"
                                     style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ;  ">
-                                <a href="">
+                                <a href="/question/admin_modify_create">
                                     수정
                                 </a>
                             </button>
@@ -150,22 +91,6 @@
 
         </div>
         <!-- 리스트 1 끝 -->
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <span>01번</span>
-                <span>인철</span>
-                <span>23.08.02</span>
-                <span>23.08.03</span>
-                <span>ㅋㅋㅋ</span>
-                <span>08</span>
-                <i class="fas fa-plus"></i>
-            </div>
-            <div class="accordion-content">
-                짱구
-            </div>
-        </div>
-
 
         <!--     리스트 목록 끝   -->
 
