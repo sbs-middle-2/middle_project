@@ -6,6 +6,23 @@
     <link rel="stylesheet" type="text/css " href="/mypage.css">
     <!-- SweetAlert 2 스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style >
+        .infor-box{
+            margin-bottom: 10px ;
+            display: flex;
+        }
+
+      .join-box  p{
+            margin-left: 190px ;
+            margin-bottom: 10px ;
+        }
+
+        input{
+            width: 600px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -45,48 +62,32 @@
     <div class="ch-section">
         <!--   정보수정 폼   -->
         <div class="join-box">
-            <h2 style="text-align: center; margin-bottom: 30px; font-size: 35px;">회원 정보 수정</h2>
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 35px;">회원 정보 수정</h2>
             <form id="userProfileForm">
-                <div class="infor-box" >
+                <div class="infor-box " >
                 <!-- 닉네임 입력 -->
-                <label for="newNickname" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 닉네임</label>
+                <label for="newNickname" style="padding: 10px 20px; font-size: 20px; font-weight: 500; width: 150px;">닉네임</label>
                 <input type="text" id="newNickname" name="newNickname" maxlength="50" placeholder="변경하실 닉네임을 입력해주세요"
-                       style=" height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br>
-                <span id="nicknameError" style="color: red;"></span><br>
+                       style=" height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;">
                 </div>
+                <p id="nicknameError" style="color: red;"></p>
 
 
                 <!-- 전화번호 입력 -->
                 <div class="infor-box">
-                <label for="newPhoneNumber" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">전화번호</label>
+                <label for="newPhoneNumber" style="padding: 10px 20px; font-size: 20px; font-weight: 500; width: 150px;">전화번호</label>
                 <input type="text" id="newPhoneNumber" name="newPhoneNumber"  placeholder="변경하실 전화번호를 입력해주세요"
-                       style= " height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br>
-                <span id="phoneError" style="color: red;"></span><br>
+                       style= " height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;">
                 </div>
+                <p id="phoneError" style="color: red; " ></p>
+
                 <!-- 이메일 입력 -->
-                    <div class="infor-box">
-                    <label for="newEmail" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">이메일</label>
-                <input type="email" id="newEmail" name="newEmail"  placeholder="변경하실 이메일을 입력해주세요"
-                       style="  height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br>
-                <span id="emailError" style="color: red;"></span><br>
-                    </div>
-                <!-- 비밀번호 입력 -->
-                        <div class="infor-box">
-                <label for="currentPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">현재 비밀번호</label>
-                <input type="password" id="currentPassword" name="currentPassword"  placeholder="현재 비밀번호를 입력해주세요"
-                       style=" height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br>
-                        </div>
-                            <div class="infor-box">
-                <label for="newPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 비밀번호</label>
-                <input type="password" id="newPassword" name="newPassword"  placeholder="변경하실 비밀번호를 입력해주세요"
-                       style=" height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br>
-                            </div>
-                                <div class="infor-box">
-                <label for="confirmPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword"  placeholder="변경하실 비밀번호를  다시 입력해주세요"
-                       style="  height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br>
-                <span id="passwordError" style="color: red;"></span><br>
-                                </div>
+                <div class="infor-box">
+                    <label for="newEmail" style="padding: 10px 20px; font-size: 20px; font-weight: 500; width: 150px;">이메일</label>
+                    <input type="text" id="newEmail" name="newEmail" placeholder="변경하실 이메일을 입력해주세요"
+                           style="height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;">
+                </div>
+                <p id="emailError" style="color: red;"></p>
 
                 <div style="display: flex">
                     <button type="button" id="updateProfileButton"
@@ -95,76 +96,76 @@
                     </button>
                     <button type="button" onclick="window.location.href='/user/mypage'"
                             style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
+                        취소
                     </button>
                 </div>
             </form>
         </div>
     </div>
-
     <script>
+        // 전화번호 입력 필드 가져오기
+        const phoneNumberInput = document.getElementById("newPhoneNumber");
+
+        phoneNumberInput.addEventListener("input", () => {
+            const phoneNumberRegex = /^(\d{3})(\d{1,4})(\d{1,4})?$/;
+            const phoneNumber = phoneNumberInput.value.replace(/-/g, ''); // 하이픈 제거
+
+            if (phoneNumberRegex.test(phoneNumber)) {
+                const formattedPhoneNumber = phoneNumber.replace(phoneNumberRegex, "$1-$2-$3");
+                phoneNumberInput.value = formattedPhoneNumber;
+            }
+        });
+
         // 수정하기 버튼 클릭 시
         document.getElementById("updateProfileButton").addEventListener("click", () => {
             // 입력된 정보 가져오기
             const newNickname = document.getElementById("newNickname").value;
-            const newPhoneNumber = document.getElementById("newPhoneNumber").value;
+            const newPhoneNumber = phoneNumberInput.value; // 수정된 전화번호 사용
             const newEmail = document.getElementById("newEmail").value;
-            const currentPassword = document.getElementById("currentPassword").value;
-            const newPassword = document.getElementById("newPassword").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
 
             // 입력값 유효성 검사
             const nicknameError = document.getElementById("nicknameError");
             const phoneError = document.getElementById("phoneError");
             const emailError = document.getElementById("emailError");
-            const passwordError = document.getElementById("passwordError");
 
-            // 닉네임은 길이 제한 검사
-            if (newNickname.length > 50) {
-                nicknameError.textContent = "닉네임은 50자 이내여야 합니다.";
-                return;
-            }
-
-            // 전화번호 형식 검사 (예시: 010-1234-5678)
-            const phoneRegex = /^01[0-9]-\d{3,4}-\d{4}$/;
-            if (!phoneRegex.test(newPhoneNumber)) {
-                phoneError.textContent = "올바른 전화번호 형식이 아닙니다.";
-                return;
-            }
-
-            // 이메일 형식 검사
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!emailRegex.test(newEmail)) {
-                emailError.textContent = "올바른 이메일 형식이 아닙니다.";
-                return;
-            }
-
-            // 현재 비밀번호 일치 여부 검사
-            if (currentPassword !== "현재비밀번호") { // 실제로는 서버에서 확인해야 함
-                passwordError.textContent = "현재 비밀번호가 일치하지 않습니다.";
-                return;
-            }
-
-            // 새 비밀번호와 새 비밀번호 확인 일치 여부 검사
-            if (newPassword !== confirmPassword) {
-                passwordError.textContent = "새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.";
-                return;
-            }
-
-            // 모든 입력값이 유효한 경우 서버로 수정 요청을 보냄 (실제 서버로 보내는 부분은 구현해야 함)
-
-            // 오류 메시지 초기화
+            // 빈 입력값 및 형식 검사
             nicknameError.textContent = "";
             phoneError.textContent = "";
             emailError.textContent = "";
-            passwordError.textContent = "";
+
+            if (newNickname.trim() === "") {
+                nicknameError.textContent = "닉네임을 입력해주세요.";
+            } else if (newNickname.length > 10 || /[!@#$%^&*(),.?":{}|<>]/.test(newNickname)) {
+                nicknameError.textContent = "닉네임은 10자 이내이며 특수 문자를 사용할 수 없습니다.";
+            }
+
+            if (newPhoneNumber.trim() === "") {
+                phoneError.textContent = "전화번호를 입력해주세요.";
+            } else if (!/^01[0-9]-\d{3,4}-\d{4}$/.test(newPhoneNumber)) {
+                phoneError.textContent = "올바른 전화번호 형식이 아닙니다.";
+            }
+
+            if (newEmail.trim() === "") {
+                emailError.textContent = "이메일을 입력해주세요.";
+            } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(newEmail)) {
+                emailError.textContent = "올바른 이메일 형식이 아닙니다.";
+            }
+
+            // 서버 구혀해야합니다
 
             // SweetAlert2 등을 사용하여 수정 완료 메시지 표시
-            Swal.fire({
-                icon: 'success',
-                title: '수정 완료',
-                text: '회원 정보가 성공적으로 수정되었습니다.',
-                confirmButtonText: '확인'
-            });
+            if (!nicknameError.textContent && !phoneError.textContent && !emailError.textContent) {
+                Swal.fire({
+                    icon: "success",
+                    title: "성공",
+                    text: "정보가 성공적으로 변경되었습니다.",
+                    confirmButtonText: '확인'
+                }).then(() => {
+                    // 리다이렉트할 URL을 여기에 지정합니다.
+                    const myPageURL = '/user/mypage'; // 마이페이지 URL로 변경해주세요.
+                    window.location.href = myPageURL; // 리다이렉트 실행
+                });
+            }
         });
     </script>
 </div>
