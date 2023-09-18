@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,8 +66,21 @@ public class UserController {
     public String login() {
         return "login_form";
     }
-    
-    
+
+    @PostMapping("/login")
+    public String loginSuccess() {
+        // 로그인 성공 시 처리
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        // 로그아웃 처리
+        return "redirect:/";
+    }
+
+
+
     // 마이페이지
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage")
@@ -75,6 +89,23 @@ public class UserController {
         model.addAttribute("siteUser", siteUser);
         return "mypage_form";
     }
+    // 마이페이지 탈퇴
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/mypage_exit")
+    public String mypage_exit(Principal principal, Model model) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        model.addAttribute("siteUser", siteUser);
+        return "mypage_secession";
+    }
+    // 마이페이지 수정
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/mypage_information")
+    public String mypage_information(Principal principal, Model model) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        model.addAttribute("siteUser", siteUser);
+        return "mypage_information";
+    }
+
     
     // 아이디 중복 체크
     @GetMapping("/checkUsername/{username}")
@@ -84,5 +115,40 @@ public class UserController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("available", isUsernameAvailable);
         return ResponseEntity.ok(response);
+    }
+
+    // 수정된 부분: 프로필 업데이트 핸들러 추가
+    @PostMapping("/updateProfile")
+    public String updateProfile(@ModelAttribute SiteUser updatedUser, Principal principal, Model model) {
+        try {
+            // 현재 사용자 가져오기
+            SiteUser currentUser = userService.getUser(principal.getName());
+
+            // 업데이트할 사용자 정보 설정
+            currentUser.setNickname(updatedUser.getNickname());
+            currentUser.setPhone(updatedUser.getPhone());
+            currentUser.setEmail(updatedUser.getEmail());
+
+            // 사용자 정보 업데이트
+            userService.updateUser(currentUser);
+
+            // 업데이트 후, 다시 마이페이지로 리다이렉트
+            return "redirect:/user/mypage";
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            // 데이터 무결성 예외 처리 (예: 중복 값 처리)
+            model.addAttribute("updateError", "이미 등록된 사용자입니다.");
+            return "mypage_information"; // 에러 페이지로 리다이렉트
+        } catch (UsernameNotFoundException e) {
+            e.printStackTrace();
+            // 사용자를 찾을 수 없음 예외 처리
+            model.addAttribute("updateError", "사용자를 찾을 수 없습니다.");
+            return "mypage_information"; // 에러 페이지로 리다이렉트
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 기타 예외 처리
+            model.addAttribute("updateError", "업데이트 중 오류가 발생했습니다.");
+            return "mypage_information"; // 에러 페이지로 리다이렉트
+        }
     }
 }
