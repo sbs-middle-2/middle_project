@@ -12,20 +12,6 @@ li {
   list-style: none;
 }
 
-/* 라이브러리 */
-.cell {
-  float: left;
-}
-
-.cell-r {
-  float: right;
-}
-
-.row::after {
-  content: "";
-  clear: both;
-  display: block;
-}
 
 /* 스타일 */
 input {
@@ -34,7 +20,7 @@ input {
 
 /* 배너 메뉴 툴 */
 .wrap-box {
-  width: 100%;
+  width: 1920px ;
   margin: 0 auto;
   position: relative;
 }
@@ -95,10 +81,11 @@ input {
   bottom: 20px;
 }
 
-.wrap-box > .top-bar-box > .login-box > li > a > i {
+.wrap-box > .top-bar-box > .login-box > li  i {
   position: absolute;
   right: 60px;
   bottom: 30px;
+
 }
 
 .wrap-box > .top-bar-box > .login-box div > .se-icon {
@@ -214,7 +201,8 @@ input {
 }
 
 .wrap-box > .top-bar-box > .menu-box:hover > li > .nav-2-menu {
-  height: 180px;
+  height: 190px;
+/*  2차 메뉴 높이 수정할 때 사용*/
 }
 
 .wrap-box > .top-bar-box > .menu-box .menu-1 {
@@ -231,6 +219,15 @@ input {
   height: 100%;
   position: absolute;
   left: 830px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.wrap-box > .top-bar-box > .menu-box .menu-3 {
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  left: 69% ;
   text-align: center;
   padding: 10px 0;
 }

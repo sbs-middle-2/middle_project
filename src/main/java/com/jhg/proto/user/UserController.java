@@ -1,16 +1,24 @@
 package com.jhg.proto.user;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -89,13 +97,13 @@ public class UserController {
         model.addAttribute("siteUser", siteUser);
         return "mypage_form";
     }
-    // 마이페이지 탈퇴
+    // 마이페이지 탈퇴 페이지
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage_exit")
     public String mypage_exit(Principal principal, Model model) {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         model.addAttribute("siteUser", siteUser);
-        return "mypage_secession";
+        return "mypage_withdrawal";
     }
     // 마이페이지 수정
     @PreAuthorize("isAuthenticated()")
@@ -105,7 +113,6 @@ public class UserController {
         model.addAttribute("siteUser", siteUser);
         return "mypage_information";
     }
-
     
     // 아이디 중복 체크
     @GetMapping("/checkUsername/{username}")
@@ -149,6 +156,33 @@ public class UserController {
             // 기타 예외 처리
             model.addAttribute("updateError", "업데이트 중 오류가 발생했습니다.");
             return "mypage_information"; // 에러 페이지로 리다이렉트
+        }
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/mypage_withdrawal")
+    public String userDelete(HttpServletRequest request, @RequestParam("password") String password,
+                             HttpServletResponse response, Principal principal, RedirectAttributes attributes) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+
+        if (BCrypt.checkpw(password, siteUser.getPassword())) {
+            this.userService.delete(siteUser);
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null) {
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+            }
+
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+
+            return "redirect:/center/list";
+        } else {
+            // 비밀번호가 일치하지 않을 때 오류 메시지를 전달하고 회원 탈퇴 페이지로 리다이렉트합니다.
+            attributes.addFlashAttribute("error", "비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+            return "redirect:/user/mypage_withdrawal";
         }
     }
 }

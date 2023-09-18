@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html layout:decorate="~{layout}">
-<head>
-    <!-- 제이쿼리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
+
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="wrap-box">
         <!-- 상단바 -->
@@ -19,46 +13,50 @@
                     <!-- 2차메뉴 -->
                     <div class="nav-2-menu">
                         <ul class="menu-1">
-                            <li><a href="/map/restaurant"><span>맛집정보</span></a></li>
-                            <li><a href="/map/lodging"><span>숙소정보</span></a></li>
+                            <li><a href="/festival/list"><span>축제정보</span></a></li>
                         </ul>
 
                         <ul class="menu-2">
-                            <li><a href="/">축제리뷰</a></li>
+                            <li><a href="/question/reply_list">축제리뷰</a></li>
                             <li><a href="/question/list">자유게시판</a></li>
+                        </ul>
+                        <ul class="menu-3">
+                            <li><a href="/question/qna_list">Q&A</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="">
-                    <a href="#"><span>축제커뮤니티</span></a>
+                    <a href="/question/reply_list"><span>축제커뮤니티</span></a>
                 </li>
-                <li><a href="/"><span>공지사항</span></a></li>
-                <li><a href="/"><span>고객센터</span></a></li>
+                <li><a href="/question/notification_list"><span>공지사항</span></a></li>
+                <li><a href="/question/qna_list"><span>고객센터</span></a>
+                </li>
             </ul>
 
             <ul class="login-box ">
                 <li><a href="#">
                     <div class="se-box">
-                        <input type="text" placeholder="어디로, 어떤 축제를 가실 예정인가요?">
+                        <input type="text" id="seach-text" name="seach-text" placeholder="어디로, 어떤 축제를 가실 예정인가요?">
                         <i class="fa-solid fa-magnifying-glass se-icon "></i>
                     </div>
-                </a></li>
+                </a>
+                </li>
 
-                <li class="lo-box"><a href="#"><i class="fa-solid fa-circle-user btn"></i>
+                <li class="lo-box" style=" cursor : pointer;">
+                    <i class="fa-solid fa-circle-user btn-i" ></i>
                     <div class="toggle-menu">
-                        <ul>
-                            <li>
-                                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
-                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/mypage}">마이페이지</a>
-                                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
-                            </li>
+                        <ul sec:authorize="isAnonymous()">
+                            <li><a class="nav-link" th:href="@{/user/login}">로그인</a></li>
+                            <li><a class="nav-link" th:href="@{/user/signup}">회원가입</a></li>
+                        </ul>
+                        <ul sec:authorize="isAuthenticated()">
+                            <li><a class="nav-link" th:href="@{/user/mypage}">마이페이지</a></li>
+                            <li><a class="nav-link" th:href="@{/user/logout}">로그아웃</a></li>
                         </ul>
                     </div>
-                </a></li>
+                </li>
+
 
             </ul>
 
@@ -68,11 +66,10 @@
 
     <script>
         $(document).ready(function () {
-            $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
+            $(document).on("click", ".wrap-box > .top-bar-box > .login-box > .lo-box i", function () {
                 $(this).siblings(".toggle-menu").toggleClass("active");
             });
         });
     </script>
+
 </nav>
-</body>
-</html>

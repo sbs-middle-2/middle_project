@@ -32,8 +32,8 @@
         </div>
 
         <!--   사용자이름  -->
-        <h2>한인철</h2>
-        <h4 style="margin-top: 10px ">gsw05018@naver.com</h4>
+        <h2><span th:text="${siteUser.name}"></span></h2>
+        <h4 style="margin-top: 10px "><span th:text="${siteUser.email}"></span></h4>
 
         <!--    메뉴   -->
         <ul class="">
@@ -46,7 +46,7 @@
     <div class="ch-section">
         <!--   정보수정 폼   -->
         <div class="join-box">
-            <form action="">
+            <form th:action="@{/user/updateProfile}" method="post">
                 <div class="form-box">
                     <table>
                         <!-- 사용자 정보  -->
