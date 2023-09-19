@@ -25,14 +25,17 @@
             </h1>
             <div class="faq-box">
                 <div class="container function-box" style="display: flex; justify-content: space-between; align-items: center;">
-                    <!-- 게시글 등록 -->
-                    <div class="q_write"><a th:href="@{/question/create}" class="btn btn-primary">질문 작성하기</a></div>
+                    <!-- 공백을 추가하여 검색 기능을 오른쪽으로 이동 -->
+                    <div style="flex-grow: 1;"></div>
+
                     <!-- 찾기 기능 -->
                     <div class="input-group">
                         <input type="text" id="search_kw" class="form-control" th:value="${kw}">
                         <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
                     </div>
                 </div>
+                <!-- 추가: 여백을 둠 -->
+                <div style="margin-top: 20px;"></div>
                 <ul>
                     <li th:each="question, loop : ${paging}">
                         <div class="faq-box__question">
@@ -55,6 +58,12 @@
                         </div>
                     </li>
                 </ul>
+                <!-- 추가: 여백을 둠 -->
+                <div style="margin-top: 20px;"></div>
+                <!-- 게시글 등록 버튼을 오른쪽 끝으로 이동 -->
+                <div class="q_write" style="text-align: right;"><a th:href="@{/question/create}" class="btn btn-primary">질문 작성하기</a></div>
+                <!-- 추가: 여백을 둠 -->
+                <div style="margin-top: 20px;"></div>
             </div>
         </div>
     </section>
