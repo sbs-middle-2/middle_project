@@ -84,3 +84,23 @@
   color: white;
   border-color: #ccc;
 }
+
+/*추가한 css*/
+/*리스트의 텍스트*/
+.faq-box__text {
+    display: flex;
+    align-items: center; /* 텍스트 수직 정렬 */
+    padding: 10px;
+    background-color: #f1f8ff; /* 배경색 추가 */
+    border-radius: 5px;
+}
+.faq-box__text span {
+    flex-grow: 1;
+}
+.faq-box__text span:last-child {
+    margin-right: 0; /* 마지막 텍스트 오른쪽 마진 제거 */
+}
+/*작성 버튼*/
+.q_write a {
+    border: 3px solid #58D3F7;
+}

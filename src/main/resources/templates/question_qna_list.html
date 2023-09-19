@@ -36,17 +36,24 @@
                 </div>
                 <!-- 추가: 여백을 둠 -->
                 <div style="margin-top: 20px;"></div>
+                <!-- 텍스트 설명 -->
+                <span class="faq-box__text">
+                    <span style="flex-grow: 1;">번호</span>
+                    <span style="flex-grow: 2;">제목</span>
+                    <span style="flex-grow: 1; text-align: right; margin-right: 20px;">작성자</span>
+                    <span style="flex-grow: 1; ">작성일</span>
+                </span>
+                <!--QnA 리스트-->
                 <ul>
                     <li th:each="question, loop : ${paging}">
                         <div class="faq-box__question">
                             <span th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}">질문id번호</span>
-                            <span>질문 분야</span>
                             <span>
                                 <!-- 질문 제목 -->
                                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
                             </span>
                             <!--질문 작성자-->
-                            <span th:if="${question.author != null}" th:text="${question.author.username}"></span>
+                            <span th:if="${question.author != null}" th:text="${question.author.username}" style="text-align: right; margin-right: 20px"></span>
                             <!--작성일-->
                             <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                         </div>
