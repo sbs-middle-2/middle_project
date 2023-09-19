@@ -14,13 +14,10 @@
 <!-- 마이페이지 -->
 <div class="my-wrap" layout:fragment="content">
     <div class="id-section">
-
         <p class="logo-text">
             <a href="/" style="width: 200px;">뭐하지 또? 또 가지 뭐! </a>
         </p>
-
         <h1>MY PAGE</h1>
-
         <!--     이미지    -->
         <div class="avatar">
             <div class="img-box">
@@ -30,7 +27,6 @@
                 <input type="file" id="profileImageInput" style="display: none;">
             </div>
         </div>
-
         <!--   사용자이름  -->
         <h2><span th:text="${siteUser.username}"></span></h2>
         <h4 style="margin-top: 10px "><span th:text="${siteUser.email}"></span></h4>
@@ -41,7 +37,6 @@
             <li><a href="">할인권 조회</a></li>
         </ul>
     </div>
-
     <div class="ch-section">
         <!--   정보수정 폼   -->
         <div class="join-box">
