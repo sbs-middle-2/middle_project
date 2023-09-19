@@ -59,7 +59,9 @@
         <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2e8b8dfe2eeda94b06ca3878c8af6cf&libraries=services"></script>
         <script>
-            var selectedFestivalAdress = $("#selectedFestivalAdress").text();
+            /*<![CDATA[*/
+<!--            var selectedFestivalAdress = $("#selectedFestivalAdress").text();-->
+            var selectedFestivalAdress =  "[[ ${selectedFestival.address} ]]"
             // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
             var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
@@ -107,6 +109,7 @@
                 // 마커가 표시되는 위치로 지도를 이동합니다
                 map.setCenter(new kakao.maps.LatLng(place.y, place.x));
             }
+            /*]]>*/
         </script>
     </div>
     <!-- 지도 api 넣기 끝 -->
