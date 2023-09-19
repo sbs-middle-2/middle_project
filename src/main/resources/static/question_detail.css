@@ -1,0 +1,63 @@
+/* 전역 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 헤더 스타일 */
+h2 {
+    font-size: 24px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* 카드 스타일 */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.btn-outline-secondary {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+/* 폼 스타일 */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* 부모 요소에 대한 스타일 추가하여 버튼 오른쪽 정렬 */
+.button-container {
+    text-align: right; /* 버튼을 오른쪽으로 정렬합니다. */
+}
