@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <!-- navbar.css를 모든 페이지에 포함 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/question_list.css}">
+    <script type="text/javascript" th:src="@{/question_list.js}"></script>
+    <!-- SweetAlert 2 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+
+<!-- 리스트 박스 -->
+<div class="list-box" layout:fragment="content">
+    <h1 style="text-align: center;  margin-top: 100px ; "> 공지사항 </h1>
+    <div class="search-box">
+        <button type="button"  class="create-btn" style="color:#000000; font-size: 15px ; width : 100px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; "><a href="/question/admin_create">작성</a></button>
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요(작성자. 제목, 내용)">
+    </div>
+    <!-- 리스트 상단 바 -->
+    <!-- 리스트 상단 바 -->
+    <div class="article-list-box">
+        <span>번호</span>
+        <span>작성자</span>
+        <span>작성날짜</span>
+        <span>수정날짜</span>
+        <span style="text-align : center;">제목</span>
+        <!-- 리스트 상단 바 끝 -->
+    </div>
+
+    <div class="accordion">
+        <!-- 리스트 목록  (accordion안에서만 넣어야 작동 가능)-->
+        <!--      리스트1 시작  -->
+        <div class="accordion-item ">
+            <div class="accordion-header">
+                <span>01번</span>
+                <span>인철</span>
+                <span>23.08.02</span>
+                <span>23.08.03</span>
+                <span>ㅋㅋㅋ</span>
+                <i class="fas fa-plus"></i>
+            </div>
+            <!-- 리스트 1 끝 -->
+            <div class="accordion-content">
+                <div class="detail-box">
+                    <ul>
+                        <li><span>번호</span></li>
+                        <li><span>작성자</span></li>
+                        <li><span>작성날짜</span></li>
+                    </ul>
+                    <!-- 상세게시판 -->
+
+                    <ul>
+                        <li><span>01</span></li>
+                        <li><span>한인철</span></li>
+                        <li><span>23.09.08</span></li>
+                    </ul>
+                    <div class="body-box"
+                         style="display : flex ; margin-top : 20px ;box-shadow: 0 6px 6px -6px rgba(68, 68, 68, 0.3);   border-bottom: 2px solid #d1d1d1; padding-bottom: 10px; margin-bottom: 20px;">
+                        <ul style="border : none ; box-shadow : none ; width : 20% ; display : flex ; justify-content :center; align-items : center ; ">
+                            <li style=" width : 100%; "><span>내용</span>
+                            </li>
+                        </ul>
+                        <ul style="width : 100%; text-align : left ;">
+                            <li style=" width : 100% ; text-align : left ; padding : 10px ;"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore, doloremque odit cumque temporibus quibusdam nisi laborum, aperiam distinctio fuga voluptas neque doloribus magnam at quis iure? Unde sapiente sunt in.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 상세게시판 끝 -->
+
+                    <!-- 게시글 좋아요 수정 삭제버튼 -->
+                    <form action="" method="post">
+                        <div class="btn-box"
+                             style="display: flex ; justify-content: flex-end; width: 250px; margin-left : auto; margin-right: 20px ;">
+                            <button type="submit"
+                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ;  ">
+                                <a href="/question/admin_modify_create">
+                                    수정
+                                </a>
+                            </button>
+                            <button type="submit"
+                                    style="box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; margin-left: 10px ; ">
+                                삭제
+                            </button>
+                        </div>
+                    </form>
+                    <!-- 게시글 좋아요 수정 삭제버튼 끝 -->
+                </div>
+            </div>
+
+        </div>
+        <!-- 리스트 1 끝 -->
+
+        <!--     리스트 목록 끝   -->
+
+    </div>
+
+
+    <!--페이지버튼-->
+    <div class="festival-pagination">
+        <ul>
+            <li class="page-number"><a href="arrow"><</a></li>
+            <li class="page-number current-page"><a href="#">1</a></li>
+            <li class="page-number"><a href="#">2</a></li>
+            <li class="page-number"><a href="#">3</a></li>
+            <li class="page-number"><a href="#">4</a></li>
+            <li class="page-number"><a href="#">5</a></li>
+            <li class="page-number"><a href="arrow">></a></li>
+            <!-- 페이지 번호를 필요한 만큼 추가 -->
+        </ul>
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>

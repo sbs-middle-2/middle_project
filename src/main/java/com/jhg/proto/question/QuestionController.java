@@ -103,4 +103,31 @@ public class QuestionController {
         this.questionService.vote(question, siteUser);
         return String.format("redirect:/question/detail/%s", id);
     }
+
+    @GetMapping("/reply_list")
+    public String reply_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_reply_list";
+    }
+
+    @GetMapping("/notification_list")
+    public String notification_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                                    @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_notification_list";
+    }
+
+    @GetMapping("/qna_list")
+    public String qna_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                           @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_qna_list";
+    }
 }
