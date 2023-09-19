@@ -178,7 +178,7 @@ public class UserController {
                 session.invalidate();
             }
 
-            return "redirect:/center/list";
+            return "redirect:/"; // 메인 페이지로 리다이렉트
         } else {
             // 비밀번호가 일치하지 않을 때 오류 메시지를 전달하고 회원 탈퇴 페이지로 리다이렉트합니다.
             attributes.addFlashAttribute("error", "비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
