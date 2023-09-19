@@ -5,6 +5,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/question_qna.css}">
 </head>
 
+<style>
+
+</style>
+
 <body>
 <!-- 리스트 박스 -->
 <div class="list-box" layout:fragment="content">
@@ -19,18 +23,16 @@
                     고객센터 : 1525-5265
                 </h3>
             </h1>
-            <!--게시글 등록-->
-            <div class="col-6">
-                <a th:href="@{/question/create}" class="btn btn-primary">게시글 등록하기</a>
-            </div>
-            <!--찾기 기능-->
-            <div class="col-6">
-                <div class="input-group">
-                    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                </div>
-            </div>
             <div class="faq-box">
+                <div class="container function-box" style="display: flex; justify-content: space-between; align-items: center;">
+                    <!-- 게시글 등록 -->
+                    <div class="q_write"><a th:href="@{/question/create}" class="btn btn-primary">질문 작성하기</a></div>
+                    <!-- 찾기 기능 -->
+                    <div class="input-group">
+                        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                        <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                    </div>
+                </div>
                 <ul>
                     <li th:each="question, loop : ${paging}">
                         <div class="faq-box__question">
@@ -40,6 +42,10 @@
                                 <!-- 질문 제목 -->
                                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
                             </span>
+                            <!--질문 작성자-->
+                            <span th:if="${question.author != null}" th:text="${question.author.username}"></span>
+                            <!--작성일-->
+                            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                         </div>
                         <div class="faq-box__answer">
                             <div>
