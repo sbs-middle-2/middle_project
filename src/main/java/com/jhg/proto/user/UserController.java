@@ -87,8 +87,6 @@ public class UserController {
         return "redirect:/";
     }
 
-
-
     // 마이페이지
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage")
@@ -99,7 +97,7 @@ public class UserController {
     }
     // 마이페이지 탈퇴 페이지
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/mypage_exit")
+    @GetMapping("/mypage_withdrawal")
     public String mypage_exit(Principal principal, Model model) {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         model.addAttribute("siteUser", siteUser);
@@ -113,7 +111,7 @@ public class UserController {
         model.addAttribute("siteUser", siteUser);
         return "mypage_information";
     }
-    
+
     // 아이디 중복 체크
     @GetMapping("/checkUsername/{username}")
     public ResponseEntity<?> checkUsernameAvailability(@PathVariable String username) {
