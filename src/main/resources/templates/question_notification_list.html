@@ -150,21 +150,29 @@
         </tbody>
     </table>
     <!-- 페이징처리 시작 -->
-    <div th:if="${!paging.isEmpty()}">
+    <div th:if="${paging.totalPages > 1}">
         <ul class="pagination justify-content-center">
-            <li class="page-item" href="javascript:void(0)" th:data-page="${paging.number-1}">
+            <!-- 이전 버튼 숨기기 -->
+            <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{|?page=${paging.number-1}|}">
+                   th:href="@{|?page=${paging.number-1}|}"
+                   th:if="${paging.number != 0}">
                     <span>이전</span>
                 </a>
             </li>
+
+            <!-- 페이지 번호 목록 -->
             <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
                 th:if="${page >= paging.number-5 and page <= paging.number+5}"
                 th:classappend="${page == paging.number} ? 'active'" class="page-item">
                 <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
             </li>
-            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+
+            <!-- 다음 버튼 숨기기 -->
+            <li class="page-item" th:classappend="${paging.number == paging.totalPages-1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.number+1}|}"
+                   th:if="${paging.number != paging.totalPages-1}">
                     <span>다음</span>
                 </a>
             </li>
