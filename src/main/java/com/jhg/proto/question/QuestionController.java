@@ -54,7 +54,7 @@ public class QuestionController {
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
-        return "redirect:/question/list";
+        return "redirect:/question/qna_list";
     }
 
     @PreAuthorize("isAuthenticated()")
