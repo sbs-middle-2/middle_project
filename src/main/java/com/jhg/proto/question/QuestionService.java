@@ -61,13 +61,13 @@ public class QuestionService {
         return this.questionRepository.findAllByKeyword(kw, pageable);
     }
 
-    public void create(String subject, String content, SiteUser user, Integer board) {
+    public void create(String subject, String content, SiteUser user, Integer boardId) {
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
         q.setAuthor(user);
-        q.setBoard(board); // 받은 board 값을 Question 엔티티의 board 필드에 설정
+        q.setBoardId(boardId); // 받은 board 값을 Question 엔티티의 board 필드에 설정
 
         this.questionRepository.save(q);
     }

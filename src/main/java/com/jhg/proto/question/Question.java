@@ -41,5 +41,5 @@ public class Question {
     Set<SiteUser> voter; // 질문에 투표한 사용자 목록을 나타냅니다.
 
     @Column
-    private Integer board; // 게시판 정보를 나타냅니다.
+    private Integer boardId; // 게시판 정보를 나타냅니다.
 }
