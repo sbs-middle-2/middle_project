@@ -104,3 +104,8 @@
 .q_write a {
     border: 3px solid #58D3F7;
 }
+/* 게시물 간 구별을 위한 스타일 */
+.post-item {
+    border-bottom: 1px solid #ddd; /* 옅은 회색의 밑줄 스타일 지정 */
+    padding-bottom: 10px; /* 밑줄과 게시물 내용 간의 간격 조절 (원하는 크기로 조정) */
+}
