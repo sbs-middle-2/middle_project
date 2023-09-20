@@ -59,17 +59,17 @@
                     </div>
                 </div>
 
-                <!-- 오류 메시지 표시 부분 -->
-                <div th:if="${error}">
-                    <p class="text-danger" th:text="${error}"></p>
-                </div>
-
                 <div class="sece-box">
                     <label for="password"
                            style="padding: 10px 20px; font-size: 20px; font-weight: 500;">비밀번호 입력 </label>
                     <input type="password" id="password" name="password" required
                            style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;">
                     <br><br>
+                </div>
+
+                <!-- 오류 메시지 표시 부분 -->
+                <div th:if="${error}">
+                    <p class="text-danger" th:text="${error}"></p>
                 </div>
 
                 <button class="btn btn-sm btn-outline-secondary"
