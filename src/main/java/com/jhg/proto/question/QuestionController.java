@@ -40,20 +40,28 @@ public class QuestionController {
         return "question_detail";
     }
 
-    // 질문 등록하기
+    // 질문 등록 페이지로 이동
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
+    // 질문 등록 처리
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
-    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
+    public String questionCreate(
+            @Valid QuestionForm questionForm,
+            BindingResult bindingResult,
+            Principal principal,
+            @RequestParam("board") Integer boardId
+    ) {
         if (bindingResult.hasErrors()) {
             return "question_form";
         }
+
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser, boardId);
+
         return "redirect:/question/qna_list";
     }
 
