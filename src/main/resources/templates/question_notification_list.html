@@ -47,7 +47,62 @@
         .admin-button {
             display: none;
         }
+
+        /* 각 열의 너비 설정 */
+        th:nth-child(1), td:nth-child(1) {
+            width: 10%;
+        }
+
+        th:nth-child(2), td:nth-child(2) {
+            width: 55%;
+        }
+
+        th:nth-child(3), td:nth-child(3) {
+            width: 15%;
+        }
+
+        th:nth-child(4), td:nth-child(4) {
+            width: 20%;
+        }
+
+        /* 페이징 버튼 스타일 */
+        .pagination {
+            margin: 20px 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-item {
+            margin: 0 5px;
+        }
+
+        .page-link {
+            background-color: #008CBA;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .page-link:hover {
+            background-color: #005f80;
+        }
+
+        .page-item.disabled .page-link {
+            background-color: #ddd;
+            color: #333;
+            cursor: not-allowed;
+        }
+
+        .page-item.active .page-link {
+            background-color: #4CAF50;
+            font-weight: bold;
+        }
     </style>
+
 </head>
 <body>
 <div layout:fragment="content" class="container my-3" style="margin-top: 100px !important;">
@@ -69,9 +124,9 @@
     </script>
 
     <!-- 버튼을 추가하고 클래스를 지정하여 숨김 및 표시를 제어 -->
-    <button class="admin-button">작성</button>
-    <button class="admin-button">수정</button>
-    <button class="admin-button">삭제</button>
+    <button class="admin-button" style="background-color: #4CAF50; color: white; font-size: 16px; padding: 10px 20px; border: none; cursor: pointer;">작성</button>
+    <button class="admin-button" style="background-color: #008CBA; color: white; font-size: 16px; padding: 10px 20px; border: none; cursor: pointer;">수정</button>
+    <button class="admin-button" style="background-color: #f44336; color: white; font-size: 16px; padding: 10px 20px; border: none; cursor: pointer;">삭제</button>
 
     <table>
         <thead>
@@ -80,20 +135,63 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>수정일</th>
         </tr>
         </thead>
         <tbody>
-        <!-- 공지사항 -->
-        <tr>
-            <td>1</td>
-            <td><a href="#">첫 번째 공지 제목</a></td>
-            <td>작성자1</td>
-            <td>2023-09-20</td>
-            <td>2023-09-20</td>
+        <tr th:each="question, loop : ${paging}" class="post-item">
+            <td th:text="${paging.getTotalElements() - (paging.getNumber() * paging.getSize()) - loop.index}">질문id번호</td>
+            <td>
+                <!-- 질문 제목 -->
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+            <td th:if="${question.author != null}" th:text="${question.author.username}" style="text-align: right; margin-right: 20px"></td>
+            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" href="javascript:void(0)" th:data-page="${paging.number-1}">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.number-1}|}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
+    <form th:action="@{/question/notification_list}" method="get" id="searchForm">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+    </form>
 </div>
+
+<script layout:fragment="script" type='text/javascript'>
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+        document.getElementById('searchForm').submit();
+    });
+</script>
+
 </body>
 </html>
