@@ -45,7 +45,8 @@
                 </span>
                 <!--QnA 리스트-->
                 <ul>
-                    <li th:each="question, loop : ${paging}" class="post-item">
+                    <li th:each="question, loop : ${paging}" class="post-item" th:if="${question.board == 3}">
+                    <!--<li th:each="question, loop : ${paging}" class="post-item">-->
                         <div class="faq-box__question">
                             <span th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}">질문id번호</span>
                             <span>
