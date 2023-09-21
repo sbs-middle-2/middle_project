@@ -253,7 +253,8 @@ input {
   display: flex;
   justify-content: center;
   margin-top: 150px;
-  gap: 400px;
+  margin-left : -250px;
+  gap: 250px;
 }
 
 /*달력 구현*/
@@ -263,7 +264,9 @@ input {
 
 .wrapper > h1 {
   margin-bottom: 50px;
-  text-align: center;
+  margin-top : 20px;
+  text-align: left;
+  margin-left:300px;
 }
 
 .wrapper > h2 {
@@ -273,6 +276,7 @@ input {
   background-color: skyblue;
   border-radius: 5px;
   margin-bottom: 20px;
+  margin-left:300px;
   color: black;
   opacity: 0.7;
   display: inline-block;
@@ -282,9 +286,12 @@ input {
 .container-calendar {
   background: #ffffff;
   padding: 15px;
-  max-width: 475px;
+  max-width: 575px;
+  height: 350px;
   margin: 0 auto;
   overflow: auto;
+  box-shadow: 1px 1px 1px 1px silver;
+  margin-left:300px;
 }
 
 .button-container-calendar button {
@@ -367,19 +374,146 @@ input {
   padding: 5px 1em;
 }
 
-/*체크박스*/
-.selectlist {
-  font-family: segoe ui;
-  width: flex;
-  letter-spacing: 7px;
 
+/*체크박스 구현*/
+
+.selectlist > h2{
+  margin-left : 180px;
+}
+.image-container {
+  position: relative;
+  display: inline-block; /* 이미지와 체크박스를 수평으로 정렬하기 위해 */
+}
+
+.image-container > img {
+  margin-left: 100px;
+  height: 400px;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px silver;
+}
+
+.searchall{
+  position: absolute;
+  left : 300px;
+  top : 350px;
+  font-weight: bold;
+  color: navy;
+}
+
+.seoul {
+  position: absolute;
+  top: 85px;
+  left: 200px;
+}
+
+.incheon {
+  position: absolute;
+  top: 100px;
+  left: 180px;
+}
+
+.gyeonggi {
+  position: absolute;
+  top: 120px;
+  left: 200px;
+}
+
+.gangwon {
+  position: absolute;
+  top: 80px;
+  left: 300px;
+}
+
+.chungbuk {
+  position: absolute;
+  top: 130px;
+  left: 260px;
+}
+
+.chungnam {
+  position: absolute;
+  top: 150px;
+  left: 160px;
+}
+
+.daejeon {
+  position: absolute;
+  top: 180px;
+  left: 225px;
+}
+
+.sejong {
+  position: absolute;
+  top: 165px;
+  left: 225px;
+}
+
+.kyeongbuk {
+  position: absolute;
+  top: 180px;
+  left: 320px;
+}
+
+.kyeongnam {
+  position: absolute;
+  top: 270px;
+  left: 280px;
+}
+
+.daegu {
+  position: absolute;
+  top: 220px;
+  left: 310px;
+}
+
+.ulsan {
+  position: absolute;
+  top: 250px;
+  left: 338px;
+}
+
+.busan {
+  position: absolute;
+  top: 270px;
+  left: 338px;
+}
+
+.jeonbuk {
+  position: absolute;
+  top: 230px;
+  left: 200px;
+}
+
+.gwangju {
+  position: absolute;
+  top: 280px;
+  left: 185px;
+}
+
+.jeonnam {
+  position: absolute;
+  top: 300px;
+  left: 180px;
+}
+
+.jeju {
+  position: absolute;
+  top: 370px;
+  left: 130px;
+}
+
+
+  /*체크박스 끝*/
 }
 .selectlist > container {
   user-select: none;
+  margin-top: 100px;
+  border: solid;
 }
 
 .selectlist > h2 {
-  margin-top : 100px;
+  margin-top: 100px;
   font-size: 20;
 
 }
@@ -394,6 +528,64 @@ input {
   display: inline-block;
   padding: 5px;
 }
+
+.selectlist > .button{
+  width : 150px;
+  height: 100px;
+}
+
+.localborder{
+  border: 1px solid black;
+  background-color : white;
+  height: 280px;
+  padding-top : 40px;
+}
+
+.localborder > img{
+  width: 250px;
+  height: 280px;
+  position: relative;
+  display: inline-block;
+}
+
+.localborder > .cc{
+  top : -200px;
+}
+/*지역별 검색 구현 끝*/
+
+
+/*분야별 검색 구현 시작*/
+.searchtype > h2 {
+  margin-top: 100px;
+  margin-left: 100px;
+  font-size: 20;
+  text-align : center;
+}
+
+.searchtype > h2 > span{
+  text-align: center;
+  background-color: skyblue;
+  border-radius: 5px;
+  color: black;
+  opacity: 0.7;
+  margin-bottom: 20px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.radiolocal{
+  background-color : white;
+  height: 380px;
+  width: 300px;
+  margin-left : 100px;
+  font-size : 18px;
+  line-height: 35px;
+  border-radius : 5px;
+  padding : 10px;
+  box-shadow: 1px 1px 1px 1px silver;
+}
+
+
 
 /*축제 정보 페이지 구현 끝*/
 
@@ -426,7 +618,7 @@ input {
 
 .festival-item img {
   width: 350px; /* 이미지 너비 */
-  height: 700px; /* 이미지 비율 유지 */
+  height: 400px; /* 이미지 비율 유지 */
 }
 
 .festival-item h2 {
