@@ -184,8 +184,15 @@ public class UserController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/password_modify")
+    public String showChangePasswordForm(Model model) {
+        return "password_modify";
+    }
+
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/password_modify")
-    public String changePassword(@RequestParam("currentPassword") String currentPassword,
+    public String changePassword(@RequestParam("password") String currentPassword,
                                  @RequestParam("newPassword") String newPassword,
                                  @RequestParam("confirmPassword") String confirmPassword,
                                  Model model, Principal principal) {
@@ -193,12 +200,12 @@ public class UserController {
 
         if (!newPassword.equals(confirmPassword)) {
             model.addAttribute("error", "새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-            return "password_modify"; // 비밀번호 변경 페이지로 리다이렉트
+            return "password_modify";
         }
 
         if (!userService.isCorrectPassword(username, currentPassword)) {
-            model.addAttribute("error", "현재 비밀번호가 올바르지 않습니다.");
-            return "password_modify"; // 비밀번호 변경 페이지로 리다이렉트
+            model.addAttribute("error", "기존 비밀번호가 올바르지 않습니다.");
+            return "password_modify";
         }
 
         userService.updatePassword(username, newPassword);

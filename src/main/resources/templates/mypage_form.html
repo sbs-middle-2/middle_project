@@ -56,7 +56,12 @@
                         <tr class="table-box ">
                             <th><span class="user">비밀번호</span><span class="body" th:text="${siteUser.password}"></span></th>
                             <td>
-                                <button id="openModalButton">수정</button>
+                                <a th:href="@{|/user/password_modify|}"
+                                   class="btn btn-sm btn-outline-secondary"
+                                   sec:authorize="isAuthenticated()"
+                                   th:if="${siteUser.username != null and #authentication.getPrincipal().getUsername() == siteUser.username}">
+                                    변경
+                                </a>
                             </td>
                         </tr>
                         <tr class="table-box ">
@@ -79,132 +84,7 @@
     <!-- On/Off 변경 시 상단에 나타날 안내창 -->
     <div id="notificationBar"></div>
 
-    <!-- 모달 창 -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" style="float: right; cursor: pointer;">닫기</span>
-            <h2 style="text-align: center; margin-bottom: 30px; font-size: 35px;">비밀번호 변경</h2>
-            <!-- 비밀번호 변경 양식 -->
-            <form id="passwordChangeForm" th:action="@{/user/password_modify}" method="post">
-                <!-- 현재 비밀번호 입력 필드 -->
-                <label for="currentPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">현재 비밀번호:</label>
-                <input type="password" id="currentPassword" name="currentPassword"
-                       style="width: 50%; height: 30px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; padding-left: 15px; margin-left: 28px "><br><br>
-                <!-- 새 비밀번호 입력 필드 -->
-                <label for="newPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 비밀번호 입력:</label>
-                <input type="password" id="newPassword" name="newPassword"
-                       style="width: 50%; height: 30px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; padding-left: 15px;"><br><br>
-                <!-- 새 비밀번호 확인 입력 필드 -->
-                <label for="confirmPassword"
-                       style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 비밀번호 확인:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword"
-                       style="width: 50%; height: 30px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; padding-left: 15px;"><br><br>
-                <button type="submit" id="changePasswordButton"
-                        style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
-                    비밀번호 변경
-                </button>
-            </form>
-            <!-- 오류 메시지를 표시하는 부분 -->
-            <div th:if="${error}" style="color: red;">
-                <p th:text="${error}"></p>
-            </div>
-        </div>
 
-        <script>
-            function redirectToMainPage() {
-                window.location.href = '/';
-            }
-            // 비밀번호 팝업창
-            const openModalButton = document.getElementById("openModalButton");
-            const modal = document.getElementById("myModal");
-            const closeModalButton = document.getElementById("closeModal");
-            const changePasswordButton = document.getElementById("changePasswordButton");
-            const newPasswordInput = document.getElementById("newPassword");
-            const confirmPasswordInput = document.getElementById("confirmPassword");
-            const otherButton = document.getElementById("otherButton");
-            let isModalOpen = false; // 팝업 창 열림 상태 추가
-
-            // 초기에 팝업 창 숨기기
-            modal.style.display = "none";
-            // 팝업 창을 열기 버튼 클릭 시 표시
-            openModalButton.addEventListener("click", () => {
-                if (!isModalOpen) {
-                    // 입력 필드 초기화
-                    newPasswordInput.value = "";
-                    confirmPasswordInput.value = "";
-                    modal.style.display = "block";
-                    isModalOpen = true;
-                    // 팝업 열 때 버튼 비활성화
-                    openModalButton.disabled = true;
-                }
-            });
-
-            // 팝업 창을 닫기 버튼 클릭 시 숨김
-            closeModalButton.addEventListener("click", () => {
-                modal.style.display = "none";
-                isModalOpen = false;
-                // 팝업 닫을 때 버튼 활성화
-                openModalButton.disabled = false;
-            });
-
-            // 정규 표현식을 사용하여 비밀번호 유효성 검사
-            function isPasswordValid(password) {
-                const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[\W_]).{8,}$/;
-                return passwordRegex.test(password);
-            }
-
-            // ON 토글 버튼
-            const toggleBtn = document.getElementById("toggleBtn");
-            const notificationBar = document.getElementById("notificationBar");
-            let isOn = false; // 맨 처음 Off 상태로 시작
-            toggleBtn.addEventListener("click", () => {
-                if (isOn) {
-                    // Off로 변경
-                    toggleBtn.textContent = "Off";
-                    toggleBtn.classList.remove("on");
-                    Swal.fire({
-                        text: "프로모션을 해제하셨습니다."
-                    });
-                } else {
-                    // On으로 변경
-                    toggleBtn.textContent = "On";
-                    toggleBtn.classList.add("on");
-                    Swal.fire({
-                        text: "프로모션을 동의하셨습니다."
-                    });
-                }
-                isOn = !isOn;
-            });
-
-            function showNotification(message) {
-                notificationBar.textContent = message;
-                notificationBar.style.display = "block"; // 안내창 표시
-                setTimeout(() => {
-                    notificationBar.style.display = "none"; // 몇 초 후에 안내창 숨김
-                }, 3000); // 3초 후에 숨김 (3000 밀리초 = 3초)
-            }
-
-            $(document).ready(function () {
-                // 프로필 사진 변경 버튼 클릭 시 파일 선택(input) 요소 클릭
-                $(".change-profile-button").click(function () {
-                    $("#profileImageInput").click();
-                });
-
-                // 파일 선택(input) 요소에서 이미지를 선택한 경우
-                $("#profileImageInput").change(function () {
-                    var file = this.files[0];
-                    if (file) {
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            // 선택한 이미지를 프로필 이미지로 설정
-                            $("#profileImage").attr("src", e.target.result);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            });
-        </script>
-    </div>
 </div>
 </body>
 
