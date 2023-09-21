@@ -83,9 +83,9 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span id="closeModal" style="float: right; cursor: pointer;">닫기</span>
-            <h2 style="text-align : center ;  margin-bottom : 30px ; font-size : 35px ;">비밀번호 변경</h2>
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 35px;">비밀번호 변경</h2>
             <!-- 비밀번호 변경 양식 -->
-            <form id="passwordChangeForm">
+            <form id="passwordChangeForm" th:action="@{/user/password_modify}" method="post">
                 <!-- 현재 비밀번호 입력 필드 -->
                 <label for="currentPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">현재 비밀번호:</label>
                 <input type="password" id="currentPassword" name="currentPassword"
@@ -95,14 +95,19 @@
                 <input type="password" id="newPassword" name="newPassword"
                        style="width: 50%; height: 30px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; padding-left: 15px;"><br><br>
                 <!-- 새 비밀번호 확인 입력 필드 -->
-                <label for="confirmPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 비밀번호 확인:</label>
+                <label for="confirmPassword"
+                       style="padding: 10px 20px; font-size: 20px; font-weight: 500;">새 비밀번호 확인:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword"
                        style="width: 50%; height: 30px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; padding-left: 15px;"><br><br>
-                <button type="button" id="changePasswordButton"
+                <button type="submit" id="changePasswordButton"
                         style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
                     비밀번호 변경
                 </button>
             </form>
+            <!-- 오류 메시지를 표시하는 부분 -->
+            <div th:if="${error}" style="color: red;">
+                <p th:text="${error}"></p>
+            </div>
         </div>
 
         <script>
@@ -147,58 +152,6 @@
                 const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[\W_]).{8,}$/;
                 return passwordRegex.test(password);
             }
-
-            // 비밀번호 변경 버튼 클릭 시
-            changePasswordButton.addEventListener("click", () => {
-                const currentPassword = document.getElementById("currentPassword").value;
-                const newPassword = document.getElementById("newPassword").value;
-                const confirmPassword = document.getElementById("confirmPassword").value;
-
-                if (currentPassword.trim() === "") {
-                    Swal.fire({
-                        icon: "error",
-                        title: "오류",
-                        text: "현재 비밀번호를 입력하세요."
-                    });
-                } else if (newPassword.trim() === "") {
-                    Swal.fire({
-                        icon: "error",
-                        title: "오류",
-                        text: "새 비밀번호를 입력하세요."
-                    });
-                } else if (confirmPassword.trim() === "") {
-                    Swal.fire({
-                        icon: "error",
-                        title: "오류",
-                        text: "새 비밀번호 확인을 입력하세요."
-                    });
-                } else if (!isPasswordValid(newPassword)) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "오류",
-                        text: "새 비밀번호는 숫자, 영어 소문자, 특수 문자를 모두 포함하고 8자 이상이어야 합니다."
-                    });
-                } else if (newPassword !== confirmPassword) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "오류",
-                        text: "새 비밀번호와 확인 비밀번호가 일치하지 않습니다. 다시 확인해주세요."
-                    });
-                } else {
-                    // 여기에 비밀번호 변경 요청을 보내는 로직을 추가하면 됩니다.
-                    // 비밀번호 변경 성공 시 아래의 코드를 실행하여 팝업 창을 닫습니다.
-                    Swal.fire({
-                        icon: "success",
-                        title: "성공",
-                        text: "비밀번호가 성공적으로 변경되었습니다."
-                    }).then(() => {
-                        modal.style.display = "none"; // 변경이 완료되면 팝업 창 닫기
-                        isModalOpen = false;
-                        // 팝업 닫을 때 버튼 활성화
-                        openModalButton.disabled = false;
-                    });
-                }
-            });
 
             // ON 토글 버튼
             const toggleBtn = document.getElementById("toggleBtn");
@@ -250,10 +203,8 @@
                     }
                 });
             });
-
         </script>
     </div>
-
 </div>
 </body>
 

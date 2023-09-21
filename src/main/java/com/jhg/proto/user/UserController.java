@@ -129,7 +129,7 @@ public class UserController {
             // 현재 사용자 가져오기
             SiteUser currentUser = userService.getUser(principal.getName());
 
-            // 업데이트할 사용자 정보 설정
+            // 업데이트 사용자 정보 설정
             currentUser.setNickname(updatedUser.getNickname());
             currentUser.setPhone(updatedUser.getPhone());
             currentUser.setEmail(updatedUser.getEmail());
@@ -184,30 +184,21 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/password_modify")
-    public String showChangePasswordForm(Principal principal, Model model) {
-        SiteUser siteUser = this.userService.getUser(principal.getName());
-        model.addAttribute("siteUser", siteUser);
-        return "password_modify";
-    }
-
-    @PreAuthorize("isAuthenticated()")
     @PostMapping("/password_modify")
-    public String showChangePasswordForm(@RequestParam("password") String password,
-                                         @RequestParam("newPassword") String newPassword,
-                                         @RequestParam("confirmPassword") String confirmPassword,
-                                         Model model, Principal principal) {
+    public String changePassword(@RequestParam("currentPassword") String currentPassword,
+                                 @RequestParam("newPassword") String newPassword,
+                                 @RequestParam("confirmPassword") String confirmPassword,
+                                 Model model, Principal principal) {
         String username = principal.getName();
 
         if (!newPassword.equals(confirmPassword)) {
             model.addAttribute("error", "새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-            return "password_modify";
+            return "password_modify"; // 비밀번호 변경 페이지로 리다이렉트
         }
 
-        if (!userService.isCorrectPassword(username, password)) {
-            model.addAttribute("error", "기존 비밀번호가 올바르지 않습니다.");
-            return "password_modify";
+        if (!userService.isCorrectPassword(username, currentPassword)) {
+            model.addAttribute("error", "현재 비밀번호가 올바르지 않습니다.");
+            return "password_modify"; // 비밀번호 변경 페이지로 리다이렉트
         }
 
         userService.updatePassword(username, newPassword);
