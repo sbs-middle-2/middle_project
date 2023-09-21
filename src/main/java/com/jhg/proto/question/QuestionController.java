@@ -24,10 +24,13 @@ public class QuestionController {
     private final QuestionService questionService;
     private final UserService userService;
 
+    // 자유 게시판 = boardId = 2
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Question> paging = this.questionService.getList(page, kw);
+    public String list(Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw,
+                       @RequestParam(value = "boardId", defaultValue = "2") Integer boardId) {
+        Page<Question> paging = this.questionService.getList(page, kw, boardId);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "question_list";
@@ -112,15 +115,19 @@ public class QuestionController {
         return String.format("redirect:/question/detail/%s", id);
     }
 
+    // 리뷰 게시판 = boardId = 1
     @GetMapping("/reply_list")
-    public String reply_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                             @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Question> paging = this.questionService.getList(page, kw);
+    public String reply_list(Model model,
+                             @RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "kw", defaultValue = "") String kw,
+                             @RequestParam(value = "boardId", defaultValue = "1") Integer boardId) {
+        Page<Question> paging = this.questionService.getList(page, kw, boardId);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "question_reply_list";
     }
 
+    // 공지 사항 게시판 = boardId = 4
     @GetMapping("/notification_list")
     public String notification_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                                     @RequestParam(value = "kw", defaultValue = "") String kw) {
@@ -130,10 +137,13 @@ public class QuestionController {
         return "question_notification_list";
     }
 
+    // qna 게시판 = boardId = 3
     @GetMapping("/qna_list")
-    public String qna_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                           @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Question> paging = this.questionService.getList(page, kw);
+    public String qna_list(Model model,
+                           @RequestParam(value = "page", defaultValue = "0") int page,
+                           @RequestParam(value = "kw", defaultValue = "") String kw,
+                           @RequestParam(value = "boardId", defaultValue = "3") Integer boardId) {
+        Page<Question> paging = this.questionService.getList(page, kw, boardId);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "question_qna_list";

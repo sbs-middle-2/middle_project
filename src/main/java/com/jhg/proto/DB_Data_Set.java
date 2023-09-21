@@ -33,8 +33,8 @@ public class DB_Data_Set {
         Random random = new Random();
         for (int boardId = 1; boardId <= 3; boardId++) {
             for (int i = 1; i <= 13; i++) {
-                String subject = generateRandomSubject();
-                String content = generateRandomContent();
+                String subject = generateRandomSubject(boardId, i);
+                String content = generateRandomContent(boardId, i);
 
                 // create 메서드를 호출하여 데이터 생성
                 questionService.create(subject, content, user1, boardId);
@@ -42,25 +42,28 @@ public class DB_Data_Set {
         }
     }
 
-    // 랜덤한 제목 생성 (예시)
-    private String generateRandomSubject() {
-        String[] subjects = {
-                "질문 제목 1",
-                "질문 제목 2",
-                // 더 많은 제목 추가
-        };
-        int randomIndex = new Random().nextInt(subjects.length);
-        return subjects[randomIndex];
+    // 동적으로 번호를 붙여주는 제목 생성
+    private String generateRandomSubject(int boardId, int number) {
+        String prefix = getBoardPrefix(boardId);
+        return prefix + " 제목 " + number;
     }
 
-    // 랜덤한 내용 생성 (예시)
-    private String generateRandomContent() {
-        String[] contents = {
-                "질문 내용 1",
-                "질문 내용 2",
-                // 더 많은 내용 추가
-        };
-        int randomIndex = new Random().nextInt(contents.length);
-        return contents[randomIndex];
+    // 동적으로 번호를 붙여주는 내용 생성
+    private String generateRandomContent(int boardId, int number) {
+        String prefix = getBoardPrefix(boardId);
+        return prefix + " 내용 " + number;
+    }
+
+    // boardId에 따라 접두사를 반환
+    private String getBoardPrefix(int boardId) {
+        if (boardId == 1) {
+            return "리뷰";
+        } else if (boardId == 2) {
+            return "자유";
+        } else if (boardId == 3) {
+            return "Q&A";
+        } else {
+            return "기타";
+        }
     }
 }

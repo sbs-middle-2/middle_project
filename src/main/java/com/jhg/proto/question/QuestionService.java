@@ -61,6 +61,15 @@ public class QuestionService {
         return this.questionRepository.findAllByKeyword(kw, pageable);
     }
 
+    public Page<Question> getList(int page, String kw, Integer boardId) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+
+        // findAllByKeywordAndBoardId 메서드를 호출하고 boardId 파라미터 전달
+        return this.questionRepository.findAllByKeywordAndBoardId(kw, boardId, pageable);
+    }
+
     public void create(String subject, String content, SiteUser user, Integer boardId) {
         Question q = new Question();
         q.setSubject(subject);
