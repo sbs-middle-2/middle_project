@@ -19,16 +19,22 @@
             <div class="wrapper">
                 <h1> 축제 정보 </h1>
                 <h2> <span>기간별 검색</span></h2>
+                <!-- 달력 컨테이너를 감싸는 div -->
                 <div class="container-calendar">
                     <h3 id="monthAndYear"></h3>
+                    <!-- 달력 이전/다음 버튼을 감싸는 div -->
                     <div class="button-container-calendar">
-                        <button id="previous" onclick="previous()">&#8249;</button>
-                        <button id="next" onclick="next()">&#8250;</button>
+                        <button id="previous" onclick="previous()">&#8249;</button> <!-- 이전 달력 달로 이동하는 버튼. -->
+                        <button id="next" onclick="next()">&#8250;</button> <!-- 다음 달력 달로 이동하는 버튼. -->
                     </div>
+                    <!-- 달력 테이블 요소 시작. 달력을 표시하는 테이블. -->
                     <table class="table-calendar" id="calendar" data-lang="en">
+                        <!-- 테이블 헤더 요소 시작. 월별 날짜 제목을 포함하는 헤더. -->
                         <thead id="thead-month"></thead>
+                        <!-- 테이블 본문 요소 시작. 달력의 실제 날짜들을 포함하는 본문. -->
                         <tbody id="calendar-body"></tbody>
                     </table>
+                    <!-- 달력 하단 컨테이너 div 요소 시작. -->
                     <div class="footer-container-calendar">
                         <label for="month">날짜 조회하기: </label>
                         <select id="month" onchange="jump()">
@@ -45,6 +51,7 @@
                             <option value=10>11월</option>
                             <option value=11>12월</option>
                         </select>
+                        <!-- 년도 선택을 위한 드롭다운 메뉴. -->
                         <select id="year" onchange="jump()"></select>
                     </div>
                 </div>
