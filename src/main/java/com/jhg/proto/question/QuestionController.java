@@ -127,16 +127,6 @@ public class QuestionController {
         return "question_reply_list";
     }
 
-    // 공지 사항 게시판 = boardId = 4
-    @GetMapping("/notification_list")
-    public String notification_list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                                    @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Question> paging = this.questionService.getList(page, kw);
-        model.addAttribute("paging", paging);
-        model.addAttribute("kw", kw);
-        return "question_notification_list";
-    }
-
     // qna 게시판 = boardId = 3
     @GetMapping("/qna_list")
     public String qna_list(Model model,
@@ -147,5 +137,16 @@ public class QuestionController {
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "question_qna_list";
+    }
+    // 공지 사항 게시판 = boardId = 4
+    @GetMapping("/notification_list")
+    public String notification_list(Model model,
+                                    @RequestParam(value = "page", defaultValue = "0") int page,
+                                    @RequestParam(value = "kw", defaultValue = "") String kw,
+                                    @RequestParam(value = "boardId", defaultValue = "4") Integer boardId) {
+        Page<Question> paging = this.questionService.getList(page, kw, boardId);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
+        return "question_notification_list";
     }
 }
