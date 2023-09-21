@@ -66,4 +66,16 @@ public class UserService {
     public void delete(SiteUser siteUser) {
         this.userRepository.delete(siteUser);
     }
+
+    public boolean isCorrectPassword(String username, String password) {
+        SiteUser user = getUser(username);
+        String actualPassword = user.getPassword();
+        return passwordEncoder.matches(password, actualPassword);
+    }
+
+    public void updatePassword(String username, String newPassword) {
+        SiteUser user = getUser(username);
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
 }

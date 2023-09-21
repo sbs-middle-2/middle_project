@@ -183,4 +183,35 @@ public class UserController {
             return "redirect:/user/mypage_withdrawal";
         }
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/password_modify")
+    public String showChangePasswordForm(Principal principal, Model model) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        model.addAttribute("siteUser", siteUser);
+        return "password_modify";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/password_modify")
+    public String showChangePasswordForm(@RequestParam("password") String password,
+                                         @RequestParam("newPassword") String newPassword,
+                                         @RequestParam("confirmPassword") String confirmPassword,
+                                         Model model, Principal principal) {
+        String username = principal.getName();
+
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+            return "password_modify";
+        }
+
+        if (!userService.isCorrectPassword(username, password)) {
+            model.addAttribute("error", "기존 비밀번호가 올바르지 않습니다.");
+            return "password_modify";
+        }
+
+        userService.updatePassword(username, newPassword);
+
+        return "redirect:/user/mypage";
+    }
 }

@@ -24,7 +24,7 @@
                 <input type="file" id="profileImageInput" style="display: none;">
             </div>
         </div>
-        <!-- 사용자이름 -->
+        <!-- 사용자 이름 -->
         <h2><span th:text="${siteUser.username}"></span></h2>
         <h4 style="margin-top: 10px "><span th:text="${siteUser.email}"></span></h4>
 
@@ -41,25 +41,25 @@
                 <div class="form-box">
                     <table>
                         <!-- 사용자 정보 -->
-                        <tr class="table-box">
+                        <tr class="table-box ">
                             <th><span class=" user">이름</span><span class="body" th:text="${siteUser.name}"></span></th>
                         </tr>
-                        <tr class="table-box">
+                        <tr class="table-box ">
                             <th><span class=" user">닉네임</span><span class="body" th:text="${siteUser.nickname}"></span></th>
                         </tr>
-                        <tr class="table-box">
+                        <tr class="table-box ">
                             <th><span class=" user">이메일</span><span class="body" th:text="${siteUser.email}"></span></th>
                         </tr>
-                        <tr class="table-box">
+                        <tr class="table-box ">
                             <th><span class=" user">전화번호</span><span class="body" th:text="${siteUser.phone}"></span></th>
                         </tr>
-                        <tr class="table-box">
+                        <tr class="table-box ">
                             <th><span class="user">비밀번호</span><span class="body" th:text="${siteUser.password}"></span></th>
                             <td>
                                 <button id="openModalButton">수정</button>
                             </td>
                         </tr>
-                        <tr class="table-box">
+                        <tr class="table-box ">
                             <th><span class="pro-text"> 핸드폰 프로모션 정보 통신 동의</span></th>
                             <td>
                                 <div class="btn" id="toggleBtn">off</div>
@@ -68,13 +68,12 @@
                     </table>
                     <div style="display: flex;">
                         <button class="submit" type="button" id="otherButton" onclick="redirectToMainPage()">확인</button>
-                        <button class="submit" type="button" id="informationButton" onclick="window.location.href='/user/mypage_information'" style="margin-right: 10px ">정보 수정</button>
+                        <button class="submit" type="button" id="informationButton" onclick="window.location.href='/user/mypage_information'" style="margin-right: 10px">정보 수정</button>
                         <button class="submit" type="button" id="withdrawButton" onclick="window.location.href='/user/mypage_withdrawal'">탈퇴</button>
                     </div>
                 </div>
             </form>
         </div>
-        <!-- 정보수정 -->
     </div>
 
     <!-- On/Off 변경 시 상단에 나타날 안내창 -->
@@ -256,8 +255,6 @@
     </div>
 
 </div>
-
 </body>
-
 
 </html>
