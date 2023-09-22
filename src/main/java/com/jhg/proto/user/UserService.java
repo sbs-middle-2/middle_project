@@ -1,12 +1,15 @@
 package com.jhg.proto.user;
 
 import com.jhg.proto.DataNotFoundException;
+import com.jhg.proto.answer.Answer;
+import com.jhg.proto.answer.AnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -15,6 +18,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AnswerRepository answerRepository;
 
     public SiteUser create(String username, String password, String email, String name, String nickname, String birthdate, String telecom, String phone) {
         SiteUser user = new SiteUser();
@@ -64,8 +68,14 @@ public class UserService {
     }
 
     public void delete(SiteUser siteUser) {
+        // 해당 사용자와 연결된 answer 레코드 삭제
+        List<Answer> userAnswers = answerRepository.findByAuthor(siteUser);
+        answerRepository.deleteAll(userAnswers);
+
+        // 사용자 삭제
         this.userRepository.delete(siteUser);
     }
+
 
     public boolean isCorrectPassword(String username, String password) {
         SiteUser user = getUser(username);
@@ -77,5 +87,15 @@ public class UserService {
         SiteUser user = getUser(username);
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
+    }
+
+    // 추가: 사용자와 관련된 Answer 엔티티 삭제
+    public void deleteUserWithAnswers(Long userId) {
+        // 사용자 삭제 전에 해당 사용자와 관련된 Answer 엔티티 삭제
+        List<Answer> userAnswers = answerRepository.findByAuthorId(userId);
+        answerRepository.deleteAll(userAnswers);
+
+        // 사용자 삭제
+        userRepository.deleteById(userId);
     }
 }
