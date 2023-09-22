@@ -15,6 +15,13 @@
         <!-- 1. 선택한 축제 제목(title) 띄우기 -->
         <h1 th:text="${selectedFestival.title}"></h1>
 
+        <div class="button-container" style="margin-top: 100px; !important;">
+            <a th:href="${site_link}" target="_blank" class="square-button">축제 사이트로 이동</a>
+            <a href="#" class="shortcut-button">
+                <i class="fas fa-link"></i>
+            </a>
+        </div>
+
         <div class="image">
             <div class="image">
                 <img th:src="${selectedFestival.picture}" alt="이미지 대체">
@@ -24,34 +31,27 @@
 
             <div class="info-container">
                 <!-- 여기에 추가 정보나 텍스트를 넣을 수 있음 -->
-                <table border="1">
-                <th></th>
-                <th></th>
-                <tr>
-                    <!-- 3. 선택한 축제 정보(title, address, event_Period) 불러오기 -->
-                    <td>이름</td>
-                    <td th:text="${selectedFestival.title}"></td>
-                </tr>
-                <tr>
-                    <td>주소</td>
-                    <td th:text="${selectedFestival.address}"></td>
-                    <div id="selectedFestivalAdress" th:text="${selectedFestival.address}" style="display:none;"></div>
-                </tr>
-                <tr>
-                    <td>행사일자</td>
-                    <td th:text="${selectedFestival.event_Period}"</td>
-                </tr>
-                <th></th>
-                <th></th>
-            </table>
+                <table>
+                    <th></th>
+                    <th></th>
+                    <tr>
+                        <td>이름</td>
+                        <td th:text="${selectedFestival.title}"></td>
+                    </tr>
+                    <tr>
+                        <td>주소</td>
+                        <td th:text="${selectedFestival.address}"></td>
+                        <div id="selectedFestivalAdress" th:text="${selectedFestival.address}" style="display:none;"></div>
+                    </tr>
+                    <tr>
+                        <td>행사일자</td>
+                        <td th:text="${selectedFestival.event_Period}"</td>
+                    </tr>
+                    <th></th>
+                    <th></th>
+                </table>
 
-            <div class="button-container">
-                <a th:href="${site_link}" target="_blank" class="square-button">축제 사이트로 이동</a>
-                <a href="#" class="shortcut-button">
-                    <i class="fas fa-link"></i>
-                </a>
-            </div>
-        </div>
+
         </div>
     </div>
 
@@ -145,6 +145,6 @@
         });
     });
 </script>
-
+</div>
 </body>
 </html>
