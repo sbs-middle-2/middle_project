@@ -246,56 +246,54 @@ input {
   color: #333;
 }
 
-
 .image {
-    width: 800px; /* 이미지의 너비 설정 */
-    display: flex;
-    height: 1000px; /* 이미지의 높이를 자동으로 조절하여 비율 유지 */
-    border: none; /* 이미지 주위에 테두리 설정 */
-    border-radius: none; /* 이미지 모서리를 둥글게 만듦 */
-    box-shadow: none; /* 이미지에 그림자 효과 추가 */
-    margin-top: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 50px;
+  width: 800px; /* 이미지의 너비 설정 */
+  display: flex;
+  height: 1000px; /* 이미지의 높이를 자동으로 조절하여 비율 유지 */
+  border: none; /* 이미지 주위에 테두리 설정 */
+  border-radius: none; /* 이미지 모서리를 둥글게 만듦 */
+  box-shadow: none; /* 이미지에 그림자 효과 추가 */
+  margin-top: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 50px;
 }
 .image-text-container {
-    display: flex; /* Flexbox를 사용하여 요소들을 가로로 배치 */
-    align-items: center; /* 요소들을 수직 중앙 정렬 */
+  display: flex; /* Flexbox를 사용하여 요소들을 가로로 배치 */
+  align-items: center; /* 요소들을 수직 중앙 정렬 */
 }
 
 .image-text-container img {
-    margin-right: 10px; /* 이미지 오른쪽에 약간의 여백 추가 */
+  margin-right: 10px; /* 이미지 오른쪽에 약간의 여백 추가 */
 }
 
 .image-info-container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 10px; /* 이미지와 정보 사이의 간격 조절 */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px; /* 이미지와 정보 사이의 간격 조절 */
 }
 
 .image-container img {
-    max-width: 100%; /* 이미지 크기 조절 */
-    height: auto;
+  max-width: 100%; /* 이미지 크기 조절 */
+  height: auto;
 }
-
-
 
 .image > .image-text {
-    position: absolute;
-    top: 550px;
-    left: 550px;
-    font-size: 50px;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease; /* 텍스트의 나타나는 애니메이션을 추가합니다. */
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  padding: 150px;
+  font-size: 50px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease; /* 텍스트의 나타나는 애니메이션을 추가합니다. */
 }
 
-.image-text:hover{
-  font-family : "Malgun Gothic";
-  color:	#404040;
-  opacity:1;
-  background-color: #DCDCDC;
+.image-text:hover {
+  font-family: "Malgun Gothic";
+  color: #404040;
+  opacity: 1;
+  background-color: #dcdcdc;
   border-radius: 5px;
   background-size: 100px;
   padding: 20;
@@ -303,155 +301,148 @@ input {
 }
 
 table {
-    font-family : "Malgun Gothic";
-    border-collapse: collapse; /* 테이블 셀 경계를 병합하여 겹치지 않도록 설정 */
-    width: 900px;
-    height: flex;
-    border: 1px solid #ccc; /* 테이블 테두리 설정 */
-    font-size: 20px;
-    display: flex;
-    justify-content: center; /* 가로 중앙 정렬 설정 */
-    margin-top : 100px;
-    margin-left : 80px;
-    margin-bottom : 20px;
-    line-height: 30px;
-
+  right: 10%;
+  font-family: "Malgun Gothic";
+  border-collapse: collapse; /* 테이블 셀 경계를 병합하여 겹치지 않도록 설정 */
+  width: 900px;
+  height: flex;
+  border: 1px solid #ccc; /* 테이블 테두리 설정 */
+  font-size: 20px;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 설정 */
+  margin-top: 100px;
+  margin-left: 80px;
+  margin-bottom: 20px;
+  line-height: 30px;
 }
 
 /* 테이블 헤더 (<th>) 스타일 설정 */
 th {
-    background-color: skyblue; /* 헤더 배경색 설정 */
-    border: 1px solid #ccc; /* 헤더 테두리 설정 */
-    padding: 8px; /* 셀 내부 여백 설정 */
-    text-align: left; /* 텍스트 왼쪽 정렬 */
+  background-color: skyblue; /* 헤더 배경색 설정 */
+  border: 1px solid #ccc; /* 헤더 테두리 설정 */
+  padding: 8px; /* 셀 내부 여백 설정 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
 }
 
 /* 테이블 데이터 셀 (<td>) 스타일 설정 */
 td {
-    border: 1px solid #ccc; /* 데이터 셀 테두리 설정 */
-    padding: 40px; /* 셀 내부 여백 설정 */
-    text-align: left; /* 텍스트 왼쪽 정렬 */
+  border: 1px solid #ccc; /* 데이터 셀 테두리 설정 */
+  padding: 40px; /* 셀 내부 여백 설정 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
 }
 
 table th:first-child,
 table td:first-child {
-    width: 100px; /* 원하는 넓이로 조절 */
-    font-weight: bold;
+  width: 100px; /* 원하는 넓이로 조절 */
+  font-weight: bold;
 }
 
-h1{
+h1 {
   display: flex;
   margin-top: 300px;
   margin-left: 10%;
   margin-bottom: -70px;
-  line-height: 13.0px;
+  line-height: 13px;
 }
 
-.button-container{
-    display: inline-block;
-    padding: 15px 20px;
-    background-color: #3498db; /* 버튼 배경색 */
-    color: #fff; /* 텍스트 색상 */
-    text-decoration: none; /* 밑줄 제거 */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s; /* 마우스 오버 시 배경색 전환 */
-    margin-top : 10px;
-    margin-left : 8%;
-    font-size : 20px;
+.button-container {
+  display: inline-block;
+  padding: 15px 20px;
+  background-color: #3498db; /* 버튼 배경색 */
+  color: #fff; /* 텍스트 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.1s; /* 마우스 오버 시 배경색 전환 */
+  margin-top: 10px;
+  margin-left: 8%;
+  font-size: 20px;
 }
 
-.button-container:hover{
+.button-container:hover {
   background-color: skyblue; /* 마우스 오버 시 배경색 변경 */
 }
 /* 메뉴 끝 */
 
-
 /*지도 구현 시작*/
-.map{
-  margin-left : 10%;
-  margin-top : 100px;
+.map {
+  margin-left: 10%;
+  margin-top: 100px;
   margin-bottom: 100px;
-
 }
 
 /*지도 구현 끝*/
 
-
-
 /*댓글 시작*/
- .comment {
-      justify-content: center;
-      align-items: center;
-
+.comment {
+  justify-content: center;
+  align-items: center;
 }
- .comment > h1{ /* 댓글 폰트 */
-     margin-left : 10%;
-     margin-top : 10px;
-     margin-bottom : 10px;
-   }
+.comment > h1 {
+  /* 댓글 폰트 */
+  margin-left: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-  input[type="text"] {
-        width: 70%;
-        padding: 20px;
-        margin-top : 50px;
-        margin-left : 10%;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size : 20px;
-      }
+.commentList {
+  list-style: none;
+  padding: 0;
+  border: line;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: flex;
+  line-height: 30px;
+}
 
-   button{
-        width: 180px;
-        height: 65px;
-        padding: 10px;
-        margin-left : 20px;
-        margin-top : 20px;
-        background-color: #3498db;
-        color: white;
-        font-size : 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+.comment input[type="text"] {
+  width: 70%;
+  padding: 20px;
+  margin-top: 50px;
+  margin-left: 10%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+}
 
-    button:hover{
-      background-color: skyblue; /* 마우스 오버 시 배경색 변경 */
-    }
+.comment button {
+  width: 180px;
+  height: 65px;
+  padding: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: #3498db;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .commentList {
-      list-style: none;
-      padding: 0;
-      border: line;
-      margin-top : 50px;
-      margin-bottom: 50px;
-      margin-left : 10%;
-      margin-right : 10%;
-      height : flex;
-      line-height: 30px;
+.comment button:hover {
+  background-color: skyblue; /* 마우스 오버 시 배경색 변경 */
+}
 
-    }
+.commentListList {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #e0ffff80;
+  opacity: 1;
+  border-radius: 10px;
+}
 
-    .commentListList{
-      margin-bottom: 10px;
-      padding: 10px;
-      background-color : #E0FFFF80;
-      opacity : 1.0;
-      border-radius: 10px;
+.commentAuthor {
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
 
-    }
-
-    .commentAuthor{
-      margin-bottom : 20px;
-      font-weight: bold;
-      font-size : 20px;
-    }
-
-    .commentAuthor{
-       font-size : 18px;
-    }
-
+.commentAuthor {
+  font-size: 18px;
+}
 
 /*댓글 기능 끝*/
