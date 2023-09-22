@@ -12,18 +12,19 @@
 <body>
 <div layout:fragment="content" class="container my-3">
     <div class="wrap-box">
-        <!-- 축제 세부 정보 및 이미지 시작-->
-
         <!-- 1. 선택한 축제 제목(title) 띄우기 -->
         <h1 th:text="${selectedFestival.title}"></h1>
 
-        <div class="img">
-            <!-- 2. 선택한 축제 이미지 띄우기 -->
-            <img th:src="${selectedFestival.picture}" alt="이미지 대체" style="width: 70%">
-        </div>
-        <div class="info-container">
-            <!-- 여기에 추가 정보나 텍스트를 넣을 수 있음 -->
-            <table border="1">
+        <div class="image">
+            <div class="image">
+                <img th:src="${selectedFestival.picture}" alt="이미지 대체">
+                <div class="image-text" data-image-src="${selectedFestival.picture}"><b>클릭시 확대</b></div>
+            </div>
+            <script src="script.js"></script>
+
+            <div class="info-container">
+                <!-- 여기에 추가 정보나 텍스트를 넣을 수 있음 -->
+                <table border="1">
                 <th></th>
                 <th></th>
                 <tr>
@@ -51,11 +52,11 @@
                 </a>
             </div>
         </div>
+        </div>
     </div>
 
     <div class="map">
         <div id="map" style="width:70%;height:550px;"></div>
-
         <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2e8b8dfe2eeda94b06ca3878c8af6cf&libraries=services"></script>
         <script>

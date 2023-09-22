@@ -1,5 +1,6 @@
 package com.jhg.proto.question;
 
+import com.jhg.proto.user.SiteUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -44,4 +45,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
             + "   or u2.username like %:kw%) "
             + "   and q.boardId = :boardId") // boardId 파라미터 추가
     Page<Question> findAllByKeywordAndBoardId(@Param("kw") String kw, @Param("boardId") Integer boardId, Pageable pageable);
+
+    List<Question> findByAuthor(SiteUser siteUser);
 }

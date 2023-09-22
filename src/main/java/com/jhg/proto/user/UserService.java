@@ -3,6 +3,8 @@ package com.jhg.proto.user;
 import com.jhg.proto.DataNotFoundException;
 import com.jhg.proto.answer.Answer;
 import com.jhg.proto.answer.AnswerRepository;
+import com.jhg.proto.question.Question;
+import com.jhg.proto.question.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AnswerRepository answerRepository;
+    private final QuestionRepository questionRepository;
 
     public SiteUser create(String username, String password, String email, String name, String nickname, String birthdate, String telecom, String phone) {
         SiteUser user = new SiteUser();
@@ -71,6 +74,10 @@ public class UserService {
         // 해당 사용자와 연결된 answer 레코드 삭제
         List<Answer> userAnswers = answerRepository.findByAuthor(siteUser);
         answerRepository.deleteAll(userAnswers);
+
+        // 해당 사용자와 연결된 question 레코드 삭제
+        List<Question> userQuestions = questionRepository.findByAuthor(siteUser);
+        questionRepository.deleteAll(userQuestions);
 
         // 사용자 삭제
         this.userRepository.delete(siteUser);
