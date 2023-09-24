@@ -96,7 +96,7 @@ a {
 /* 버튼 영역(숨기기) */
 
 .adminbutton {
-  height: 60px;
+  height: 55px;
 }
 
 .adminbutton1 {
@@ -178,12 +178,12 @@ td:nth-child(4) {
   justify-content: center; /* 페이지 번호 수평 중앙 정렬 */
 }
 
-.page-number {
+.page-item {
   margin: 0 5px; /* 페이지 번호 간격 조절 */
   font-size: 25px; /* 페이지 번호 글꼴 크기 */
 }
 
-.page-number a {
+.page-item a {
   text-decoration: none; /* 링크 밑줄 제거 */
   color: #333; /* 페이지 번호 색상 */
   padding: 10px 20px; /* 페이지 번호 내 여백 */
@@ -192,7 +192,7 @@ td:nth-child(4) {
   transition: background-color 0.3s; /* 호버 효과 애니메이션 설정 */
 }
 
-.page-number a:hover {
+.page-item a:hover {
   background-color: skyblue; /* 호버 시 배경색 변경 */
   color: white; /* 호버 시 텍스트 색상 변경 */
 }

@@ -57,13 +57,13 @@ public class DB_Data_Set {
     // boardId에 따라 접두사를 반환
     private String getBoardPrefix(int boardId) {
         if (boardId == 1) {
-            return "리뷰";
+            return "[리뷰] ";
         } else if (boardId == 2) {
-            return "자유";
+            return "[자유] ";
         } else if (boardId == 3) {
-            return "Q&A";
+            return "[Q&A] ";
         } else if (boardId == 4) {
-            return "공지";
+            return "[공지] ";
         } else {
             return "기타";
         }

@@ -5,150 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/notice.css">
     <title>공지사항 리스트</title>
-    <!--<style>
-body {
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  font-family: "Malgun Gothic";
-  text-align: center;
-  font-size: 40px;
-}
-
-input {
-  margin-left: 1560px;
-  width: 250px;
-  height: 30px;
-  font-size: 16px;
-}
-
-button {
-  width: 50px;
-  height: 35px;
-  font-size: 15px;
-  margin-left: 10px;
-}
-
-table {
-  width: 80%;
-  margin: 20px auto;
-  margin-top: 80px;
-  margin-bottom: 100px;
-  border-collapse: collapse;
-}
-
-th {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-th {
-  background-color: #e0ffff;
-}
-
-tr:nth-child(even) {
-  background-color: white;
-}
-
-td:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-  color: #333;
-}
-
-/* 버튼 숨기기 */
-.admin-button {
-  display: none;
-}
-
-/* 각 열의 너비 설정 */
-th:nth-child(1),
-td:nth-child(1) {
-  width: 10%;
-}
-
-th:nth-child(2),
-td:nth-child(2) {
-  width: 55%;
-}
-
-th:nth-child(3),
-td:nth-child(3) {
-  width: 15%;
-}
-
-th:nth-child(4),
-td:nth-child(4) {
-  width: 20%;
-}
-
-/* 페이징 버튼 스타일 */
-.page-box {
-  margin-top: 40px; /* 페이지 번호와 축제 리스트 간격 조절 */
-  margin-bottom: 40px;
-  text-align: center; /* 페이지 번호 가운데 정렬 */
-}
-
-.page-box ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center; /* 페이지 번호 수평 중앙 정렬 */
-}
-
-.page-item {
-  margin: 0 5px; /* 페이지 번호 간격 조절 */
-  font-size: 25px; /* 페이지 번호 글꼴 크기 */
-}
-
-.page-item a {
-  text-decoration: none; /* 링크 밑줄 제거 */
-  color: #333; /* 페이지 번호 색상 */
-  padding: 10px 20px; /* 페이지 번호 내 여백 */
-  border: 1px solid #ccc; /* 페이지 번호 테두리 설정 */
-  border-radius: 5px; /* 페이지 번호 모서리 둥글게 */
-  transition: background-color 0.3s; /* 호버 효과 애니메이션 설정 */
-}
-
-.page-item a:hover {
-  background-color: skyblue; /* 호버 시 배경색 변경 */
-  color: white; /* 호버 시 텍스트 색상 변경 */
-}
-
-.current-page a {
-  background-color: skyblue;
-  color: white;
-  border-color: #ccc;
-}
-
-/* 버튼을 게시물 리스트 아래에 위치시키기 */
-.admin-button-box {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
-.admin-button-box button {
-  margin-left: 10px;
-}
-/* 게시물 리스트 컨테이너 position을 상대 위치로 설정 */
-.container.my-3 {
-  position: relative;
-}
-    </style>-->
-
 </head>
 <body>
 <div layout:fragment="content" class="container my-3" style="margin-top: 100px !important;">
@@ -195,22 +51,6 @@ td:nth-child(4) {
         <input type="text" id="search_kw" class="form-control" th:value="${kw}">
         <button class="search" type="button" id="btn_search">찾기</button>
     </div>
-    <!--찾기 기능 스크립트-->
-    <script layout:fragment="script" type='text/javascript'>
-        const page_elements = document.getElementsByClassName("page-link");
-        Array.from(page_elements).forEach(function(element) {
-            element.addEventListener('click', function() {
-                document.getElementById('page').value = this.dataset.page;
-                document.getElementById('searchForm').submit();
-            });
-        });
-        const btn_search = document.getElementById("btn_search");
-        btn_search.addEventListener('click', function() {
-            document.getElementById('kw').value = document.getElementById('search_kw').value;
-            document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
-            document.getElementById('searchForm').submit();
-        });
-    </script>
 
     <table class="main">
         <thead>
@@ -238,7 +78,7 @@ td:nth-child(4) {
     <div class="festival-pagination" th:if="${paging.totalPages > 1}">
         <ul class="pagination justify-content-center">
             <!-- 이전 버튼 숨기기 -->
-            <li class="page-number" th:classappend="${paging.number == 0} ? 'disabled'">
+            <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
                 <a class="page-link"
                    th:href="@{|?page=${paging.number-1}|}"
                    th:if="${paging.number != 0}">
@@ -249,12 +89,12 @@ td:nth-child(4) {
             <!-- 페이지 번호 목록 -->
             <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
                 th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'" class="page-number">
+                th:classappend="${page == paging.number} ? 'active current-page'" class="page-item">
                 <a th:text="${page + 1}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
             </li>
 
             <!-- 다음 버튼 숨기기 -->
-            <li class="page-number" th:classappend="${paging.number == paging.totalPages-1} ? 'disabled'">
+            <li class="page-item" th:classappend="${paging.number == paging.totalPages-1} ? 'disabled'">
                 <a class="page-link"
                    th:href="@{|?page=${paging.number+1}|}"
                    th:if="${paging.number != paging.totalPages-1}">
@@ -268,6 +108,23 @@ td:nth-child(4) {
         <input type="hidden" id="kw" name="kw" th:value="${kw}">
         <input type="hidden" id="page" name="page" th:value="${paging.number}">
     </form>
+
+    <!--찾기 기능 스크립트-->
+    <script layout:fragment="script" type='text/javascript'>
+        const page_elements = document.getElementsByClassName("page-link");
+        Array.from(page_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                document.getElementById('page').value = this.dataset.page;
+                document.getElementById('searchForm').submit();
+            });
+        });
+        const btn_search = document.getElementById("btn_search");
+        btn_search.addEventListener('click', function() {
+            document.getElementById('kw').value = document.getElementById('search_kw').value;
+            document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+            document.getElementById('searchForm').submit();
+        });
+    </script>
 </div>
 
 </body>
