@@ -11,25 +11,23 @@
     <h1>공지 사항</h1>
 
     <span id="siteUserUsername" style="display: none;">${siteUser.username}</span>
-
     <script>
         // Thymeleaf에서 username 값을 가져옴
         var username = document.getElementById("siteUserUsername").textContent;
 
         // username이 "admin"인 경우 버튼 표시
-        if (username === "admin") {
+        if (username !== "admin") {
             var buttons = document.querySelectorAll(".admin-button");
             for (var i = 0; i < buttons.length; i++) {
-                buttons[i].style.display = "block";
+                buttons[i].style.display = "none"; // "none"으로 변경하여 숨김
             }
         }
     </script>
-
     <!-- 버튼을 추가하고 클래스를 지정하여 숨김 및 표시를 제어 -->
     <div class="adminbutton">
-        <button class="adminbutton1">작성</button>
-        <button class="adminbutton2">수정</button>
-        <button class="adminbutton3">삭제</button>
+        <button class="adminbutton1 admin-button">작성</button>
+        <button class="adminbutton2 admin-button">수정</button>
+        <button class="adminbutton3 admin-button">삭제</button>
     </div>
 
     <table class="category">
