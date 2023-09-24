@@ -49,7 +49,7 @@
             <!-- 상세 게시판 -->
             <div class="accordion-content">
                 <div class="detail-box">
-                    <!--상세 디테일 헤드-->
+                    <!--상세 헤드-->
                     <ul>
                         <li><span>번호</span></li>
                         <li><span>작성자</span></li>
@@ -58,7 +58,7 @@
                         <li><span>댓글 수</span></li>
                         <li><span style="color:#FF4500;">♥</span></li>
                     </ul>
-                    <!--상세 디테일 바디-->
+                    <!--상세 헤드 내용 -->
                     <ul>
                         <li><span th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}">질문id번호</span></li>
                         <li><span th:if="${question.author != null}" th:text="${question.author.username}" style="text-align: right; margin-right: 20px"></span></li>
@@ -68,14 +68,16 @@
                         <li><span>01</span></li>
                     </ul>
                     <div class="body-box" style="display : flex ; margin-top : 20px ;box-shadow: 0 6px 6px -6px rgba(68, 68, 68, 0.3);   border-bottom: 2px solid #d1d1d1; padding-bottom: 10px; margin-bottom: 20px;">
-                        <ul style="border : none ; box-shadow : none ; width : 20% ; display : flex ; justify-content :center; align-items : center;">
+                        <!--상세 바디 -->
+                        <ul style="border : none ; box-shadow : none ; width : 20% ; display : flex ; justify-content :center; align-items : center; padding : 10px;">
                             <li style=" width : 100%;">
                                 <span>내용</span>
                             </li>
                         </ul>
+                        <!--상세 바디 내용 -->
                         <ul style="width : 100%; text-align : left;">
                             <li style=" width : 100% ; text-align : left ; padding : 10px;">
-                                <!--<span th:text="${question.content}">내용</span>-->
+                                <span th:text="${question.content}"></span>
                             </li>
                         </ul>
                     </div>
