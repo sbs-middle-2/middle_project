@@ -7,48 +7,11 @@
 
     <!--  제이쿼리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- 새로운 스크립트를 추가하여 필터링 기능을 구현합니다. -->
-    <script>
-        // 문서 로딩 완료 시 실행될 JavaScript 코드
-        $(document).ready(function () {
-            // 사용자가 체크박스 또는 라디오 버튼을 변경할 때마다 필터링을 수행합니다.
-            $('input[type="checkbox"], input[type="radio"]').on('change', function () {
-                filterFestivals(); // 필터링 함수 호출
-            });
-
-            // 필터링 함수 정의
-            function filterFestivals() {
-                // 선택된 지역과 분야를 수집합니다.
-                var selectedRegions = [];
-                var selectedCategory = $('input[name="radio"]:checked').val();
-
-                $('.checkbox1:checked').each(function () {
-                    selectedRegions.push($(this).text().trim());
-                });
-
-                // 모든 축제 아이템을 숨깁니다.
-                $('.festival-item').hide();
-
-                // 선택된 지역 또는 분야에 맞게 축제 아이템을 표시합니다.
-                $('.festival-item').each(function () {
-                    var festivalRegion = $(this).attr('data-region');
-                    var festivalCategory = $(this).attr('data-category');
-
-                    if (
-                        (selectedRegions.length === 0 || selectedRegions.includes(festivalRegion)) &&
-                        (selectedCategory === "all" || selectedCategory === festivalCategory)
-                    ) {
-                        $(this).show();
-                    }
-                });
-            }
-        });
-    </script>
 </head>
 
 <body>
 <div layout:fragment="content" class="container my-3">
+    <!--이곳에 분류 기능 추가-->
     <div class="wrap-box">
         <!-- 축제정보 페이지 구현 시작-->
         <div class="outtrack">
@@ -65,70 +28,6 @@
                         <input type="checkbox" id="checkbox" class="checkbox1">
                         서울
                     </div>
-                    <div class="incheon">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        인천
-                    </div>
-                    <div class="gyeonggi">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        경기
-                    </div>
-                    <div class="gangwon">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        강원
-                    </div>
-                    <div class="chungbuk">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        충북
-                    </div>
-                    <div class="chungnam">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        충남
-                    </div>
-                    <div class="daejeon">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        대전
-                    </div>
-                    <div class="sejong">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        세종
-                    </div>
-                    <div class="kyeongbuk">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        경북
-                    </div>
-                    <div class="kyeongnam">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        경남
-                    </div>
-                    <div class="daegu">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        대구
-                    </div>
-                    <div class="ulsan">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        울산
-                    </div>
-                    <div class="busan">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        부산
-                    </div>
-                    <div class="gwangju">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        광주
-                    </div>
-                    <div class="jeonbuk">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        전북
-                    </div>
-                    <div class="jeonnam">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        전남
-                    </div>
-                    <div class="jeju">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        제주
-                    </div>
                 </div>
             </div>
 
@@ -138,36 +37,6 @@
                 <div class="radiolocal">
                     <div>
                         <input type="radio" name="category" value="all" checked ondblclick="this.checked=false"> 전체 <!-- 추가 -->
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="radiolocal" ondblclick="this.checked=false"> 농촌문화
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="extensivefestival" ondblclick="this.checked=false"> 대규모 행사
-                    </div>
-                    <div class="culturetour">
-                        <input type="radio" name="category" value="culturetour" ondblclick="this.checked=false"> 문화관광
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="cultureart" ondblclick="this.checked=false"> 문화예술
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="ecology" ondblclick="this.checked=false"> 생태자연
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="anniversaryfestival" ondblclick="this.checked=false"> 기념행사
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="tradition" ondblclick="this.checked=false"> 전통행사(역사, 문화 등)
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="fashionbeauty" ondblclick="this.checked=false"> 패션 뷰티
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="communication" ondblclick="this.checked=false"> 주민화합
-                    </div>
-                    <div>
-                        <input type="radio" name="category" value="astronomyscience" ondblclick="this.checked=false"> 천문과학
                     </div>
                 </div>
             </div>
@@ -183,7 +52,6 @@
                 <p th:text="${festival.event_Period}">축제 기간</p>
             </a>
         </div>
-        <!-- 나머지 축제 아이템들도 유사한 방식으로 추가합니다. -->
     </div>
 
     <div class="festival-pagination">
