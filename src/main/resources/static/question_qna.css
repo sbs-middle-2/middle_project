@@ -1,55 +1,111 @@
-.faq-box {
-  width: 1100px;
-  height: auto ;
-  margin: auto ;
-  margin-top: 40px ;
-  margin-bottom: 100px;
-  box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08);
-  padding:10px;
+h1 {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 60px;
 }
 
-.faq-box__question {
-  cursor:pointer;
+h3 {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 20px;
 }
 
-.faq-box__question::after {
-  content:"[+]";
-  float:right;
+input {
+  border-bottom: 2px solid gray;
+  margin-left: 1520px;
+  width: 300px;
+  height: 33px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  border-width: 0.5px;
+  position: relative;
+  top: 30%;
+  right: 10%;
 }
 
-.faq-box > ul > li {
-  padding:10px;
-}
-.faq-box > ul > li> .faq-box__question {
-  display: flex;
-}
-
-.faq-box > ul > li> .faq-box__question span:nth-child(3){
-  flex-grow: 2 ;
-}
-
-.faq-box > ul > li> .faq-box__question span {
-  flex-grow: 1 ;
-}
-
-.faq-box > ul > li.hover > .faq-box__question::after {
-  content:"[-]";
+.search {
+  width: 50px;
+  height: 33px;
+  font-size: 15px;
+  margin-left: 5px;
+  border-color: skyblue;
+  border-radius: 10%;
+  border-width: 1px;
+  background-color: #00bfff;
+  position: relative;
+  top: 30%;
+  right: 10%;
 }
 
-.faq-box__answer {
-  display:none;
-  background-color:#f1f8ff ;
-  margin-top: 20px ;
-  margin-bottom: 20px ;
-  border-radius: 5px ;
-  padding:10px;
+.search:hover {
+  cursor: pointer;
+  background-color: #1e90ff;
+  transition: background-color 0.3s;
+}
+
+.adminbutton {
+  height: 50px;
+}
+
+.adminbutton1 {
+  width: 100px;
+  height: 40px;
+  font-size: 19px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: white;
+  font-weight: bold;
+  position: relative;
+  top: 1600%;
+  left: 81%;
+}
+
+.adminbutton1:hover {
+  background-color: #1e90ff;
+}
+
+.free {
+  text-align: center;
+  width: 80%;
+  margin: 20px auto;
+  margin-top: 40px;
+  margin-bottom: 115px;
+  border-collapse: collapse;
+}
+
+th {
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  padding: 12px;
+  text-align: center;
+  font-size: 18px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+}
+
+th {
+  background-color: #1e90ff;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+td:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .festival-pagination {
-  margin-top: 50px; /* 페이지 번호와 축제 리스트 간격 조절 */
-  margin-bottom : 40px;
+  margin-top: 40px; /* 페이지 번호와 축제 리스트 간격 조절 */
+  margin-bottom: 40px;
   text-align: center; /* 페이지 번호 가운데 정렬 */
-
 }
 
 .festival-pagination ul {
@@ -75,37 +131,12 @@
 }
 
 .page-number a:hover {
-  background-color: skyblue; /* 호버 시 배경색 변경 */
+  background-color: #1e90ff; /* 호버 시 배경색 변경 */
   color: white; /* 호버 시 텍스트 색상 변경 */
 }
 
 .current-page a {
-  background-color: skyblue;
+  background-color: #1e90ff;
   color: white;
   border-color: #ccc;
-}
-
-/*추가한 css*/
-/*리스트의 텍스트*/
-.faq-box__text {
-    display: flex;
-    align-items: center; /* 텍스트 수직 정렬 */
-    padding: 10px;
-    background-color: #f1f8ff; /* 배경색 추가 */
-    border-radius: 5px;
-}
-.faq-box__text span {
-    flex-grow: 1;
-}
-.faq-box__text span:last-child {
-    margin-right: 0; /* 마지막 텍스트 오른쪽 마진 제거 */
-}
-/*작성 버튼*/
-.q_write a {
-    border: 3px solid #58D3F7;
-}
-/* 게시물 간 구별을 위한 스타일 */
-.post-item {
-    border-bottom: 1px solid #ddd; /* 옅은 회색의 밑줄 스타일 지정 */
-    padding-bottom: 10px; /* 밑줄과 게시물 내용 간의 간격 조절 (원하는 크기로 조정) */
 }

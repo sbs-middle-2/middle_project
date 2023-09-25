@@ -1,156 +1,96 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head>
-    <!-- navbar.css를 모든 페이지에 포함 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/question_qna.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/question_qna.css">
+    <title>공지사항 리스트</title>
 </head>
-
 <body>
-<!-- 리스트 박스 -->
-<div class="list-box" layout:fragment="content">
-    <section class="section section-faq">
-        <div class="container mx-auto">
-            <h1 style="text-align: center;  margin-top: 120px ; font-weight: 400; ">
-                자주하는 질문
-                <span style="font-size: 13px ; font-weight: 400 ; color: #999999; padding: 0 5px "  >
-                    고객님들께서 자주하는 질문을 모았습니다
-                </span>
-                <h3 style="text-align: right  ; padding: 10px 10px ; margin-right: 400px; font-weight: 300;  ">
-                    고객센터 : 1525-5265
-                </h3>
-            </h1>
-            <div class="faq-box">
-                <div class="container function-box" style="display: flex; justify-content: space-between; align-items: center;">
-                    <!-- 공백을 추가하여 검색 기능을 오른쪽으로 이동 -->
-                    <div style="flex-grow: 1;"></div>
+<div layout:fragment="content" class="container my-3" style="margin-top: 100px !important;">
+    <h1>FAQ 게시판</h1>
+    <h3>고객님들께서 자주 찾는 질문들을 모아보았습니다.</h3>
 
-                    <!-- 찾기 기능 -->
-                    <div class="input-group">
-                        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                        <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                    </div>
-                </div>
-                <!-- 추가: 여백을 둠 -->
-                <div style="margin-top: 20px;"></div>
-                <!-- 텍스트 설명 -->
-                <span class="faq-box__text">
-                    <span style="flex-grow: 1;">번호</span>
-                    <span style="flex-grow: 2;">제목</span>
-                    <span style="flex-grow: 1; text-align: right; margin-right: 20px;">작성자</span>
-                    <span style="flex-grow: 1; ">작성일</span>
-                </span>
-                <!--QnA 리스트-->
-                <ul>
-                    <li th:each="question, loop : ${paging}" class="post-item" th:if="${question.boardId == 3}">
-                    <!--<li th:each="question, loop : ${paging}" class="post-item">-->
-                        <div class="faq-box__question">
-                            <span th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}">질문id번호</span>
-                            <span>
-                                <!-- 질문 제목 -->
-                                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
-                            </span>
-                            <!--질문 작성자-->
-                            <span th:if="${question.author != null}" th:text="${question.author.username}" style="text-align: right; margin-right: 20px"></span>
-                            <!--작성일-->
-                            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-                        </div>
-                        <div class="faq-box__answer">
-                            <div>
-                                <!-- 질문 내용 -->
-                                <span th:text="${question.content}">내용</span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <!-- 추가: 여백을 둠 -->
-                <div style="margin-top: 20px;"></div>
-                <!-- 게시글 등록 버튼을 오른쪽 끝으로 이동 -->
-                <div class="q_write" style="text-align: right;"><a th:href="@{/question/create}" class="btn btn-primary">질문 작성하기</a></div>
-                <!-- 추가: 여백을 둠 -->
-                <div style="margin-top: 20px;"></div>
-            </div>
+    <span id="siteUserUsername" style="display: none;">${siteUser.username}</span>
+    <script>
+        // Thymeleaf에서 username 값을 가져옴
+        var username = document.getElementById("siteUserUsername").textContent;
+
+        // username이 "admin"인 경우 버튼 표시
+        if (username !== "admin") {
+            var buttons = document.querySelectorAll(".admin-button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].style.display = "none"; // "none"으로 변경하여 숨김
+            }
+        }
+    </script>
+
+    <!-- 찾기 기능 -->
+    <div class="search-button">
+        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+        <button class="search" type="button" id="btn_search">찾기</button>
+    </div>
+
+    <table class="free">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question, loop : ${paging}" class="post-item" th:if="${question.boardId == 3}">
+            <td th:text="${paging.getTotalElements() - (paging.getNumber() * paging.getSize()) - loop.index}">질문id번호</td>
+            <td>
+                <!-- 질문 제목 -->
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+            <td th:if="${question.author != null}" th:text="${question.author.username}"></td>
+            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+        <!-- 버튼을 추가하고 클래스를 지정하여 숨김 및 표시를 제어 -->
+        <div class="adminbutton">
+            <button class="adminbutton1 admin-button">작성</button>
         </div>
-    </section>
+    </table>
+
     <!-- 페이징처리 시작 -->
-    <div class="festival-pagination">
-        <ul class="page-number">
-            <li class="page-item" th:if="${paging.number == 1}">
-                <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
-                    <span>이전</span>
+    <div class="festival-pagination" th:if="${paging.totalPages > 1}">
+        <ul class="pagination justify-content-center">
+            <!-- 이전 버튼 숨기기 -->
+            <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.number-1}|}"
+                   th:if="${paging.number != 0}">
+                    <span>&lt;</span>
                 </a>
             </li>
+
+            <!-- 페이지 번호 목록 -->
             <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
                 th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                th:classappend="${page == paging.number} ? 'active current-page'" class="page-item">
                 <a th:text="${page + 1}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
             </li>
-            <li class="page-item" th:if="${paging.hasNext}">
-                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
-                    <span>다음</span>
+
+            <!-- 다음 버튼 숨기기 -->
+            <li class="page-item" th:classappend="${paging.number == paging.totalPages-1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.number+1}|}"
+                   th:if="${paging.number != paging.totalPages-1}">
+                    <span>&gt;</span>
                 </a>
             </li>
         </ul>
     </div>
     <!-- 페이징처리 끝 -->
-
     <form th:action="@{/question/qna_list}" method="get" id="searchForm">
         <input type="hidden" id="kw" name="kw" th:value="${kw}">
         <input type="hidden" id="page" name="page" th:value="${paging.number}">
     </form>
-
-    <!-- 폰트 -->
-    <style>
-        @font-face {
-            font-family: 'LotteMartDream';
-            font-style: normal;
-            font-weight: 400;
-            src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
-        }
-
-        @font-face {
-            font-family: 'LotteMartDream';
-            font-style: normal;
-            font-weight: 700;
-            src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
-        }
-
-        @font-face {
-            font-family: 'LotteMartDream';
-            font-style: normal;
-            font-weight: 300;
-            src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
-        }
-
-        html>body {
-            font-family: 'LotteMartDream', sans-serif;
-        }
-    </style>
-
-    <script>
-        function FaqBox__init() {
-            $('.faq-box > ul > li').click(function() {
-                let $this = $(this);
-
-                $this.siblings('.hover').find(' > .faq-box__answer').stop().slideUp(300); // 추가
-                $this.siblings('.hover').removeClass('hover');
-
-                if ( $this.hasClass('hover') ) {
-                    $this.find(' > .faq-box__answer').stop().slideUp(300); // 추가
-                    $this.removeClass('hover');
-                }
-                else {
-                    $this.find(' > .faq-box__answer').stop().slideDown(300); // 추가
-                    $this.addClass('hover');
-                }
-            });
-
-            $('.faq-box__answer').click(function() {
-                return false;
-            });
-        }
-
-        FaqBox__init();
-    </script>
 
     <!--찾기 기능 스크립트-->
     <script layout:fragment="script" type='text/javascript'>
@@ -171,5 +111,4 @@
 </div>
 
 </body>
-
 </html>
