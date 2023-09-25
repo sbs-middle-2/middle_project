@@ -18,10 +18,8 @@
         <div class="image">
             <div class="image">
                 <img th:src="${selectedFestival.picture}" alt="이미지 대체">
-                <div class="image-text" data-image-src="${selectedFestival.picture}"><b>클릭시 확대</b></div>
             </div>
             <script src="script.js"></script>
-
             <div class="info-container">
                 <!-- 여기에 추가 정보나 텍스트를 넣을 수 있음 -->
                 <table>
@@ -45,8 +43,8 @@
                 </table>
             </div>
         </div>
-        <div class="button-container" style="margin-top: 100px; !important;">
-            <a th:href="${site_link}" target="_blank" class="square-button">축제 사이트로 이동</a>
+        <div class="button-container" style="margin-top: 100px;">
+            <a th:href="${selectedFestival.siteLink}" target="_blank" class="square-button">축제 사이트로 이동</a>
             <a href="#" class="shortcut-button">
                 <i class="fas fa-link"></i>
             </a>
