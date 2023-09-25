@@ -1,163 +1,111 @@
-@font-face {
-  font-family: "Humanbumsuk";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2")
-  format("woff2");
-  font-weight: normal;
-  font-style: normal;
+h1 {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 60px;
 }
 
-/* 노멀라이징 */
-* {
-  margin: 0;
-  padding: 0;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-ul,
-li {
-  list-style: none;
+h3 {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 20px;
 }
 
-/* 스타일 추가 */
-
-.list-box .search-box input,
-.list-box textarea {
-  outline: none;
-}
-
-.list-box .search-box input:hover,
-.list-box textarea:hover {
-  border: 1px solid #3b91ff;
-}
-
-/* 리스트  */
-.list-box {
-  width: 1200px;
-  height: auto ;
-  margin: 0 auto;
-  margin-top : 100px ;
-  margin-bottom : 100px ;
-}
-
-.list-box .search-box {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: right;
-}
-
-.list-box .search-box input[type="text"] {
+input {
+  border-bottom: 2px solid gray;
+  margin-left: 1520px;
   width: 300px;
-  padding: 10px;
-  border: 1px solid #ccc;
+  height: 33px;
+  font-size: 16px;
+  text-align: center;
   border-radius: 5px;
+  border-width: 0.5px;
+  position: relative;
+  top: 30%;
+  left: 1%;
 }
 
-.list-box .article-list-box {
-  box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.3);
-  border: 1px solid #f1f1f1;
-  border-radius: 10px;
-  background-color: #fff;
-  padding: 15px;
-  display: flex;
-  font-weight: bold;
+.search {
+  width: 50px;
+  height: 33px;
+  font-size: 15px;
+  margin-left: 5px;
+  border-color: skyblue;
+  border-radius: 10%;
+  border-width: 1px;
+  background-color: #afeeee;
+  position: relative;
+  top: 30%;
+  left: 1%;
 }
 
-.list-box .article-list-box span {
-  flex-grow: 1;
-}
-
-.list-box .article-list-box span:nth-child(5) {
-  flex-grow: 8;
-}
-
-.list-box .article-list-box span:nth-child(6) {
-  margin-right: 13px;
-}
-
-.list-box .accordion-item {
-  display: block;
-  width: 100%;
-  border: 1px solid #dadada;
-  border-radius: 10px;
-  background-color: #fff;
-  margin: 10px 0;
-}
-
-.list-box .accordion-header {
-  padding: 10px;
+.search:hover {
   cursor: pointer;
-  box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.3);
-  border: 1px solid #f1f1f1;
-  border-radius: 10px;
-  background-color: #fff;
-  display: flex;
-  font-weight: 600;
+  background-color: skyblue;
+  transition: background-color 0.3s;
 }
 
-.list-box .accordion-header span {
-  flex-grow: 1;
+.adminbutton {
+  height: 50px;
 }
 
-.list-box .accordion-header span:nth-child(5) {
-  flex-grow: 7;
-}
-
-.list-box > .search-box >.create-btn:hover{
-  border: 1px solid #3b91ff;
-  background-color: #f0f8ff;
-  color: black;
+.adminbutton1 {
+  width: 100px;
+  height: 40px;
+  font-size: 19px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: white;
   font-weight: bold;
+  position: relative;
+  top: 1450%;
+  left: 81%;
 }
 
-.list-box .accordion-header:hover {
-  border: 1px solid #3b91ff;
+.adminbutton1:hover {
+  background-color: #87cefa;
 }
 
-.list-box .accordion-header i {
-  float: right;
-  margin-right: 10px;
-  transition: transform 0.4s;
+.free {
+  text-align: center;
+  width: 80%;
+  margin: 20px auto;
+  margin-top: 40px;
+  margin-bottom: 115px;
+  border-collapse: collapse;
 }
 
-.list-box .accordion-content {
-  display: none;
-  padding: 10px;
-}
-/* 리스트 끝 */
-
-/* 상세보기 */
-.list-box .accordion-content .detail-box ul {
-  display: flex;
+th {
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  padding: 12px;
+  text-align: center;
+  font-size: 18px;
 }
 
-.list-box .accordion-content .detail-box ul:nth-child(1) {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  font-weight: bold;
-}
-
-.list-box .accordion-content .detail-box ul:nth-child(1) li,
-.list-box .accordion-content .detail-box ul:nth-child(2) li {
-  width: 25%;
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
   text-align: center;
 }
 
-button[type="submit"]:hover {
-  border: 1px solid #3b91ff;
-  background-color: #f0f8ff;
-  color: black;
-  font-weight: bold;
+th {
+  background-color: #e0ffff;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+td:hover {
+  text-decoration: underline;
   cursor: pointer;
 }
-/* 상세보기 끝 */
 
 .festival-pagination {
-  margin-top: 50px; /* 페이지 번호와 축제 리스트 간격 조절 */
-  margin-bottom : 40px;
+  margin-top: 40px; /* 페이지 번호와 축제 리스트 간격 조절 */
+  margin-bottom: 40px;
   text-align: center; /* 페이지 번호 가운데 정렬 */
-
 }
 
 .festival-pagination ul {
