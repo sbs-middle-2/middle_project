@@ -6,49 +6,49 @@
     <link rel="stylesheet" href="/festival_list.css">
 
     <!--  제이쿼리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 필터 버튼 클릭 시
+            $("#filter-button").click(function () {
+                var selectedRegion = $("#region-select").val(); // 선택한 지역 값 가져오기
+
+                // 모든 축제 항목을 숨김
+                $(".festival-item").hide();
+
+                // 선택한 지역과 일치하는 축제 항목을 표시
+                $(".festival-item").each(function () {
+                    var festivalRegion = $(this).find(".festival-region").text(); // 각 축제의 지역 가져오기
+                    if (selectedRegion === "" || selectedRegion === festivalRegion) {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
 <div layout:fragment="content" class="container my-3">
-    <!--이곳에 분류 기능 추가-->
-    <div class="wrap-box">
-        <!-- 축제정보 페이지 구현 시작-->
-        <div class="outtrack">
-            <!-- 지역별 검색 -->
-            <div class="selectlist">
-                <h2><span>지역별 검색</span></h2>
-                <div class="image-container">
-                    <img src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjNfMjIx/MDAxNTg0OTU1NDQwODQw.pgdMrlFpHuyYm8WVtqxcz9kMlOrnqnUAh9HJUzTES2cg.iWkik9RmfMMmX8Zl1s0eGHmg_qBrsqc_0VF4JdALiRMg.JPEG.hakarashi/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD(%ED%95%9C%EA%B5%AD)%EC%A7%80%EB%8F%84.jpg?type=w800" alt="Your Image">
-                    <div class="searchall">
-                        <input type="checkbox" id="cc" onclick="javascript:checkAll(this)" />
-                        <label for="cc">전체 적용</label>
-                    </div>
-                    <div class="seoul">
-                        <input type="checkbox" id="checkbox" class="checkbox1">
-                        서울
-                    </div>
-                </div>
-            </div>
-
-            <!--분야별 검색-->
-            <div class="searchtype">
-                <h2><span>분야별 검색</span></h2>
-                <div class="radiolocal">
-                    <div>
-                        <input type="radio" name="category" value="all" checked ondblclick="this.checked=false"> 전체 <!-- 추가 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <div><br><br><br><br></div>
     <h1 style="margin-left: 10% !important;">진행 중인 축제 리스트</h1>
+
+    <div class="festival-search">
+        <select id="region-select">
+            <option value="">전체 지역</option>
+            <option value="서울">서울</option>
+            <option value="경기">경기</option>
+            <option value="부산">부산</option>
+            <!-- 다른 지역 옵션 추가 -->
+        </select>
+        <button id="filter-button">필터 적용</button>
+    </div>
     <div class="festival-list">
         <div class="festival-item" th:each="festival : ${festivals}">
             <a th:href="@{|/festival/detail/${festival.id}|}">
                 <img th:src="${festival.picture}" alt="축제 이미지">
                 <h2 th:text="${festival.title}">축제 제목</h2>
+                <p class="festival-region" th:text="${festival.region}">축제 지역</p>
                 <p th:text="${festival.event_Period}">축제 기간</p>
             </a>
         </div>
