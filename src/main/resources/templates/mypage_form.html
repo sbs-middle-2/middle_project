@@ -25,7 +25,7 @@
             </div>
         </div>
         <!-- 사용자 이름 -->
-        <h2><span th:text="${siteUser.username}"></span></h2>
+        <h2><span th:text="${siteUser.name}"></span></h2>
         <h4 style="margin-top: 10px "><span th:text="${siteUser.email}"></span></h4>
 
         <!-- 메뉴 -->
@@ -44,6 +44,10 @@
                             <th><span class=" user">이름</span><span class="body" th:text="${siteUser.name}"></span></th>
                         </tr>
                         <tr class="table-box ">
+                            <th><span class=" user">아이디</span><span class="body" th:text="${siteUser.username}"></span></th>
+                        </tr>
+
+                        <tr class="table-box ">
                             <th><span class=" user">닉네임</span><span class="body" th:text="${siteUser.nickname}"></span></th>
                         </tr>
                         <tr class="table-box ">
@@ -53,20 +57,14 @@
                             <th><span class=" user">전화번호</span><span class="body" th:text="${siteUser.phone}"></span></th>
                         </tr>
                         <tr class="table-box ">
-                            <th><span class="user">비밀번호</span><span class="body" th:text="${siteUser.password}"></span></th>
-                            <td>
+                            <th><span class="user">비밀번호</span><span class="body" >********</span></th>
+                            <td class="btn">
                                 <a th:href="@{|/user/password_modify|}"
-                                   class="btn btn-sm btn-outline-secondary"
                                    sec:authorize="isAuthenticated()"
-                                   th:if="${siteUser.username != null and #authentication.getPrincipal().getUsername() == siteUser.username}">
+                                   th:if="${siteUser.username != null and #authentication.getPrincipal().getUsername() == siteUser.username}"
+                                   style=" font-size : 20px ; ">
                                     변경
                                 </a>
-                            </td>
-                        </tr>
-                        <tr class="table-box ">
-                            <th><span class="pro-text"> 핸드폰 프로모션 정보 통신 동의</span></th>
-                            <td>
-                                <div class="btn" id="toggleBtn">off</div>
                             </td>
                         </tr>
                     </table>

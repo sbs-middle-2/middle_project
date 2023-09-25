@@ -29,8 +29,6 @@ public class SiteUser {
 
     private String birthdate;
 
-    private String telecom;
-
     @Column(unique = true)
     private String phone;
 }

@@ -33,9 +33,6 @@ public class UserCreateForm {
     @NotEmpty(message = "생년월일은 필수 항목 입니다.")
     private String birthdate;
 
-    @NotEmpty(message = "통신사는 필수 항목 입니다.")
-    private String telecom; // 통신사 필드 추가
-
     @NotEmpty(message = "전화번호는 필수 항목 입니다.")
     private String phone;
 

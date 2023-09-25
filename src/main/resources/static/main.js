@@ -26,16 +26,7 @@ window.onload = function () {
 
 // 로딩 팝업 창 끝
 
-// 현재 이 코드는 navbar에서도 사용 중. 2개 다 사용시 코드 동작이 겹쳐서 버튼 기능이 동작하지 않음
-/*// 로그인 메뉴
-$(document).ready(function () {
-    $(
-        ".wrap-box >  .top-bar-box > .login-box > .lo-box > a"
-    ).click(function () {
-        $(this).siblings(".toggle-menu").toggleClass("active");
-    });
-});
-// 로그인메뉴 끝*/
+
 
 // 슬릭 슬라이더 옵션추가
 $(document).ready(function () {

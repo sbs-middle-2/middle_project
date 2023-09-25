@@ -20,6 +20,7 @@
         }
     </style>
 </head>
+
 <body>
 <div layout:fragment="content" class="my-wrap">
     <div class="id-section">
@@ -42,47 +43,79 @@
         </ul>
     </div>
 
+
     <div class="ch-section">
+        <!--   정보수정 폼   -->
         <div class="join-box">
-            <h2 style="text-align: center; margin-bottom: 30px; font-size: 35px;">회원 탈퇴</h2>
-            <p>계정을 삭제하기 위해 서는 본인 확인을 위해 비밀번호를 입력해 주세요.</p>
-            <form th:action="@{/user/mypage_withdrawal}" method="post">
-
-                <div>
-                    <div class="sece-box">
-                        <label for="currentPassword"
-                               style="padding: 10px 20px; font-size: 20px; font-weight: 500;">아이디 </label>
-                        <input type="text" id="currentPassword" name="currentPassword" disabled
-                               th:value="${siteUser.username}"
-                               style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px; background-color: #fff;">
-                        <br><br>
-                    </div>
-                </div>
-
+            <h2 style="text-align : center ;  margin-bottom : 30px ; font-size : 35px ;">회원 탈퇴</h2>
+            <!-- 비밀번호 변경 양식 -->
+            <form id="passwordChangeForm" th:action="@{/user/mypage_withdrawal}" method="post">
+                <!-- 현재 비밀번호 입력 필드 -->
                 <div class="sece-box">
-                    <label for="password"
-                           style="padding: 10px 20px; font-size: 20px; font-weight: 500;">비밀번호 입력 </label>
-                    <input type="password" id="password" name="password" required
-                           style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;">
-                    <br><br>
+                    <label for="currentPassword" style="  padding: 10px 20px; font-size: 20px; font-weight: 500;">아이디 </label>
+                    <input type="text" id="currentPassword" name="currentPassword" disabled th:value = "${siteUser.username}"   style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;  ; background-color: #fff;"> <br><br>
+                </div>
+                <!-- 새 비밀번호 입력 필드 -->
+                <div class="sece-box">
+                    <label for="newPassword" style="padding: 10px 20px; font-size: 20px; font-weight: 500;">비밀번호 입력 </label>
+                    <input type="password" id="newPassword" name="newPassword" placeholder="비밀번호를 입력하세요"
+                           style="width: 50%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 5px; padding-left: 15px;"><br><br>
                 </div>
 
-                <!-- 오류 메시지 표시 부분 -->
-                <div th:if="${error}">
-                    <p class="text-danger" th:text="${error}"></p>
+                <div style="display: flex ">
+                    <button type="button" id="changePasswordButton"
+                            style="margin-right : 20px ; width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;" th:text="탈퇴">
+                        탈퇴하기
+                    </button>
+                    <button type="button"  onclick="window.location.href='/user/mypage'"
+                            style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
+                        취소
+                    </button>
                 </div>
-
-                <button class="btn btn-sm btn-outline-secondary"
-                        style="color: black; width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
-                    탈퇴하기
-                </button>
-                <button type="button" onclick="window.location.href='/user/mypage'"
-                        style="width: 100%; height: 50px; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; cursor: pointer; margin-top: 30px;">
-                    취소
-                </button>
             </form>
-
         </div>
+
     </div>
+
+    <script>
+        // 탈퇴 버튼 클릭 시
+       document.getElementById("changePasswordButton").addEventListener("click", function () {
+           const enteredPassword = document.getElementById("newPassword").value;
+
+           // 서버에 비밀번호 확인 요청을 보내는 대신, 여기에서는 임의로 비밀번호 "password"를 기준으로 확인
+           const correctPassword = "password";
+
+           if (enteredPassword === correctPassword) {
+               Swal.fire({
+                   title: "탈퇴 확인",
+                   text: "정말로 탈퇴하시겠습니까?",
+                   icon: "warning",
+                   showCancelButton: true,
+                   confirmButtonText: "예",
+                   cancelButtonText: "아니오"
+               }).then((result) => {
+                   if (result.isConfirmed) {
+                       // 여기에서 실제 탈퇴 처리 로직을 추가해주세요
+                       window.location.href = "/";
+                       Swal.fire({
+                           icon: "success",
+                           title: "성공",
+                           text: "탈퇴가 되었습니다.",
+                           confirmButtonText: '확인'
+                       })
+                   }
+               });
+           } else {
+               Swal.fire({
+                   icon: "error",
+                   title: "오류",
+                   text: "비밀번호를 입력해주세요.",
+                   confirmButtonText: '확인'
+               })
+           }
+       });
+    </script>
+
+</div>
 </body>
 </html>

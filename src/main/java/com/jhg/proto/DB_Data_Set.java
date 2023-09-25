@@ -24,10 +24,10 @@ public class DB_Data_Set {
     @PostConstruct
     public void initializeData() {
         // Insert admin user
-        userService.create("admin", "admin", "admin@admin.com", "관리자", "program_manager", "0000-00-00", "KT", "010-0000-0000");
+        userService.create("admin", "admin", "admin@admin.com", "관리자", "program_manager", "0000-00-00", "010-0000-0000");
 
         // Insert user1
-        SiteUser user1 = userService.create("user1", "user1", "user1@user1.com", "user1name", "user1nickname", "1111-11-11", "KT", "010-1111-1111");
+        SiteUser user1 = userService.create("user1", "user1", "user1@user1.com", "user1name", "user1nickname", "1111-11-11",  "010-1111-1111");
 
         // boardId 1, 2, 3에 대해 13개의 데이터 생성
         Random random = new Random();

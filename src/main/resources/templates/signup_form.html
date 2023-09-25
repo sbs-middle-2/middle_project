@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/signup.css">
+
+    <!-- SweetAlert 2 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-<div layout:fragment="content" class="container my-3" style="margin-top: 300px !important; margin-bottom: 100px !important;">
+<div layout:fragment="content" class="container my-3">
     <div class="join-box">
-        <p class="logo-text">뭐하지 또? 또 가지 뭐!</p>
+        <a href="/"> <p class="logo-text">뭐하지 또? 또 가지 뭐!</p></a>
         <h1>회원가입</h1>
         <!-- 회원가입 폼 -->
         <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
@@ -18,8 +21,8 @@
                 <div class="join-icon-box">
                     <i class="id fa-regular fa-user"></i>
                     <input type="text" th:field="*{username}" placeholder="아이디를 입력하세요" class="id-box" id="username">
-                    <button id="checkUsernameBtn" class="submit">아이디 확인</button>
-                    <p id="usernameAvailability" class="availability-text"></p>
+                    <button id="checkUsernameBtn" class="submit" style="margin-bottom: 10px ">아이디 확인</button>
+                    <p id="usernameAvailability" class="availability-text" style="margin-bottom: 10px ; font-size: 15px ; font-weight: bold "></p>
                 </div>
                 <div class="join-icon-box">
                     <i class="ps fa-solid fa-key"></i>
@@ -30,6 +33,7 @@
                     <i class="ps fa-solid fa-key"></i>
                     <input type="password" th:field="*{password2}" placeholder="비밀번호를 다시 입력하세요" class="pass-box">
                     <p class="p-text">영어, 특수문자, 숫자를 모두 포함시켜주세요</p>
+                    <p id="passwordMatchError" class="error-text" style="margin-bottom: 10px ; font-size: 15px ; font-weight: bold "></p>
                 </div>
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-envelope"></i>
@@ -47,15 +51,6 @@
                     <i class="name fa-solid fa-heart"></i>
                     <input type="text" th:field="*{birthdate}" placeholder="생년월일을 입력하세요" class="bir-box" id="birthdateInput">
                 </div>
-                <div class="join-icon-box">
-                    <i class="name fa-solid fa-phone-volume"></i>
-                    <select name="통신사" th:field="*{telecom}" id="통신사">
-                        <option value="" selected>통신사 선택</option>
-                        <option value="KT">KT</option>
-                        <option value="LGU+">LGU+</option>
-                        <option value="SKT">SKT</option>
-                    </select>
-                </div>
 
                 <div class="join-icon-box">
                     <i class="name fa-solid fa-tablet-screen-button"></i>
@@ -65,48 +60,111 @@
                 <p class="text">
                     <input type="checkbox" class="agree-box" id="privacyCheckbox"> 개인정보 수집 및 이용 내용을 확인하였으며, 동의합니다.
                 </p>
-
                 <button type="submit" class="submit">회원가입하기</button>
             </div>
         </form>
     </div>
 
     <!-- 아이디 중복 체크 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const usernameInput = document.getElementById("username");
-            const checkUsernameBtn = document.getElementById("checkUsernameBtn");
-            const usernameAvailability = document.getElementById("usernameAvailability");
+       const usernameInput = document.getElementById("username");
+       const checkUsernameBtn = document.getElementById("checkUsernameBtn");
+       const usernameAvailability = document.getElementById("usernameAvailability");
 
-            checkUsernameBtn.addEventListener("click", function () {
-                event.preventDefault(); // 기본 동작인 페이지 새로고침을 막습니다.
-                const username = usernameInput.value;
+       checkUsernameBtn.addEventListener("click", function () {
+           event.preventDefault(); // 기본 동작인 페이지 새로고침을 막습니다.
+           const username = usernameInput.value;
 
-                // 아이디 중복 체크 함수 호출
-                checkUsernameAvailability(username);
+           // 아이디 미입력 검사
+           if (!username) {
+               Swal.fire({
+                   icon: 'error',
+                   title: '에러',
+                   text: '아이디를 입력해주세요.',
+               });
+               return; // 미입력 시 함수 종료
+           }
+
+           // 아이디 중복 체크 함수 호출
+           checkUsernameAvailability(username);
+       });
+
+       function checkUsernameAvailability(username) {
+           // 서버로 아이디 중복 체크 요청을 보냅니다.
+           fetch(`/user/checkUsername/${username}`)
+               .then(response => response.json())
+               .then(data => {
+                   const isUsernameAvailable = data.available;
+                   if (isUsernameAvailable) {
+                       usernameAvailability.textContent = "사용 가능한 아이디입니다.";
+                       usernameAvailability.classList.remove("unavailable");
+                       usernameAvailability.classList.add("available");
+
+                       // SweetAlert로 성공 메시지 표시
+                       Swal.fire({
+                           icon: 'success',
+                           title: '성공',
+                           text: '사용 가능한 아이디입니다.',
+                       });
+                   } else {
+                       // Swal로 에러 메시지 표시
+                       Swal.fire({
+                           icon: 'error',
+                           title: '에러',
+                           text: '이미 사용 중인 아이디입니다.',
+                       });
+                       usernameAvailability.textContent = "이미 사용 중인 아이디입니다.";
+                       usernameAvailability.classList.remove("available");
+                       usernameAvailability.classList.add("unavailable");
+                   }
+               })
+               .catch(error => {
+                   console.error("아이디 중복 체크 에러:", error);
+                   Swal.fire({
+                       icon: 'error',
+                       title: '에러',
+                       text: '아이디 중복 체크 중 오류가 발생했습니다.',
+                   });
+               });
+       }
+   });
+    </script>
+
+    <!--    비밀번호 형식 확인-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const password1Input = document.getElementById("password1");
+            const password2Input = document.getElementById("password2");
+            const passwordMatchError = document.getElementById("passwordMatchError");
+
+            password1Input.addEventListener("input", function () {
+                validatePassword();
             });
 
-            function checkUsernameAvailability(username) {
-                // 서버로 아이디 중복 체크 요청을 보냅니다.
-                fetch(`/user/checkUsername/${username}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const isUsernameAvailable = data.available;
-                        if (isUsernameAvailable) {
-                            usernameAvailability.textContent = "사용 가능한 아이디입니다.";
-                            usernameAvailability.classList.remove("unavailable");
-                            usernameAvailability.classList.add("available");
-                        } else {
-                            usernameAvailability.textContent = "이미 사용 중인 아이디입니다.";
-                            usernameAvailability.classList.remove("available");
-                            usernameAvailability.classList.add("unavailable");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("아이디 중복 체크 에러:", error);
-                        // 에러 처리 로직 추가
-                    });
+            password2Input.addEventListener("input", function () {
+                validatePassword();
+            });
+
+            function validatePassword() {
+                const password1 = password1Input.value;
+                const password2 = password2Input.value;
+
+                const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+
+                if (!passwordRegex.test(password1)) {
+                    password1Input.setCustomValidity("영어, 특수문자, 숫자를 모두 포함시켜야 합니다.");
+                } else {
+                    password1Input.setCustomValidity("");
+                }
+
+                if (password1 !== password2) {
+                    password2Input.setCustomValidity("비밀번호가 일치하지 않습니다.");
+                    passwordMatchError.textContent = "비밀번호가 일치하지 않습니다.";
+                } else {
+                    password2Input.setCustomValidity("");
+                    passwordMatchError.textContent = "";
+                }
             }
         });
     </script>
@@ -167,80 +225,121 @@
         });
     </script>
 
-    <!-- 인증번호 요청 스크립트 -->
-    <script>
-        $(document).ready(function() {
-            // 인증번호 생성 함수
-            function generateVerificationCode() {
-                const codeLength = 6;
-                const min = Math.pow(10, codeLength - 1);
-                const max = Math.pow(10, codeLength) - 1;
-                const randomCode = Math.floor(Math.random() * (max - min + 1)) + min;
-
-                return randomCode.toString().padStart(codeLength, '0');
-            }
-
-            // 인증번호 요청 버튼 클릭 이벤트
-            $('#requestCodeBtn').click(function(event) {
-                event.preventDefault(); // 기본 동작 막기
-                const verificationCode = generateVerificationCode();
-                $('#verificationCode').text('인증번호: ' + verificationCode);
-            });
-        });
-    </script>
-    <!-- 인증번호 확인 스크립트 -->
-    <script>
-        $(document).ready(function() {
-            // 인증번호 확인 버튼 클릭 이벤트
-            $('#verifyButton').click(function(event) {
-                event.preventDefault(); // 기본 동작 막기
-                const enteredCode = $('#verificationInput').val().trim(); // 입력된 인증번호
-                const generatedCode = $('#verificationCode').text().split(': ')[1]; // 생성된 인증번호
-
-                if (enteredCode === generatedCode) {
-                    // 인증번호가 일치할 때만 회원가입 버튼 활성화
-                    $('#submitBtn').prop('disabled', false); // 회원가입 버튼 활성화
-                } else {
-                    alert('인증번호가 일치하지 않습니다.');
-                    // 인증번호가 일치하지 않으면 회원가입 버튼 비활성화
-                    $('#submitBtn').prop('disabled', true); // 회원가입 버튼 비활성화
-                }
-            });
-
-            // Enter 키를 눌렀을 때 인증번호 확인 버튼 클릭 이벤트 호출
-            $('#verificationInput').keypress(function(event) {
-                if (event.which === 13) {
-                    event.preventDefault();
-                    const enteredCode = $('#verificationInput').val().trim(); // 입력된 인증번호
-                    const generatedCode = $('#verificationCode').text().split(': ')[1]; // 생성된 인증번호
-
-                    if (enteredCode === generatedCode) {
-                        // 인증번호가 일치할 때만 회원가입 버튼 활성화
-                        $('#submitBtn').prop('disabled', false); // 회원가입 버튼 활성화
-                    } else {
-                        alert('인증번호가 일치하지 않습니다.');
-                        // 인증번호가 일치하지 않으면 회원가입 버튼 비활성화
-                        $('#submitBtn').prop('disabled', true); // 회원가입 버튼 비활성화
-                    }
-                }
-            });
-        });
-    </script>
-
-    <!-- 개인정보 수집 동의 -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const privacyCheckbox = document.getElementById("privacyCheckbox");
             const form = document.querySelector("form");
 
             form.addEventListener("submit", function (event) {
-                if (!privacyCheckbox.checked) {
+                const usernameInput = document.getElementById("username");
+                const password1Input = document.querySelector("input[name='password1']");
+                const password2Input = document.querySelector("input[name='password2']");
+                const emailInput = document.querySelector("input[name='email']");
+                const nameInput = document.querySelector("input[name='name']");
+                const nicknameInput = document.querySelector("input[name='nickname']");
+                const birthdateInput = document.querySelector("input[name='birthdate']");
+                const phoneInput = document.querySelector("input[name='phone']");
+                const privacyCheckbox = document.getElementById("privacyCheckbox");
+
+                let isFormValid = true;
+
+                // 아이디 입력란 체크
+                if (!usernameInput.value || usernameInput.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '아이디를 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 비밀번호 입력란 체크
+               else if (!password1Input.value || password1Input.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '비밀번호를 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 비밀번호 확인 입력란 체크
+                else if (!password2Input.value || password2Input.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '비밀번호 확인을 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 이메일 입력란 체크
+                else if (!emailInput.value || emailInput.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '이메일을 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 이름 입력란 체크
+                else if (!nameInput.value || nameInput.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '이름을 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 닉네임 입력란 체크
+                else if (!nicknameInput.value || nicknameInput.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '닉네임을 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 생년월일 입력란 체크
+                else if (!birthdateInput.value || birthdateInput.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '생년월일을 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 전화번호 입력란 체크
+                else if (!phoneInput.value || phoneInput.value.trim() === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '전화번호를 입력하세요.'
+                    });
+                    isFormValid = false;
+                }
+
+                // 개인정보 수집 동의 체크
+                else if (!privacyCheckbox.checked) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '입력 오류',
+                        text: '개인정보 수집 및 이용 내용에 동의해야 회원가입이 가능합니다.'
+                    });
+                    isFormValid = false;
+                }
+
+               if (!isFormValid) {
                     event.preventDefault(); // 폼 제출을 막습니다.
-                    alert("개인정보 수집 및 이용 내용에 동의해야 회원가입이 가능합니다.");
                 }
             });
+
         });
     </script>
+
 
 </div>
 </body>

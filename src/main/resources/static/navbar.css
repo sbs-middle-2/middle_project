@@ -201,13 +201,13 @@ input {
 }
 
 .wrap-box > .top-bar-box > .menu-box:hover > li > .nav-2-menu {
-  height: 190px;
+  height:  170px;
 /*  2차 메뉴 높이 수정할 때 사용*/
 }
 
 .wrap-box > .top-bar-box > .menu-box .menu-1 {
   position: absolute;
-  left: 580px;
+  left: 380px;
   width: 100px;
   height: 100%;
   text-align: center;
@@ -218,7 +218,7 @@ input {
   width: 100px;
   height: 100%;
   position: absolute;
-  left: 830px;
+  left: 680px;
   text-align: center;
   padding: 10px 0;
 }
@@ -227,7 +227,7 @@ input {
   position: absolute;
   width: 100px;
   height: 100%;
-  left: 69% ;
+  left: 67% ;
   text-align: center;
   padding: 10px 0;
 }

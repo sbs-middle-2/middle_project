@@ -1,5 +1,9 @@
 package com.jhg.proto.user;
 
+import com.jhg.proto.user.SiteUser;
+import com.jhg.proto.user.UserCreateForm;
+import com.jhg.proto.user.UserRepository;
+import com.jhg.proto.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -55,8 +59,7 @@ public class UserController {
             userService.create(userCreateForm.getUsername(),
                     userCreateForm.getPassword1(), userCreateForm.getEmail(),
                     userCreateForm.getName(), userCreateForm.getNickname(),
-                    userCreateForm.getBirthdate(), userCreateForm.getTelecom(),
-                    userCreateForm.getPhone());
+                    userCreateForm.getBirthdate(), userCreateForm.getPhone());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -115,7 +118,7 @@ public class UserController {
     // 아이디 중복 체크
     @GetMapping("/checkUsername/{username}")
     public ResponseEntity<?> checkUsernameAvailability(@PathVariable String username) {
-        // 아이디 중복 체크를 위한 서비스 메서드 호출
+        // 아    이디 중복 체크를 위한 서비스 메서드 호출
         boolean isUsernameAvailable = !userRepository.existsByUsername(username);
         Map<String, Boolean> response = new HashMap<>();
         response.put("available", isUsernameAvailable);
@@ -163,9 +166,11 @@ public class UserController {
                              HttpServletResponse response, Principal principal, RedirectAttributes attributes) {
         SiteUser siteUser = this.userService.getUser(principal.getName());
 
-        if (BCrypt.checkpw(password, siteUser.getPassword())) {
-            this.userService.delete(siteUser);
+        if (userService.isCorrectPassword(siteUser.getUsername(), password)) {
+            // 사용자를 삭제
+//            this.userService.deleteUserAndRelatedData(siteUser.getUsername());
 
+            // 사용자 삭제 후 로그아웃 처리
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (auth != null) {
                 new SecurityContextLogoutHandler().logout(request, response, auth);
@@ -176,14 +181,13 @@ public class UserController {
                 session.invalidate();
             }
 
-            return "redirect:/"; // 메인 페이지로 리다이렉트
+            return "redirect:/user/main";
         } else {
-            // 비밀번호가 일치하지 않을 때 오류 메시지를 전달하고 회원 탈퇴 페이지로 리다이렉트합니다.
+            // 비밀번호가 일치하지 않을 때 오류 메시지를 전달하고 회원 탈퇴 페이지로 리다이렉트
             attributes.addFlashAttribute("error", "비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
             return "redirect:/user/mypage_withdrawal";
         }
     }
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/password_modify")
     public String showChangePasswordForm(Model model) {

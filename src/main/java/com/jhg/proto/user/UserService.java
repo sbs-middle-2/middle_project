@@ -5,6 +5,7 @@ import com.jhg.proto.answer.Answer;
 import com.jhg.proto.answer.AnswerRepository;
 import com.jhg.proto.question.Question;
 import com.jhg.proto.question.QuestionRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +24,7 @@ public class UserService {
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
 
-    public SiteUser create(String username, String password, String email, String name, String nickname, String birthdate, String telecom, String phone) {
+    public SiteUser create(String username, String password, String email, String name, String nickname, String birthdate,  String phone) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
@@ -31,7 +32,6 @@ public class UserService {
         user.setName(name);
         user.setNickname(nickname);
         user.setBirthdate(birthdate);
-        user.setTelecom(telecom);
         user.setPhone(phone);
         this.userRepository.save(user);
         return user;
