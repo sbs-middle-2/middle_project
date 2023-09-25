@@ -1,167 +1,63 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head>
-    <!-- navbar.css를 모든 페이지에 포함 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/question_list.css}">
-    <script type="text/javascript" th:src="@{/question_list.js}"></script>
-    <!-- SweetAlert 2 스크립트 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!--페이징 버튼 스타일-->
-    <style>
-    .festival-pagination {
-      margin-top: 40px; /* 페이지 번호와 축제 리스트 간격 조절 */
-      margin-bottom: 40px;
-      text-align: center; /* 페이지 번호 가운데 정렬 */
-    }
-
-    .festival-pagination ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center; /* 페이지 번호 수평 중앙 정렬 */
-    }
-
-    .page-item {
-      margin: 0 5px; /* 페이지 번호 간격 조절 */
-      font-size: 25px; /* 페이지 번호 글꼴 크기 */
-    }
-
-    .page-item a {
-      text-decoration: none; /* 링크 밑줄 제거 */
-      color: #333; /* 페이지 번호 색상 */
-      padding: 10px 20px; /* 페이지 번호 내 여백 */
-      border: 1px solid #ccc; /* 페이지 번호 테두리 설정 */
-      border-radius: 5px; /* 페이지 번호 모서리 둥글게 */
-      transition: background-color 0.3s; /* 호버 효과 애니메이션 설정 */
-    }
-
-    .page-item a:hover {
-      background-color: skyblue; /* 호버 시 배경색 변경 */
-      color: white; /* 호버 시 텍스트 색상 변경 */
-    }
-
-    .current-page a {
-      background-color: skyblue;
-      color: white;
-      border-color: #ccc;
-    }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/question_reply.css">
+    <title>리뷰 게시판</title>
 </head>
-
 <body>
-<!-- 리스트 박스 -->
-<div class="list-box" layout:fragment="content">
-    <h1 style="text-align: center;  margin-top: 100px ; ">축제의 생생한 리뷰 집합소 </h1>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="검색어를 입력하세요(작성자. 제목, 내용)">
-        <button type="button"  class="create-btn" style="color:#000000; font-size: 15px ; width : 100px ; text-align : center ; box-shadow: 0 2px 6px 0 rgba(68, 68, 68, 0.08); border: 1px solid #dadada; border-radius: 10px; background-color: #fff; padding : 10px 10px ; "><a href="/question/create">리뷰</a></button>
-    </div>
+<div layout:fragment="content" class="container my-3" style="margin-top: 100px !important;">
+    <h1>리뷰게시판</h1>
+    <h3>축제의 생생한 리뷰 집합소</h3>
 
-    <!-- 리스트 상단 바 -->
-    <div class="article-list-box">
-        <span>번호</span>
-        <span>작성자</span>
-        <span>작성날짜</span>
-        <span style="text-align : center;">제목</span>
-        <span></span>
-    </div>
-    <!-- 리스트 상단 바 끝 -->
-
-    <div class="accordion">
-        <!--리스트 목록(accordion안에서만 넣어야 작동 가능)-->
-        <!--리스트 시작-->
-        <div class="accordion-item" th:each="question, loop : ${paging}" th:if="${question.boardId == 1}">
-            <div class="accordion-header" data-state="closed">
-                <!--리뷰 ID 번호-->
-                <span th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}">질문id번호</span>
-                <!--질문 작성자-->
-                <span th:if="${question.author != null}" th:text="${question.author.username}" style="text-align: right; margin-right: 20px"></span>
-                <!--작성일-->
-                <span th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></span>
-                <!--수정일-->
-                <span th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></span>
-                <!-- 질문 제목 -->
-                <span><a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a></span>
-                <i class="fas fa-plus"></i>
-            </div>
-
-            <!-- 상세 게시판 -->
-            <div class="accordion-content">
-                <div class="detail-box">
-                    <!--상세 헤드-->
-                    <ul>
-                        <li><span>번호</span></li>
-                        <li><span>작성자</span></li>
-                        <li><span>작성날짜</span></li>
-                        <li><span>수정날짜</span></li>
-                        <li><span>댓글 수</span></li>
-                        <li><span style="color:#FF4500;">♥</span></li>
-                    </ul>
-                    <!--상세 헤드 내용 -->
-                    <ul>
-                        <li><span th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}">질문id번호</span></li>
-                        <li><span th:if="${question.author != null}" th:text="${question.author.username}" style="text-align: right; margin-right: 20px"></span></li>
-                        <li><span th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></span></li>
-                        <li><span th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></li>
-                        <!--답글 수-->
-                        <li>
-                            <span class="text-danger small ms-2"
-                                  th:if="${#lists.size(question.answerList) > 0}"
-                                  th:text="${#lists.size(question.answerList)}">
-                            </span>
-                        </li>
-                        <!--추천 수-->
-                        <li>
-                            <span class="text-danger small ms-2"
-                                  th:if="${#lists.size(question.voter) > 0}"
-                                  th:text="${#lists.size(question.voter)}">
-                            </span>
-                        </li>
-                    </ul>
-                    <div class="body-box" style="display : flex ; margin-top : 20px ;box-shadow: 0 6px 6px -6px rgba(68, 68, 68, 0.3);   border-bottom: 2px solid #d1d1d1; padding-bottom: 10px; margin-bottom: 20px;">
-                        <!--상세 바디 -->
-                        <ul style="border : none ; box-shadow : none ; width : 20% ; display : flex ; justify-content :center; align-items : center; padding : 10px;">
-                            <li style=" width : 100%;">
-                                <span>내용</span>
-                            </li>
-                        </ul>
-                        <!--상세 바디 내용 -->
-                        <ul style="width : 100%; text-align : left;">
-                            <li style=" width : 100% ; text-align : left ; padding : 10px;">
-                                <span th:text="${question.content}"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--아코디언 스크립트-->
+    <span id="siteUserUsername" style="display: none;">${siteUser.username}</span>
     <script>
-        $(document).ready(function () {
-            $(".accordion-header").click(function () {
-                // 클릭된 헤더 요소에서 data-state 속성 값을 가져옵니다.
-                var state = $(this).attr("data-state");
+        // Thymeleaf에서 username 값을 가져옴
+        var username = document.getElementById("siteUserUsername").textContent;
 
-                if (state === "closed") {
-                    // 현재 상태가 닫힌 상태인 경우, 열기 동작 수행
-                    $(this).next(".accordion-content").slideDown("slow");
-                    $(this).attr("data-state", "open");
-                    $(this).find("i").removeClass("fa-plus").addClass("fa-minus");
-                } else {
-                    // 현재 상태가 열린 상태인 경우, 닫기 동작 수행
-                    $(this).next(".accordion-content").slideUp("slow");
-                    $(this).attr("data-state", "closed");
-                    $(this).find("i").removeClass("fa-minus").addClass("fa-plus");
-                }
-            });
-        });
+        // username이 "admin"인 경우 버튼 표시
+        if (username !== "admin") {
+            var buttons = document.querySelectorAll(".admin-button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].style.display = "none"; // "none"으로 변경하여 숨김
+            }
+        }
     </script>
+    <!-- 버튼을 추가하고 클래스를 지정하여 숨김 및 표시를 제어 -->
+    <div class="adminbutton">
+        <button class="adminbutton1 admin-button">작성</button>
+    </div>
 
-    <!--페이지버튼-->
+    <!-- 찾기 기능 -->
+    <div class="search-button">
+        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+        <button class="search" type="button" id="btn_search">찾기</button>
+    </div>
+
+    <table class="free">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question, loop : ${paging}" class="post-item" th:if="${question.boardId == 1}">
+            <td th:text="${paging.getTotalElements() - (paging.getNumber() * paging.getSize()) - loop.index}">질문id번호</td>
+            <td>
+                <!-- 질문 제목 -->
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+            <td th:if="${question.author != null}" th:text="${question.author.username}"></td>
+            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이징처리 시작 -->
     <div class="festival-pagination" th:if="${paging.totalPages > 1}">
         <ul class="pagination justify-content-center">
             <!-- 이전 버튼 숨기기 -->
@@ -195,6 +91,7 @@
         <input type="hidden" id="kw" name="kw" th:value="${kw}">
         <input type="hidden" id="page" name="page" th:value="${paging.number}">
     </form>
+
     <!--찾기 기능 스크립트-->
     <script layout:fragment="script" type='text/javascript'>
         const page_elements = document.getElementsByClassName("page-link");
@@ -212,5 +109,6 @@
         });
     </script>
 </div>
+
 </body>
 </html>
