@@ -7,57 +7,52 @@
 
     <!--  제이쿼리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 새로운 스크립트를 추가하여 필터링 기능을 구현합니다. -->
+    <script>
+        // 문서 로딩 완료 시 실행될 JavaScript 코드
+        $(document).ready(function () {
+            // 사용자가 체크박스 또는 라디오 버튼을 변경할 때마다 필터링을 수행합니다.
+            $('input[type="checkbox"], input[type="radio"]').on('change', function () {
+                filterFestivals(); // 필터링 함수 호출
+            });
+
+            // 필터링 함수 정의
+            function filterFestivals() {
+                // 선택된 지역과 분야를 수집합니다.
+                var selectedRegions = [];
+                var selectedCategory = $('input[name="radio"]:checked').val();
+
+                $('.checkbox1:checked').each(function () {
+                    selectedRegions.push($(this).text().trim());
+                });
+
+                // 모든 축제 아이템을 숨깁니다.
+                $('.festival-item').hide();
+
+                // 선택된 지역 또는 분야에 맞게 축제 아이템을 표시합니다.
+                $('.festival-item').each(function () {
+                    var festivalRegion = $(this).attr('data-region');
+                    var festivalCategory = $(this).attr('data-category');
+
+                    if (
+                        (selectedRegions.length === 0 || selectedRegions.includes(festivalRegion)) &&
+                        (selectedCategory === "all" || selectedCategory === festivalCategory)
+                    ) {
+                        $(this).show();
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 
 <body>
 <div layout:fragment="content" class="container my-3">
-
     <div class="wrap-box">
         <!-- 축제정보 페이지 구현 시작-->
         <div class="outtrack">
-            <!-- 달력영역-->
-            <div class="wrapper">
-                <h1> 축제 정보 </h1>
-                <h2> <span>기간별 검색</span></h2>
-                <!-- 달력 컨테이너를 감싸는 div -->
-                <div class="container-calendar">
-                    <h3 id="monthAndYear"></h3>
-                    <!-- 달력 이전/다음 버튼을 감싸는 div -->
-                    <div class="button-container-calendar">
-                        <button id="previous" onclick="previous()">&#8249;</button> <!-- 이전 달력 달로 이동하는 버튼. -->
-                        <button id="next" onclick="next()">&#8250;</button> <!-- 다음 달력 달로 이동하는 버튼. -->
-                    </div>
-                    <!-- 달력 테이블 요소 시작. 달력을 표시하는 테이블. -->
-                    <table class="table-calendar" id="calendar" data-lang="en">
-                        <!-- 테이블 헤더 요소 시작. 월별 날짜 제목을 포함하는 헤더. -->
-                        <thead id="thead-month"></thead>
-                        <!-- 테이블 본문 요소 시작. 달력의 실제 날짜들을 포함하는 본문. -->
-                        <tbody id="calendar-body"></tbody>
-                    </table>
-                    <!-- 달력 하단 컨테이너 div 요소 시작. -->
-                    <div class="footer-container-calendar">
-                        <label for="month">날짜 조회하기: </label>
-                        <select id="month" onchange="jump()">
-                            <option value=0>1월</option>
-                            <option value=1>2월</option>
-                            <option value=2>3월</option>
-                            <option value=3>4월</option>
-                            <option value=4>5월</option>
-                            <option value=5>6월</option>
-                            <option value=6>7월</option>
-                            <option value=7>8월</option>
-                            <option value=8>9월</option>
-                            <option value=9>10월</option>
-                            <option value=10>11월</option>
-                            <option value=11>12월</option>
-                        </select>
-                        <!-- 년도 선택을 위한 드롭다운 메뉴. -->
-                        <select id="year" onchange="jump()"></select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 체크박스-->
+            <!-- 지역별 검색 -->
             <div class="selectlist">
                 <h2><span>지역별 검색</span></h2>
                 <div class="image-container">
@@ -137,49 +132,49 @@
                 </div>
             </div>
 
-            <!--분야별검색-->
+            <!--분야별 검색-->
             <div class="searchtype">
                 <h2><span>분야별 검색</span></h2>
                 <div class="radiolocal">
                     <div>
-                        <input type="radio" name="radio" value="radiolocal" ondblclick="this.checked=false"> 농촌문화
+                        <input type="radio" name="category" value="all" checked ondblclick="this.checked=false"> 전체 <!-- 추가 -->
                     </div>
                     <div>
-                        <input type="radio" name="localproducts" value="localproducts" ondblclick="this.checked=false"> 특산물(농/수산물)
+                        <input type="radio" name="category" value="radiolocal" ondblclick="this.checked=false"> 농촌문화
                     </div>
-                    <div class="extensivefestival">
-                        <input type="radio" name="extensivefestival" value="extensivefestival" ondblclick="this.checked=false"> 대규모 행사
+                    <div>
+                        <input type="radio" name="category" value="extensivefestival" ondblclick="this.checked=false"> 대규모 행사
                     </div>
                     <div class="culturetour">
-                        <input type="radio" name="culturetour" value="culturetour" ondblclick="this.checked=false"> 문화관광
+                        <input type="radio" name="category" value="culturetour" ondblclick="this.checked=false"> 문화관광
                     </div>
-                    <div class="cultureart">
-                        <input type="radio" name="cultureart" value="cultureart" ondblclick="this.checked=false"> 문화 예술
+                    <div>
+                        <input type="radio" name="category" value="cultureart" ondblclick="this.checked=false"> 문화예술
                     </div>
-                    <div class="ecology">
-                        <input type="radio" name="ecology" value="ecology" ondblclick="this.checked=false"> 생태자연
+                    <div>
+                        <input type="radio" name="category" value="ecology" ondblclick="this.checked=false"> 생태자연
                     </div>
-                    <div class="anniversaryfestival">
-                        <input type="radio" name="anniversaryfestival" value="anniversaryfestival" ondblclick="this.checked=false"> 기념행사
+                    <div>
+                        <input type="radio" name="category" value="anniversaryfestival" ondblclick="this.checked=false"> 기념행사
                     </div>
-                    <div class="tradition">
-                        <input type="radio" name="tradition" value="tradition" ondblclick="this.checked=false"> 전통행사(역사, 문화 등)
+                    <div>
+                        <input type="radio" name="category" value="tradition" ondblclick="this.checked=false"> 전통행사(역사, 문화 등)
                     </div>
-                    <div class="fashionbeauty">
-                        <input type="radio" name="fashionbeauty" value="fashionbeauty" ondblclick="this.checked=false"> 패션 뷰티
+                    <div>
+                        <input type="radio" name="category" value="fashionbeauty" ondblclick="this.checked=false"> 패션 뷰티
                     </div>
-                    <div class="communication">
-                        <input type="radio" name="communication" value="communication" ondblclick="this.checked=false"> 주민화합
+                    <div>
+                        <input type="radio" name="category" value="communication" ondblclick="this.checked=false"> 주민화합
                     </div>
-                    <div class="astronomyscience">
-                        <input type="radio" name="astronomyscience" value="astronomyscience" ondblclick="this.checked=false"> 천문과학
+                    <div>
+                        <input type="radio" name="category" value="astronomyscience" ondblclick="this.checked=false"> 천문과학
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <h1>진행 중인 축제 리스트</h1>
+    <h1 style="margin-left: 10% !important;">진행 중인 축제 리스트</h1>
     <div class="festival-list">
         <div class="festival-item" th:each="festival : ${festivals}">
             <a th:href="@{|/festival/detail/${festival.id}|}">
@@ -188,6 +183,7 @@
                 <p th:text="${festival.event_Period}">축제 기간</p>
             </a>
         </div>
+        <!-- 나머지 축제 아이템들도 유사한 방식으로 추가합니다. -->
     </div>
 
     <div class="festival-pagination">
@@ -203,179 +199,6 @@
         <!-- 다음 페이지로 이동하는 링크 -->
         <a th:if="${currentPage < totalPages}" th:href="@{|/festival/list/page/${currentPage + 1}|}">&gt;</a>
     </div>
-
-    <!--축제 정보를 클릭하면 상세 정보를 표시하거나 다른 동작을 수행하기 위한 JavaScript 함수를 정의-->
-    <script>
-        function showFestivalDetail(event, title, period, picture) {
-            // 기본 이벤트 동작 막기 (링크 이동 방지)
-            event.preventDefault();
-
-            // 예시: 상세 정보를 모달 또는 다른 방법으로 표시
-            console.log("축제 제목: " + title);
-            console.log("축제 기간: " + period);
-            console.log("축제 이미지 URL: " + picture);
-
-            // 상세 페이지로 이동하려면 window.location.href를 사용
-            // window.location.href = "/festival/detail?title=" + title;
-            // 위 코드는 클릭한 축제의 제목을 URL 매개변수로 전달하는 예시입니다.
-        }
-    </script>
-
-    <script>
-        $(document).ready(function () {
-        $(".wrap-box > .top-bar-box > .login-box > .lo-box > a").click(function () {
-        $(this).siblings(".toggle-menu").toggleClass("active");
-        });
-        });
-
-        //달력 기능 연동 함수
-
-        function generate_year_range(start, end) {
-        var years = "";
-        for (var year = start; year <= end; year++) {
-        years += "<option value='" + year + "'>" + year + "</option>";
-        }
-        return years;
-        }
-
-        today = new Date();
-        currentYear = today.getFullYear();
-        currentMonth = today.getMonth();
-        selectYear = document.getElementById("year");
-        selectMonth = document.getElementById("month");
-
-        createYear = generate_year_range(1970, 2050);
-        /** or
-        * createYear = generate_year_range( 1970, currentYear );
-        */
-
-        document.getElementById("year").innerHTML = createYear;
-
-        var calendar = document.getElementById("calendar");
-        var lang = calendar.getAttribute("data-lang");
-
-        var months = "";
-        var days = "";
-
-        var monthDefault = [
-        "01월",
-        "02월",
-        "03월",
-        "04월",
-        "05월",
-        "06월",
-        "07월",
-        "08월",
-        "09월",
-        "10월",
-        "11월",
-        "12월"
-        ];
-
-        var dayDefault = ["일", "월", "화", "수", "목", "금", "토"];
-
-        if (lang == "en") {
-        months = monthDefault;
-        days = dayDefault;
-        }
-        var $dataHead = "<tr>";
-        for (dhead in days) {
-        $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
-        }
-        $dataHead += "</tr>";
-
-        //alert($dataHead);
-        document.getElementById("thead-month").innerHTML = $dataHead;
-
-        monthAndYear = document.getElementById("monthAndYear");
-        showCalendar(currentMonth, currentYear);
-
-        function next() {
-        currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-        currentMonth = (currentMonth + 1) % 12;
-        showCalendar(currentMonth, currentYear);
-        }
-
-        function previous() {
-        currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
-        currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-        showCalendar(currentMonth, currentYear);
-        }
-
-        function jump() {
-        currentYear = parseInt(selectYear.value);
-        currentMonth = parseInt(selectMonth.value);
-        showCalendar(currentMonth, currentYear);
-        }
-
-        function showCalendar(month, year) {
-        var firstDay = new Date(year, month).getDay();
-
-        tbl = document.getElementById("calendar-body");
-
-        tbl.innerHTML = "";
-
-        monthAndYear.innerHTML = year + "년 " + months[month];
-        selectYear.value = year;
-        selectMonth.value = month;
-
-        // creating all cells
-        var date = 1;
-        for (var i = 0; i < 6; i++) {
-        var row = document.createElement("tr");
-
-        for (var j = 0; j < 7; j++) {
-        if (i === 0 && j < firstDay) {
-        cell = document.createElement("td");
-        cellText = document.createTextNode("");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        } else if (date > daysInMonth(month, year)) {
-        break;
-        } else {
-        cell = document.createElement("td");
-        cell.setAttribute("data-date", date);
-        cell.setAttribute("data-month", month + 1);
-        cell.setAttribute("data-year", year);
-        cell.setAttribute("data-month_name", months[month]);
-        cell.className = "date-picker";
-        cell.innerHTML = "<span>" + date + "</span>";
-
-        if (
-        date === today.getDate() &&
-        year === today.getFullYear() &&
-        month === today.getMonth()
-        ) {
-        cell.className = "date-picker selected";
-        }
-        row.appendChild(cell);
-        date++;
-        }
-        }
-
-        tbl.appendChild(row);
-        }
-        }
-
-        function daysInMonth(iMonth, iYear) {
-        return 32 - new Date(iYear, iMonth, 32).getDate();
-        }
-
-        /*달력 끝*/
-
-        /*체크박스*/
-        function checkAll(o) {
-        var boxes = document.getElementsByTagName("input");
-        for (var x = 0; x < boxes.length; x++) {
-        var obj = boxes[x];
-        if (obj.type == "checkbox") {
-        if (obj.name != "check") obj.checked = o.checked;
-        }
-        }
-        }
-
-        /*라디오 버튼은 html의 ondbclick로 대체합니다.*/
-    </script>
 </div>
 </body>
 </html>
